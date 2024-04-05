@@ -9,5 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code On Time Items", "Code 
 		ClientLibrary.en-US.txt = ClientLibrary.en-US.txt
 		DataAquarium.Project.xml = DataAquarium.Project.xml
 		DataAquarium.Version.xml = DataAquarium.Version.xml
+		Sync.DESKTOP-VI56M3O-stefa.xml = Sync.DESKTOP-VI56M3O-stefa.xml
 	EndProjectSection
 EndProject

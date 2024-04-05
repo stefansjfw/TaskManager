@@ -33,7 +33,7 @@
     <fieldsToHide></fieldsToHide>
     <customLabels></customLabels>
   </bll>
-  <membership enabled="false" providerName="System.Data.SqlClient" connectionString="" windowsAuthentication="false" activeDirectory="false" customSecurity="false" dedicatedLogin="false" displayRememberMe="true" rememberMeSet="false" displaySignUp="true" displayPasswordRecovery="true" displayMyAccount="true" displayHelp="true" idleUserDetectionTimeout="-1" tabViewSelection="0" validationKey="2430FEDBCCCD2F797F917CA5C78209E5CE90AD65A780228C15468E742C3B6A48FDFCB02946F8BB6F7CC03CA6D175851526B1373DADC70EACEDF6089592115D13">
+  <membership enabled="true" providerName="System.Data.SqlClient" connectionString="" windowsAuthentication="false" activeDirectory="false" customSecurity="false" dedicatedLogin="false" displayRememberMe="true" rememberMeSet="false" displaySignUp="true" displayPasswordRecovery="true" displayMyAccount="true" displayHelp="true" idleUserDetectionTimeout="-1" tabViewSelection="0" validationKey="2430FEDBCCCD2F797F917CA5C78209E5CE90AD65A780228C15468E742C3B6A48FDFCB02946F8BB6F7CC03CA6D175851526B1373DADC70EACEDF6089592115D13">
     <adConfig></adConfig>
     <config></config>
   </membership>

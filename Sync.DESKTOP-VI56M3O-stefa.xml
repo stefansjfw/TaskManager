@@ -190,6 +190,92 @@ WHERE TaskID = @TaskID</Script>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-05T21:02:58.2250342Z">
+      <controller name="Tasks" />
+      <field name="Creator" />
+      <update>
+        <ItemsStyle>UserNameLookup</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:03:09.0740563Z">
+      <controller name="Tasks" />
+      <field name="Owner" />
+      <update>
+        <ItemsStyle>UserNameLookup</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:05:41.2344314Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+        <Script>SET @Creator = @BusinessRules_UserName
+IF (@Owner IS NULL)
+    SET @Owner = @BusinessRules_UserName
+</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:46.6148862Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Address" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:46.6392481Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="City" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:46.6635626Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="State" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:46.6879338Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="PostalCode" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:46.7041964Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Country" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:59.7230428Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Address" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:59.7452420Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="City" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:59.7709062Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="State" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:59.7966959Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="PostalCode" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:06:59.8128516Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Country" />
+      <delete />
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

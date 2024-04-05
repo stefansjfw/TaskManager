@@ -18,6 +18,8 @@ select
 	,"Location"."State" "State"
 	,"Location"."PostalCode" "PostalCode"
 	,"Location"."Country" "Country"
+	,"Tasks"."Creator" "Creator"
+	,"Tasks"."Owner" "Owner"
 from "dbo"."Tasks" "Tasks"
 	left join "dbo"."Categories" "Category" on "Tasks"."CategoryID" = "Category"."CategoryID"
 	left join "dbo"."Locations" "Location" on "Tasks"."LocationID" = "Location"."LocationID"
@@ -49,6 +51,12 @@ order by "Tasks"."Date" desc]]></text>
     <field name="State" type="String" readOnly="true" label="State" length="50" />
     <field name="PostalCode" type="String" readOnly="true" label="Postal Code" length="50" />
     <field name="Country" type="String" readOnly="true" label="Country" length="50" />
+    <field name="Creator" type="String" label="Creator" length="50">
+      <items style="UserNameLookup" />
+    </field>
+    <field name="Owner" type="String" label="Owner" length="50">
+      <items style="UserNameLookup" />
+    </field>
     <field name="Attachments" type="DataView" label="Attachments">
       <dataView controller="Attachments" view="grid1" filterFields="TaskID" />
     </field>
@@ -63,11 +71,8 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
-        <dataField fieldName="Address" columns="50" />
-        <dataField fieldName="City" columns="50" />
-        <dataField fieldName="State" columns="50" />
-        <dataField fieldName="PostalCode" columns="50" />
-        <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Creator" columns="50" />
+        <dataField fieldName="Owner" columns="50" />
         <dataField fieldName="Attachments" columns="15" />
       </dataFields>
     </view>
@@ -88,6 +93,8 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Creator" columns="50" />
+            <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
           </dataFields>
         </category>
@@ -109,6 +116,8 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Creator" columns="50" />
+            <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
           </dataFields>
         </category>
@@ -123,11 +132,8 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
-        <dataField fieldName="Address" columns="50" />
-        <dataField fieldName="City" columns="50" />
-        <dataField fieldName="State" columns="50" />
-        <dataField fieldName="PostalCode" columns="50" />
-        <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Creator" columns="50" />
+        <dataField fieldName="Owner" columns="50" />
         <dataField fieldName="Attachments" columns="15" />
       </dataFields>
     </view>
@@ -206,5 +212,9 @@ $row.Date = d;]]></rule>
     <rule id="r102" commandName="Custom" commandArgument="CompleteTask" type="Sql" phase="Execute"><![CDATA[UPDATE Tasks
 SET Completed = GETDATE()
 WHERE TaskID = @TaskID]]></rule>
+    <rule id="r103" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Creator = @BusinessRules_UserName
+IF (@Owner IS NULL)
+    SET @Owner = @BusinessRules_UserName
+]]></rule>
   </businessRules>
 </dataController>

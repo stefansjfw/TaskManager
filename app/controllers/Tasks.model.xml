@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Tasks" alias="Tasks" created="2024-04-05T11:12:01" modified="2024-04-05T15:42:17" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Tasks" alias="Tasks" created="2024-04-05T11:12:01" modified="2024-04-05T23:01:01" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Category" parentTableSchema="dbo" parentTableName="Categories" x="297" y="20">
       <foreignKeyColumn columnName="CategoryID" parentColumnName="CategoryID" />
@@ -23,5 +23,7 @@
     <column name="State" fieldName="State" label="State" foreignKey="Location" />
     <column name="PostalCode" fieldName="PostalCode" label="Postal Code" foreignKey="Location" />
     <column name="Country" fieldName="Country" label="Country" foreignKey="Location" />
+    <column name="Creator" fieldName="Creator" label="Creator" />
+    <column name="Owner" fieldName="Owner" label="Owner" />
   </columns>
 </dataModel>

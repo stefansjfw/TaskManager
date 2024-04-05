@@ -20,7 +20,6 @@ namespace FreeTrial.Services
             ApplicationServices.EnableCombinedCss = releaseMode;
             CultureManager.SupportedCultures = new string[] {
                     "en-US,en-US"};
-            ApplicationServicesBase.AuthorizationIsSupported = false;
             BlobFactoryConfig.Initialize();
         }
     }

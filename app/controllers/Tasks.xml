@@ -116,7 +116,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Country" columns="50" />
-            <dataField fieldName="Creator" columns="50" />
+            <dataField fieldName="Creator" columns="50" hidden="true" />
             <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
           </dataFields>

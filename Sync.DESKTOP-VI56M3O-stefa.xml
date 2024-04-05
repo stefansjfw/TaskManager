@@ -143,6 +143,53 @@ WHERE TaskID = @TaskID</Script>
         <FilterExpression />
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-05T19:36:51.1574427Z">
+      <controller name="Tasks" />
+      <move>
+        <controller name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-05T19:38:01.7669552Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-05T19:38:03.8488513Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-05T19:38:05.8459735Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-05T19:38:07.4755090Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-05T19:38:19.4001941Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Attachments" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

@@ -27,7 +27,7 @@ order by "Tasks"."Date" desc]]></text>
     <field name="Completed" type="DateTime" dataFormatString="g" label="Completed" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Tasks" sortExpression="Date desc">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" columns="50" />
@@ -62,6 +62,15 @@ order by "Tasks"."Date" desc]]></text>
           </dataFields>
         </category>
       </categories>
+    </view>
+    <view id="gridAllTasks" type="Grid" commandId="command1" label="All Tasks" sortExpression="Completed desc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="Date" columns="20" />
+        <dataField fieldName="Created" columns="20" />
+        <dataField fieldName="Completed" columns="20" />
+      </dataFields>
     </view>
   </views>
   <actions>

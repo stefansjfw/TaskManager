@@ -40,6 +40,25 @@ else
 $row.Date = d;</Script>
       </insert>
     </c>
+    <c y="NodeSet" t="2024-04-05T11:56:07.3224865Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="Created" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-05T11:56:41.1109936Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="Created" />
+      <update>
+        <TextMode>Static</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

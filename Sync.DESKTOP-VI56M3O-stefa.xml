@@ -76,6 +76,39 @@ $row.Date = d;</Script>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-05T12:05:14.4700603Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag2" />
+      <insert type="action">
+        <CommandName>Custom</CommandName>
+        <CommandArgument>CompleteTask</CommandArgument>
+        <HeaderText>Complete</HeaderText>
+        <CausesValidation>true</CausesValidation>
+        <WhenClientScript>$row.Completed == null</WhenClientScript>
+        <CssClass>material-icon-assignment-turned-in</CssClass>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-05T12:05:21.9272575Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag1" />
+      <copy>
+        <controller name="Tasks" />
+        <actionGroup id="ag2" />
+        <action id="a100" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-05T12:06:14.9412488Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Custom</CommandName>
+        <CommandArgument>CompleteTask</CommandArgument>
+        <Phase>Execute</Phase>
+        <Script>UPDATE Tasks
+SET Completed = GETDATE()
+WHERE TaskID = @TaskID</Script>
+      </insert>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

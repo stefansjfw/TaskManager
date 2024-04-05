@@ -72,6 +72,7 @@ order by "Tasks"."Date" desc]]></text>
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action commandName="Custom" commandArgument="CompleteTask" headerText="Complete" cssClass="material-icon-assignment-turned-in" whenClientScript="$row.Completed == null" id="a100" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -86,6 +87,7 @@ order by "Tasks"."Date" desc]]></text>
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+      <action commandName="Custom" commandArgument="CompleteTask" headerText="Complete" cssClass="material-icon-assignment-turned-in" whenClientScript="$row.Completed == null" id="a100" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
@@ -133,5 +135,8 @@ else
     d.setMinutes(60, 0, 0);
 
 $row.Date = d;]]></rule>
+    <rule id="r102" commandName="Custom" commandArgument="CompleteTask" type="Sql" phase="Execute"><![CDATA[UPDATE Tasks
+SET Completed = GETDATE()
+WHERE TaskID = @TaskID]]></rule>
   </businessRules>
 </dataController>

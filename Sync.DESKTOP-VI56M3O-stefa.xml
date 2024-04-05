@@ -285,6 +285,20 @@ IF (@Owner IS NULL)
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-05T21:20:56.0883824Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <update>
+        <FilterExpression>Completed is null AND (Creator = @BusinessRules_UserName OR Owner = @BusinessRules_UserName)</FilterExpression>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-05T21:21:12.2301787Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <update>
+        <FilterExpression>Creator = @BusinessRules_UserName OR Owner = @BusinessRules_UserName</FilterExpression>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

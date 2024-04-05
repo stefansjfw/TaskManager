@@ -62,7 +62,7 @@ order by "Tasks"."Date" desc]]></text>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null AND (Creator = @BusinessRules_UserName OR Owner = @BusinessRules_UserName)">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" columns="50" />
@@ -123,7 +123,7 @@ order by "Tasks"."Date" desc]]></text>
         </category>
       </categories>
     </view>
-    <view id="gridAllTasks" type="Grid" commandId="command1" label="All Tasks" sortExpression="Completed desc">
+    <view id="gridAllTasks" type="Grid" commandId="command1" label="All Tasks" sortExpression="Completed desc" filter="Creator = @BusinessRules_UserName OR Owner = @BusinessRules_UserName">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" columns="50" />

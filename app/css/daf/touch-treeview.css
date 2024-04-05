@@ -1,0 +1,138 @@
+﻿.app-treeview {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    font-size: 13px;
+    color: #000;
+}
+
+    .app-treeview:focus {
+        outline: none;
+    }
+
+    .app-treeview > ul {
+        margin: 4px 0;
+    }
+
+    .app-treeview ul {
+        list-style-type: none;
+        padding: 0 0 0 18px;
+    }
+
+    .app-treeview li {
+        padding: 0 8px;
+        cursor: default;
+    }
+
+    .app-treeview .app-node {
+        border: solid 1px transparent;
+        padding: 2px 8px 2px 4px;
+        position: relative;
+        margin-right: 8px;
+        border-radius: 3px;
+    }
+
+    .app-treeview li .app-node {
+        line-height: 20px;
+        display: inline-block;
+        white-space: nowrap;
+        padding-left: 0;
+        background-size: 20px;
+        background-position: 4px center;
+        background-repeat: no-repeat;
+        user-select: none;
+    }
+
+    .app-treeview.app-treeview-noicons li .app-node .app-text {
+        padding-left: 8px;
+    }
+
+    .app-treeview .app-node .app-anchor {
+        max-width: 0;
+        display: inline-block;
+        width: 0;
+    }
+
+    .app-treeview .app-node .app-text {
+        padding-left: 32px;
+    }
+
+    .app-treeview .app-node .app-muted {
+        color: #999;
+        margin-left: 6px;
+    }
+
+    .app-treeview .app-node .app-toggle {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: -24px;
+        top: 50%;
+        margin-top: -12px;
+    }
+
+        .app-treeview .app-node .app-toggle:after {
+            font-family: 'Material Icons';
+            content: 'arrow_drop_down';
+            font-size: 24px;
+            height: 24px;
+            line-height: 24px;
+            width: 24px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -10px;
+            margin-top: -12px;
+            font-weight: normal;
+        }
+
+    .app-treeview .app-node .material-icon {
+        font-size: 20px;
+        line-height: 20px;
+        position: absolute !important;
+        left: 4px;
+        top: 50%;
+        margin-top: -10px !important;
+        width: 20px;
+        height: 20px;
+        display: inline-block !important;
+        text-indent: 0;
+        color: #535353;
+    }
+
+    .app-treeview .app-collapsed > .app-node .app-toggle:after {
+        content: 'arrow_right';
+    }
+
+    .app-treeview .app-collapsed > ul {
+        display: none;
+    }
+
+    .app-treeview .app-loading {
+        display: none;
+    }
+
+        .app-treeview .app-loading .app-node {
+            text-transform: lowercase;
+        }
+
+/* dark theme */
+
+/*.app-theme-dark .app-treeview {
+    color: #eee;
+}
+*/
+.app-theme-dark .app-propgrid .app-treeview {
+    background-color: #191919;
+    color: #eee;
+}
+
+/*.app-theme-dark .app-treeview .app-node:hover {
+    background-color: rgba(255,255,255,.1);
+}
+*/
+/*.app-theme-dark .app-treeview .app-selected > .app-node {
+    background-color: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.1);
+}
+*/

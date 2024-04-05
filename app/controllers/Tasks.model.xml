@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Tasks" alias="Tasks" created="2024-04-05T11:12:01" modified="2024-04-05T11:12:23" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TaskID" fieldName="TaskID" label="Task ID" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Date" fieldName="Date" label="Date" format="g" sortType="Descending" sortOrder="1" />
+    <column name="Created" fieldName="Created" label="Created" format="g" />
+    <column name="Completed" fieldName="Completed" label="Completed" format="g" />
+  </columns>
+</dataModel>

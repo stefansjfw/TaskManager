@@ -1,0 +1,13 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 17
+
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TaskManager", "app\", "595A0352-4088-48D3-A243-A4F3FC23AE23"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code On Time Items", "Code On Time Items", "{93E1768B-653E-4774-9FCB-EE04D2101DD1}"
+	ProjectSection(SolutionItems) = preProject
+		ClientLibrary.en-US.txt = ClientLibrary.en-US.txt
+		DataAquarium.Project.xml = DataAquarium.Project.xml
+		DataAquarium.Version.xml = DataAquarium.Version.xml
+	EndProjectSection
+EndProject

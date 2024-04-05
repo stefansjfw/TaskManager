@@ -126,5 +126,13 @@ order by "Tasks"."Date" desc]]></text>
   </actions>
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Created = GETDATE()]]></rule>
+    <rule id="r101" commandName="New" type="JavaScript" phase="After"><![CDATA[var d = new Date();
+
+if (d.getMinutes() < 30)
+    d.setMinutes(30, 0, 0);
+else
+    d.setMinutes(60, 0, 0);
+
+$row.Date = d;]]></rule>
   </businessRules>
 </dataController>

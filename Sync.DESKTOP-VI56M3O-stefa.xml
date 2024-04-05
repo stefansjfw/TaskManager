@@ -24,6 +24,22 @@
         <Script>SET @Created = GETDATE()</Script>
       </insert>
     </c>
+    <c y="NodeSet" t="2024-04-05T11:54:19.1254501Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>JavaScript</Type>
+        <CommandName>New</CommandName>
+        <Phase>After</Phase>
+        <Script>var d = new Date();
+
+if (d.getMinutes() &lt; 30)
+    d.setMinutes(30, 0, 0);
+else
+    d.setMinutes(60, 0, 0);
+
+$row.Date = d;</Script>
+      </insert>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

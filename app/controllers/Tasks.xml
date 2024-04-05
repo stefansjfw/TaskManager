@@ -45,7 +45,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="Date" columns="20" />
             <dataField fieldName="Created" columns="20" textMode="Static" />
-            <dataField fieldName="Completed" columns="20" />
+            <dataField fieldName="Completed" columns="20" textMode="Static" />
           </dataFields>
         </category>
       </categories>
@@ -59,7 +59,6 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="Date" columns="20" />
             <dataField fieldName="Created" columns="20" hidden="true" />
-            <dataField fieldName="Completed" columns="20" />
           </dataFields>
         </category>
       </categories>

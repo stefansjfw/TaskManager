@@ -124,4 +124,7 @@ order by "Tasks"."Date" desc]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Created = GETDATE()]]></rule>
+  </businessRules>
 </dataController>

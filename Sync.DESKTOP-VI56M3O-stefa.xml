@@ -346,6 +346,62 @@ IF (@Owner IS NULL)
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-06T10:18:18.3871976Z">
+      <controller name="Expenses" />
+      <field name="Price" />
+      <update>
+        <CausesCalculate>true</CausesCalculate>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:18:23.8029676Z">
+      <controller name="Expenses" />
+      <field name="Quantity" />
+      <update>
+        <CausesCalculate>true</CausesCalculate>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:20:40.9917401Z">
+      <controller name="Expenses" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Calculate</CommandName>
+        <Phase>Execute</Phase>
+        <Script>IF @Price IS NULL OR @Quantity IS NULL
+    SET @TotalPrice = 0
+ELSE
+    SET @TotalPrice = @Price * @Quantity</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:21:02.9423285Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="Price" />
+      <update>
+        <Hidden>false</Hidden>
+        <Aggregate>Average</Aggregate>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:21:18.4069273Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="Quantity" />
+      <update>
+        <Hidden>false</Hidden>
+        <Aggregate>Sum</Aggregate>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:22:11.2288443Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="TotalPrice" />
+      <update>
+        <Hidden>false</Hidden>
+        <Aggregate>Sum</Aggregate>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

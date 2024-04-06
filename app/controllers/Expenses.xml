@@ -28,8 +28,8 @@ from "dbo"."Expenses" "Expenses"
   <fields>
     <field name="ExpenseID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Expense ID" readOnly="true" />
     <field name="Item" type="String" allowNulls="false" label="Item" length="50" showInSummary="true" />
-    <field name="Price" type="Decimal" allowNulls="false" dataFormatString="c" label="Price" showInSummary="true" />
-    <field name="Quantity" type="Int32" allowNulls="false" label="Quantity" showInSummary="true" />
+    <field name="Price" type="Decimal" allowNulls="false" dataFormatString="c" label="Price" showInSummary="true" causesCalculate="true" />
+    <field name="Quantity" type="Int32" allowNulls="false" label="Quantity" showInSummary="true" causesCalculate="true" />
     <field name="TotalPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Total Price" computed="true" showInSummary="true">
       <formula>Expenses.Price * Expenses.Quantity</formula>
     </field>
@@ -45,9 +45,9 @@ from "dbo"."Expenses" "Expenses"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Item" columns="50" />
-        <dataField fieldName="Price" columns="15" />
-        <dataField fieldName="Quantity" columns="15" />
-        <dataField fieldName="TotalPrice" columns="15" />
+        <dataField fieldName="Price" columns="15" aggregate="Average" />
+        <dataField fieldName="Quantity" columns="15" aggregate="Sum" />
+        <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
         <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
         <dataField fieldName="TaskCategoryName" columns="50" />
         <dataField fieldName="TaskLocationName" columns="50" />
@@ -147,4 +147,10 @@ from "dbo"."Expenses" "Expenses"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Calculate" type="Sql" phase="Execute"><![CDATA[IF @Price IS NULL OR @Quantity IS NULL
+    SET @TotalPrice = 0
+ELSE
+    SET @TotalPrice = @Price * @Quantity]]></rule>
+  </businessRules>
 </dataController>

@@ -299,6 +299,53 @@ IF (@Owner IS NULL)
         <FilterExpression>Creator = @BusinessRules_UserName OR Owner = @BusinessRules_UserName</FilterExpression>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-06T10:14:57.4445818Z">
+      <controller name="Tasks" />
+      <move>
+        <controller name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:15:13.3452490Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:15:15.9880558Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:15:18.1466729Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:15:19.7056982Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-06T10:15:21.0056321Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Expenses" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

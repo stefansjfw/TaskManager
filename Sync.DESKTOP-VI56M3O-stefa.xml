@@ -533,6 +533,13 @@ ELSE
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-07T20:31:12.4350668Z">
+      <controller name="Tasks" />
+      <field name="Tags" />
+      <update>
+        <ItemsStyle>DropDownList</ItemsStyle>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

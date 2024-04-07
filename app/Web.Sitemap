@@ -7,6 +7,8 @@
     <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
     <siteMapNode title="Attachments" description="View Attachments" url="~/pages/attachments" />
     <siteMapNode title="Expenses" description="View Expenses" url="~/pages/expenses" />
+    <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" />
+    <siteMapNode title="Task Tags" description="View Task Tags" url="~/pages/task-tags" />
     <siteMapNode title="^MembershipPath^Membership^MembershipPath^" description="^MembershipDesc^User and role manager^MembershipDesc^" url="~/pages/membership" roles="Administrators" />
   </siteMapNode>
 </siteMap>

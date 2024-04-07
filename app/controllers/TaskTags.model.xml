@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TaskTags" alias="TaskTags" created="2024-04-07T22:23:40" modified="2024-04-07T22:23:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Task" parentTableSchema="dbo" parentTableName="Tasks" x="236" y="20">
+      <foreignKeyColumn columnName="TaskID" parentColumnName="TaskID" />
+    </foreignKey>
+    <foreignKey id="TaskCategory" parentTableSchema="dbo" parentTableName="Categories" baseForeignKey="Task" x="512" y="20">
+      <foreignKeyColumn columnName="CategoryID" parentColumnName="CategoryID" />
+    </foreignKey>
+    <foreignKey id="TaskLocation" parentTableSchema="dbo" parentTableName="Locations" baseForeignKey="Task" x="512" y="160">
+      <foreignKeyColumn columnName="LocationID" parentColumnName="LocationID" />
+    </foreignKey>
+    <foreignKey id="Tag" parentTableSchema="dbo" parentTableName="Tags" x="236" y="227">
+      <foreignKeyColumn columnName="TagID" parentColumnName="TagID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TaskID" fieldName="TaskID" label="Task ID" aliasColumnName="Description" aliasForeignKey="Task" />
+    <column name="Description" fieldName="TaskDescription" label="Task Description" foreignKey="Task" />
+    <column name="CategoryName" fieldName="TaskCategoryName" label="Task Category Name" foreignKey="TaskCategory" />
+    <column name="Name" fieldName="TaskLocationName" label="Task Location Name" foreignKey="TaskLocation" />
+    <column name="TagID" fieldName="TagID" label="Tag ID" aliasColumnName="Tag" aliasForeignKey="Tag" />
+    <column name="Tag" fieldName="Tag" label="Tag" foreignKey="Tag" />
+  </columns>
+</dataModel>

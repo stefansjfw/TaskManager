@@ -63,6 +63,9 @@ order by "Tasks"."Date" desc]]></text>
     <field name="Expenses" type="DataView" label="Expenses">
       <dataView controller="Expenses" view="grid1" filterFields="TaskID" />
     </field>
+    <field name="Tags" type="String" label="Tags">
+      <items style="CheckBoxList" dataController="Tags" newDataView="createForm1" targetController="TaskTags" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null AND (Creator = @BusinessRules_UserName OR Owner = @BusinessRules_UserName)">
@@ -73,6 +76,7 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+        <dataField fieldName="Tags" columns="30" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
         <dataField fieldName="Creator" columns="50" />
         <dataField fieldName="Owner" columns="50" />
@@ -101,6 +105,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
             <dataField fieldName="Expenses" columns="15" />
+            <dataField fieldName="Tags" rows="5" />
           </dataFields>
         </category>
       </categories>
@@ -125,6 +130,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
             <dataField fieldName="Expenses" columns="15" />
+            <dataField fieldName="Tags" rows="5" />
           </dataFields>
         </category>
       </categories>
@@ -137,6 +143,7 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+        <dataField fieldName="Tags" rows="5" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
         <dataField fieldName="Creator" columns="50" />
         <dataField fieldName="Owner" columns="50" />

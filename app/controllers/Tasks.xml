@@ -18,6 +18,7 @@ select
 	,"Location"."Country" "Country"
 	,"Tasks"."Creator" "Creator"
 	,"Tasks"."Owner" "Owner"
+	,"Tasks"."Status" "Status"
 from "dbo"."Tasks" "Tasks"
 	left join "dbo"."Locations" "Location" on "Tasks"."LocationID" = "Location"."LocationID"
 order by "Tasks"."Date" desc]]></text>
@@ -50,6 +51,15 @@ order by "Tasks"."Date" desc]]></text>
     <field name="Owner" type="String" label="Owner" length="50">
       <items style="UserNameLookup" />
     </field>
+    <field name="Status" type="String" label="Status" length="50">
+      <items style="DropDownList">
+        <item value="New" text="New" />
+        <item value="Delegated" text="Delegated" />
+        <item value="In-Progress" text="In-Progress" />
+        <item value="Canceled" text="Canceled" />
+        <item value="Completed" text="Completed" />
+      </items>
+    </field>
     <field name="Attachments" type="DataView" label="Attachments">
       <dataView controller="Attachments" view="grid1" filterFields="TaskID" />
     </field>
@@ -66,6 +76,7 @@ order by "Tasks"."Date" desc]]></text>
       <dataFields>
         <dataField fieldName="Description" columns="50" />
         <dataField fieldName="Date" columns="20" />
+        <dataField fieldName="Status" columns="50" />
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="Tags" columns="30" />
@@ -94,6 +105,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Country" columns="50" />
             <dataField fieldName="Creator" columns="50" />
             <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="Status" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
             <dataField fieldName="Expenses" columns="15" />
             <dataField fieldName="Tags" rows="5" />
@@ -118,6 +130,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Country" columns="50" />
             <dataField fieldName="Creator" columns="50" hidden="true" />
             <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="Status" columns="50" hidden="true" />
             <dataField fieldName="Attachments" columns="15" />
             <dataField fieldName="Expenses" columns="15" />
             <dataField fieldName="Tags" rows="5" />
@@ -130,6 +143,7 @@ order by "Tasks"."Date" desc]]></text>
       <dataFields>
         <dataField fieldName="Description" columns="50" />
         <dataField fieldName="Date" columns="20" />
+        <dataField fieldName="Status" columns="50" />
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
@@ -213,11 +227,13 @@ else
 
 $row.Date = d;]]></rule>
     <rule id="r102" commandName="Custom" commandArgument="CompleteTask" type="Sql" phase="Execute"><![CDATA[UPDATE Tasks
-SET Completed = GETDATE()
+SET Completed = GETDATE(), "Status" = 'Completed'
 WHERE TaskID = @TaskID]]></rule>
     <rule id="r103" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Creator = @BusinessRules_UserName
+SET @Status = 'New'
 IF (@Owner IS NULL)
     SET @Owner = @BusinessRules_UserName
-]]></rule>
+ELSE
+    SET @Status = 'Delegated']]></rule>
   </businessRules>
 </dataController>

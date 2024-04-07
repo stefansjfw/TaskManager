@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <dataModel baseSchema="dbo" baseTable="Tasks" alias="Tasks" created="2024-04-05T11:12:01" modified="2024-04-05T23:01:01" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
-    <foreignKey id="Category" parentTableSchema="dbo" parentTableName="Categories" x="297" y="20">
-      <foreignKeyColumn columnName="CategoryID" parentColumnName="CategoryID" />
-    </foreignKey>
     <foreignKey id="Location" parentTableSchema="dbo" parentTableName="Locations" x="281" y="186">
       <foreignKeyColumn columnName="LocationID" parentColumnName="LocationID" />
     </foreignKey>
@@ -14,8 +11,6 @@
     <column name="Date" fieldName="Date" label="Date" format="g" sortType="Descending" sortOrder="1" />
     <column name="Created" fieldName="Created" label="Created" format="g" />
     <column name="Completed" fieldName="Completed" label="Completed" format="g" />
-    <column name="CategoryID" fieldName="CategoryID" label="Category ID" aliasColumnName="CategoryName" aliasForeignKey="Category" />
-    <column name="CategoryName" fieldName="CategoryName" label="Category Name" foreignKey="Category" />
     <column name="LocationID" fieldName="LocationID" label="Location ID" aliasColumnName="Name" aliasForeignKey="Location" />
     <column name="Name" fieldName="LocationName" label="Location Name" foreignKey="Location" />
     <column name="Address" fieldName="Address" label="Address" foreignKey="Location" />

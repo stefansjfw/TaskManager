@@ -9,8 +9,6 @@ select
 	,"Tasks"."Date" "Date"
 	,"Tasks"."Created" "Created"
 	,"Tasks"."Completed" "Completed"
-	,"Tasks"."CategoryID" "CategoryID"
-	,"Category"."CategoryName" "CategoryName"
 	,"Tasks"."LocationID" "LocationID"
 	,"Location"."Name" "LocationName"
 	,"Location"."Address" "Address"
@@ -21,7 +19,6 @@ select
 	,"Tasks"."Creator" "Creator"
 	,"Tasks"."Owner" "Owner"
 from "dbo"."Tasks" "Tasks"
-	left join "dbo"."Categories" "Category" on "Tasks"."CategoryID" = "Category"."CategoryID"
 	left join "dbo"."Locations" "Location" on "Tasks"."LocationID" = "Location"."LocationID"
 order by "Tasks"."Date" desc]]></text>
     </command>
@@ -38,11 +35,7 @@ order by "Tasks"."Date" desc]]></text>
     <field name="Date" type="DateTime" allowNulls="false" dataFormatString="g" label="Date" showInSummary="true" />
     <field name="Created" type="DateTime" allowNulls="false" dataFormatString="g" label="Created" showInSummary="true" />
     <field name="Completed" type="DateTime" dataFormatString="g" label="Completed" showInSummary="true" />
-    <field name="CategoryID" type="Int32" label="Category ID" showInSummary="true">
-      <items style="Lookup" dataController="Categories" newDataView="createForm1" dataValueField="CategoryID" dataTextField="CategoryName" />
-    </field>
-    <field name="CategoryName" type="String" readOnly="true" label="Category Name" length="50" />
-    <field name="LocationID" type="Int32" label="Location ID">
+    <field name="LocationID" type="Int32" label="Location ID" showInSummary="true">
       <items style="Lookup" dataController="Locations" newDataView="createForm1" dataValueField="LocationID" dataTextField="Name" copy="Address=Address, City=City, State=State, PostalCode=PostalCode, Country=Country" />
     </field>
     <field name="LocationName" type="String" readOnly="true" label="Location Name" length="50" />
@@ -75,7 +68,6 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Date" columns="20" />
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
-        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
         <dataField fieldName="Tags" columns="30" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
         <dataField fieldName="Creator" columns="50" />
@@ -94,7 +86,6 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Date" columns="20" />
             <dataField fieldName="Created" columns="20" textMode="Static" />
             <dataField fieldName="Completed" columns="20" textMode="Static" />
-            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="LocationID" aliasFieldName="LocationName" />
             <dataField fieldName="Address" columns="50" />
             <dataField fieldName="City" columns="50" />
@@ -119,7 +110,6 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="Date" columns="20" />
             <dataField fieldName="Created" columns="20" hidden="true" />
-            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="LocationID" aliasFieldName="LocationName" />
             <dataField fieldName="Address" columns="50" />
             <dataField fieldName="City" columns="50" />
@@ -142,9 +132,8 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Date" columns="20" />
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
-        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
-        <dataField fieldName="Tags" rows="5" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+        <dataField fieldName="Tags" rows="5" />
         <dataField fieldName="Creator" columns="50" />
         <dataField fieldName="Owner" columns="50" />
         <dataField fieldName="Attachments" columns="15" />

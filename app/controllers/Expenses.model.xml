@@ -4,12 +4,6 @@
     <foreignKey id="Task" parentTableSchema="dbo" parentTableName="Tasks" x="290" y="20">
       <foreignKeyColumn columnName="TaskID" parentColumnName="TaskID" />
     </foreignKey>
-    <foreignKey id="TaskCategory" parentTableSchema="dbo" parentTableName="Categories" baseForeignKey="Task" x="566" y="20">
-      <foreignKeyColumn columnName="CategoryID" parentColumnName="CategoryID" />
-    </foreignKey>
-    <foreignKey id="TaskLocation" parentTableSchema="dbo" parentTableName="Locations" baseForeignKey="Task" x="566" y="160">
-      <foreignKeyColumn columnName="LocationID" parentColumnName="LocationID" />
-    </foreignKey>
   </foreignKeys>
   <columns>
     <column name="ExpenseID" fieldName="ExpenseID" label="Expense ID" />
@@ -21,7 +15,5 @@
     </column>
     <column name="TaskID" fieldName="TaskID" label="Task ID" aliasColumnName="Description" aliasForeignKey="Task" />
     <column name="Description" fieldName="TaskDescription" label="Task Description" foreignKey="Task" />
-    <column name="CategoryName" fieldName="TaskCategoryName" label="Task Category Name" foreignKey="TaskCategory" />
-    <column name="Name" fieldName="TaskLocationName" label="Task Location Name" foreignKey="TaskLocation" />
   </columns>
 </dataModel>

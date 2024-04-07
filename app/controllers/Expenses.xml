@@ -10,12 +10,8 @@ select
 	,"Expenses"."Quantity" "Quantity"
 	,"Expenses"."TaskID" "TaskID"
 	,"Task"."Description" "TaskDescription"
-	,"TaskCategory"."CategoryName" "TaskCategoryName"
-	,"TaskLocation"."Name" "TaskLocationName"
 from "dbo"."Expenses" "Expenses"
 	left join "dbo"."Tasks" "Task" on "Expenses"."TaskID" = "Task"."TaskID"
-	left join "dbo"."Categories" "TaskCategory" on "Task"."CategoryID" = "TaskCategory"."CategoryID"
-	left join "dbo"."Locations" "TaskLocation" on "Task"."LocationID" = "TaskLocation"."LocationID"
 ]]></text>
     </command>
     <command id="ExpenseIDIdentityCommand" type="Text" event="Inserted">
@@ -34,11 +30,9 @@ from "dbo"."Expenses" "Expenses"
       <formula>Expenses.Price * Expenses.Quantity</formula>
     </field>
     <field name="TaskID" type="Int32" allowNulls="false" label="Task ID" showInSummary="true">
-      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" copy="TaskCategoryName=CategoryName, TaskLocationName=LocationName" />
+      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" />
     </field>
     <field name="TaskDescription" type="String" readOnly="true" label="Task Description" length="50" />
-    <field name="TaskCategoryName" type="String" readOnly="true" label="Task Category Name" length="50" />
-    <field name="TaskLocationName" type="String" readOnly="true" label="Task Location Name" length="50" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Expenses">
@@ -49,8 +43,6 @@ from "dbo"."Expenses" "Expenses"
         <dataField fieldName="Quantity" columns="15" aggregate="Sum" />
         <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
         <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
-        <dataField fieldName="TaskCategoryName" columns="50" />
-        <dataField fieldName="TaskLocationName" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Expenses">
@@ -64,8 +56,6 @@ from "dbo"."Expenses" "Expenses"
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="TotalPrice" columns="15" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
-            <dataField fieldName="TaskCategoryName" columns="50" />
-            <dataField fieldName="TaskLocationName" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -81,8 +71,6 @@ from "dbo"."Expenses" "Expenses"
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="TotalPrice" columns="15" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
-            <dataField fieldName="TaskCategoryName" columns="50" />
-            <dataField fieldName="TaskLocationName" columns="50" />
           </dataFields>
         </category>
       </categories>

@@ -664,6 +664,45 @@ WHERE TaskID = @TaskID</Script>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-07T21:25:03.9157110Z">
+      <controller name="Tasks" />
+      <update>
+        <GenerateDataAccessObjects>false</GenerateDataAccessObjects>
+        <StatusBar>Status: New
+[New] &gt; In-Progress &gt; Done &gt;
+
+Status: Delegated
+New &gt; [Delegated] &gt; In-Progress &gt; Completed &gt;
+
+Status: In-Progress
+New &gt; [Being Worked On] &gt; Completed
+
+Status: Canceled
+Something Went Wrong &gt; [Canceled]
+
+Status: Completed
+New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-07T21:26:53.2816991Z">
+      <controller name="Tasks" />
+      <update>
+        <StatusBar>Status: New
+[New] &gt; In-Progress &gt; Done &gt;
+
+Status: Delegated
+New &gt; [Delegated] &gt; In-Progress &gt; Completed &gt;
+
+Status: In-Progress
+New &gt; [Being Worked On] &gt; Completed &gt;
+
+Status: Canceled
+Something Went Wrong &gt; [Canceled] &gt;
+
+Status: Completed
+New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

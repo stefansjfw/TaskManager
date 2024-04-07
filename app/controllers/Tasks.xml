@@ -236,4 +236,18 @@ IF (@Owner IS NULL)
 ELSE
     SET @Status = 'Delegated']]></rule>
   </businessRules>
+  <statusBar><![CDATA[Status: New
+[New] > In-Progress > Done >
+
+Status: Delegated
+New > [Delegated] > In-Progress > Completed >
+
+Status: In-Progress
+New > [Being Worked On] > Completed >
+
+Status: Canceled
+Something Went Wrong > [Canceled] >
+
+Status: Completed
+New > In-Progress > [Completed] >]]></statusBar>
 </dataController>

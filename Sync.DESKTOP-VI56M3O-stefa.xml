@@ -981,5 +981,46 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
       </update>
     </c>
   </log>
-  <log type="Application"></log>
+  <log type="Application">
+    <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">
+      <page name="Tasks" />
+      <rename>To-Do</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:12:59.9198324Z">
+      <page name="TaskTags" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:13:22.7815764Z">
+      <pages />
+      <insert type="page">
+        <Name>Admin</Name>
+        <Url>about:blank</Url>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Admin</Path>
+        <Title>Admin</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:13:30.7156517Z">
+      <page name="Admin" />
+      <move>
+        <page name="Locations" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:13:30.7166642Z">
+      <page name="Admin" />
+      <move>
+        <page name="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:13:30.7166642Z">
+      <page name="Admin" />
+      <move>
+        <page name="Membership" />
+      </move>
+    </c>
+  </log>
 </logs>

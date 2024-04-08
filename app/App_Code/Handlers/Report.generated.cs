@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Data;
 using System.IO;
 using System.Web;
 using Microsoft.Reporting.WebForms;
-using FreeTrial.Data;
+using StefanTutorialDemo.Data;
 
-namespace FreeTrial.Handlers
+namespace StefanTutorialDemo.Handlers
 {
     public partial class Report : ReportBase
     {

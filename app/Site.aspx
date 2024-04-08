@@ -1,1 +1,1 @@
-﻿<%@ Page CodeBehind="Site.aspx.cs" Inherits="FreeTrial.Handlers.Site" ValidateRequest="false" %>
+<%@ Page CodeBehind="Site.aspx.cs" Inherits="StefanTutorialDemo.Handlers.Site" ValidateRequest="false" %>

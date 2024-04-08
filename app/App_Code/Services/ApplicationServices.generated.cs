@@ -1,9 +1,8 @@
-﻿using FreeTrial.Handlers;
-using FreeTrial.Data;
-using FreeTrial.Web;
+﻿using StefanTutorialDemo.Handlers;
+using StefanTutorialDemo.Web;
 using System.Web.Configuration;
 
-namespace FreeTrial.Services
+namespace StefanTutorialDemo.Services
 {
     public class AppFrameworkConfig
     {
@@ -13,13 +12,12 @@ namespace FreeTrial.Services
             ApplicationServices.FrameworkAppName = "Task Manager";
             ApplicationServices.Version = "8.9.40.0";
             ApplicationServices.HostVersion = "1.2.5.0";
-            var releaseMode = true;
+            var compilation = ((CompilationSection)(WebConfigurationManager.GetSection("system.web/compilation")));
+            var releaseMode = !compilation.Debug;
             AquariumExtenderBase.EnableMinifiedScript = releaseMode;
             AquariumExtenderBase.EnableCombinedScript = releaseMode;
             ApplicationServices.EnableMinifiedCss = releaseMode;
             ApplicationServices.EnableCombinedCss = releaseMode;
-            CultureManager.SupportedCultures = new string[] {
-                    "en-US,en-US"};
             BlobFactoryConfig.Initialize();
         }
     }

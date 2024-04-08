@@ -57,6 +57,8 @@ generation library.
 
 ^AddMatchingGroup^Add matching group^AddMatchingGroup^
 
+^AddSearchBarField^More Search Fields^AddSearchBarField^
+
 ^AddSystemIdentity^Add System Identity^AddSystemIdentity^
 
 ^AddToFavorites^Add to Favorites^AddToFavorites^
@@ -104,6 +106,8 @@ generation library.
 ^BatchEditActionHeaderText^Batch Edit^BatchEditActionHeaderText^
 
 ^BatchEdited^{0} updated^BatchEdited^
+
+^BatchEditInFormActionHeaderText^Batch Edit (Form)^BatchEditInFormActionHeaderText^
 
 ^BatchUpdate^update^BatchUpdate^
 

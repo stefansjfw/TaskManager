@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="MyProfile" conflictDetection="overwriteChanges" label="My Profile" handler="FreeTrial.Rules.MyProfileBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="MyProfile" conflictDetection="overwriteChanges" label="My Profile" handler="StefanTutorialDemo.Rules.MyProfileBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
     <field name="UserName" type="String" allowNulls="false" label="^UserName^User Name^UserName^" />

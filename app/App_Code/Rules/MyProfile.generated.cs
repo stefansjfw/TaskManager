@@ -1,4 +1,4 @@
-﻿namespace FreeTrial.Rules
+namespace StefanTutorialDemo.Rules
 {
 
 

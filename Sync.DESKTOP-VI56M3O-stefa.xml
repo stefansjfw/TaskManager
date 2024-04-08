@@ -1008,6 +1008,22 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <Tags>material-icon-attach-money</Tags>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-08T20:04:22.0148316Z">
+      <controller name="Expenses" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-attach-money modal-dock-right modal-max-tn modal-always</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T20:04:56.0215025Z">
+      <controller name="Expenses" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>New</CommandName>
+        <Phase>Execute</Phase>
+        <Script>SET @Quantity = 1</Script>
+      </insert>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

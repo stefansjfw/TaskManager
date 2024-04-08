@@ -10,9 +10,10 @@ select
 	,"Expenses"."Quantity" "Quantity"
 	,"Expenses"."TaskID" "TaskID"
 	,"Task"."Description" "TaskDescription"
+	,"Task"."Date" "TaskDate"
 from "dbo"."Expenses" "Expenses"
 	left join "dbo"."Tasks" "Task" on "Expenses"."TaskID" = "Task"."TaskID"
-]]></text>
+order by "Task"."Date" desc]]></text>
     </command>
     <command id="ExpenseIDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
@@ -30,12 +31,13 @@ from "dbo"."Expenses" "Expenses"
       <formula>Expenses.Price * Expenses.Quantity</formula>
     </field>
     <field name="TaskID" type="Int32" allowNulls="false" label="Task ID" showInSummary="true">
-      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" />
+      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" copy="TaskDate=Date" />
     </field>
-    <field name="TaskDescription" type="String" readOnly="true" label="Task Description" length="50" />
+    <field name="TaskDescription" type="String" readOnly="true" label="Task" length="50" />
+    <field name="TaskDate" type="DateTime" readOnly="true" dataFormatString="g" label="Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Expenses">
+    <view id="grid1" type="Grid" commandId="command1" label="Expenses" sortExpression="TaskDate desc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Item" columns="50" />
@@ -43,6 +45,7 @@ from "dbo"."Expenses" "Expenses"
         <dataField fieldName="Quantity" columns="15" aggregate="Sum" />
         <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
         <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+        <dataField fieldName="TaskDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Expenses" tags="material-icon-attach-money">
@@ -56,11 +59,12 @@ from "dbo"."Expenses" "Expenses"
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="TotalPrice" columns="15" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+            <dataField fieldName="TaskDate" columns="20" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Expenses" tags="material-icon-attach-money">
+    <view id="createForm1" type="Form" commandId="command1" label="New Expenses" tags="material-icon-attach-money modal-dock-right modal-max-tn modal-always">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -71,6 +75,7 @@ from "dbo"."Expenses" "Expenses"
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="TotalPrice" columns="15" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+            <dataField fieldName="TaskDate" columns="20" />
           </dataFields>
         </category>
       </categories>
@@ -140,5 +145,6 @@ from "dbo"."Expenses" "Expenses"
     SET @TotalPrice = 0
 ELSE
     SET @TotalPrice = @Price * @Quantity]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Quantity = 1]]></rule>
   </businessRules>
 </dataController>

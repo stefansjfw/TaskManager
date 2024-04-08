@@ -1024,6 +1024,91 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <Script>SET @Quantity = 1</Script>
       </insert>
     </c>
+    <c y="NodeSet" t="2024-04-08T21:24:23.5536191Z">
+      <controller name="Attachments" />
+      <insert type="field">
+        <Name>Attachment</Name>
+        <Type>Byte[]</Type>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>false</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>true</OnDemand>
+        <SourceFields>AttachmentID</SourceFields>
+        <OnDemandHandler>AttachmentBlobHandler</OnDemandHandler>
+        <OnDemandStyle>Thumbnail</OnDemandStyle>
+        <Label>Attachment</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-08T21:24:48.4638113Z">
+      <controller name="Attachments" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Attachments" />
+        <field name="Attachment" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T21:24:50.1195285Z">
+      <controller name="Attachments" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Attachments" />
+        <field name="Attachment" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T21:24:51.7726632Z">
+      <controller name="Attachments" />
+      <view id="grid1" />
+      <move>
+        <controller name="Attachments" />
+        <field name="Attachment" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T21:24:53.1797771Z">
+      <controller name="Attachments" />
+      <view id="grid1" />
+      <dataField fieldName="Attachment" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T21:27:26.8312793Z">
+      <controller name="Attachments" />
+      <update>
+        <GenerateDataAccessObjects>false</GenerateDataAccessObjects>
+        <BlobAdapterConfig>Field: Attachment
+Storage-System: File
+Path-Template: C:\ToDo\Attachments\{AttachmentID}-{FileName}
+File-Name-Field: FileName
+Content-Type-Field: ContentType
+Length-Field: Length</BlobAdapterConfig>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T21:33:48.5101016Z">
+      <controller name="Attachments" />
+      <update>
+        <BlobAdapterConfig>Field: Attachment
+Storage-System: File
+Path-Template: C:\ToDo\Attachments\{AttachmentID}-{FileName}
+File-Name-Field: FileName
+Content-Type-Field: ContentType
+Length-Field: Length</BlobAdapterConfig>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

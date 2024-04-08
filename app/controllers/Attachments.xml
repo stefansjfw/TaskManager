@@ -5,7 +5,6 @@
       <text><![CDATA[
 select
 	"Attachments"."AttachmentID" "AttachmentID"
-	,"Attachments"."Attachment" "Attachment"
 	,"Attachments"."FileName" "FileName"
 	,"Attachments"."Length" "Length"
 	,"Attachments"."ContentType" "ContentType"
@@ -24,7 +23,6 @@ from "dbo"."Attachments" "Attachments"
   </commands>
   <fields>
     <field name="AttachmentID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Attachment ID" readOnly="true" />
-    <field name="Attachment" type="Byte[]" onDemand="true" sourceFields="AttachmentID" onDemandHandler="AttachmentsAttachment" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Attachment" showInSummary="true" />
     <field name="FileName" type="String" allowNulls="false" label="File Name" length="50" showInSummary="true" />
     <field name="Length" type="Int32" allowNulls="false" label="Length" showInSummary="true" />
     <field name="ContentType" type="String" allowNulls="false" label="Content Type" length="50" showInSummary="true" />
@@ -32,16 +30,17 @@ from "dbo"."Attachments" "Attachments"
       <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" />
     </field>
     <field name="TaskDescription" type="String" readOnly="true" label="Task Description" length="50" />
+    <field name="Attachment" type="Byte[]" label="Attachment" sourceFields="AttachmentID" onDemand="true" onDemandHandler="AttachmentBlobHandler" onDemandStyle="Thumbnail" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Attachments">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Attachment" columns="15" />
         <dataField fieldName="FileName" columns="50" />
         <dataField fieldName="Length" columns="15" />
         <dataField fieldName="ContentType" columns="50" />
         <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+        <dataField fieldName="Attachment" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Attachments" tags="material-icon-attach-file">
@@ -50,11 +49,11 @@ from "dbo"."Attachments" "Attachments"
         <category id="c1" headerText="Attachments" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Attachment" columns="15" tag="header-image-original" />
             <dataField fieldName="FileName" columns="50" />
             <dataField fieldName="Length" columns="15" />
             <dataField fieldName="ContentType" columns="50" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+            <dataField fieldName="Attachment" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -65,11 +64,11 @@ from "dbo"."Attachments" "Attachments"
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Attachment" columns="15" />
             <dataField fieldName="FileName" columns="50" />
             <dataField fieldName="Length" columns="15" />
             <dataField fieldName="ContentType" columns="50" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+            <dataField fieldName="Attachment" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -134,4 +133,10 @@ from "dbo"."Attachments" "Attachments"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <blobAdapterConfig>Field: Attachment
+Storage-System: File
+Path-Template: C:\ToDo\Attachments\{AttachmentID}-{FileName}
+File-Name-Field: FileName
+Content-Type-Field: ContentType
+Length-Field: Length</blobAdapterConfig>
 </dataController>

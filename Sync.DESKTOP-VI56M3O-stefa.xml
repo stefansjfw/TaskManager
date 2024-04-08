@@ -712,6 +712,68 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <Description />
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-08T07:04:10.9239581Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Status" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:04:33.8149600Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <HeaderText>Audit</HeaderText>
+        <Floating>true</Floating>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:04:47.5302958Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Creator" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:04:47.5314941Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Created" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:04:47.5314941Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Completed" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:04:52.9650001Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="Completed" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

@@ -1022,5 +1022,14 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <page name="Membership" />
       </move>
     </c>
+    <c y="NodeSet" t="2024-04-08T08:15:05.2174641Z">
+      <page name="Tasks" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <CustomStyle>material-icon-event</CustomStyle>
+      </update>
+    </c>
   </log>
 </logs>

@@ -2,7 +2,7 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
   <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
     <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
-    <siteMapNode title="To-Do" description="View Tasks" url="~/pages/tasks" />
+    <siteMapNode title="To-Do" description="View Tasks" url="~/pages/tasks" cssClass="material-icon-event" />
     <siteMapNode title="Attachments" description="View Attachments" url="~/pages/attachments" />
     <siteMapNode title="Expenses" description="View Expenses" url="~/pages/expenses" />
     <siteMapNode title="Admin" description="" roles="*">

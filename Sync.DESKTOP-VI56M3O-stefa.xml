@@ -970,6 +970,16 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-08T07:16:30.5279726Z">
+      <controller name="Attachments" />
+      <view id="editForm1" />
+      <dataField fieldName="Attachment" />
+      <update>
+        <Tag>header-image-original</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

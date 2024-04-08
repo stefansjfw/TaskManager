@@ -112,7 +112,7 @@ order by "Tasks"."Date" desc]]></text>
         </category>
         <category tab="Expenses" id="c4">
           <dataFields>
-            <dataField fieldName="Expenses" columns="15" />
+            <dataField fieldName="Expenses" columns="15" tag="modal-always modal-fit-content modal-max-xs page-header-none" />
           </dataFields>
         </category>
         <category tab="Address" id="c5">

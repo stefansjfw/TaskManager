@@ -96,8 +96,12 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="Date" columns="20" />
             <dataField fieldName="Status" columns="50" />
-            <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+          </dataFields>
+        </category>
+        <category headerText="Details" id="c6" flow="NewColumn">
+          <dataFields>
             <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="LocationID" aliasFieldName="LocationName" />
             <dataField fieldName="Tags" rows="5" />
           </dataFields>
         </category>

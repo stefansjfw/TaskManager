@@ -900,6 +900,66 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <Flow>NewRow</Flow>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-08T07:11:41.3161416Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <HeaderText>Details</HeaderText>
+        <Flow>NewColumn</Flow>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:11:48.3544218Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c3" />
+      <before>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c6" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:11:58.4508653Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c6" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Owner" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:11:58.4508653Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c6" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="LocationID" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:11:58.4518647Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c6" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-08T07:12:00.0987667Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

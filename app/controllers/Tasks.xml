@@ -90,8 +90,8 @@ order by "Tasks"."Date" desc]]></text>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tasks" tags="material-icon-event">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Tasks" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="Task" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="Date" columns="20" />

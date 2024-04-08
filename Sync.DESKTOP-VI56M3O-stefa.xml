@@ -703,6 +703,15 @@ Status: Completed
 New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-08T07:02:33.0583123Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <update>
+        <HeaderText>Task</HeaderText>
+        <Description />
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

@@ -980,6 +980,34 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-08T08:18:50.4514908Z">
+      <controller name="Attachments" />
+      <view id="editForm1" />
+      <update>
+        <Tags>material-icon-attach-file</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:18:54.2987671Z">
+      <controller name="Attachments" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-attach-file</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:19:24.9622838Z">
+      <controller name="Expenses" />
+      <view id="editForm1" />
+      <update>
+        <Tags>material-icon-attach-money</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:19:27.8374694Z">
+      <controller name="Expenses" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-attach-money</Tags>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">
@@ -1029,6 +1057,24 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <Offline>false</Offline>
         <Kiosk>false</Kiosk>
         <CustomStyle>material-icon-event</CustomStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:18:17.9058829Z">
+      <page name="Attachments" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <CustomStyle>material-icon-attach-file</CustomStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-08T08:19:15.5879869Z">
+      <page name="Expenses" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <CustomStyle>material-icon-attach-money</CustomStyle>
       </update>
     </c>
   </log>

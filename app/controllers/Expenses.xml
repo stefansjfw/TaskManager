@@ -45,7 +45,7 @@ from "dbo"."Expenses" "Expenses"
         <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Expenses">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Expenses" tags="material-icon-attach-money">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Expenses" flow="NewColumn">
@@ -60,7 +60,7 @@ from "dbo"."Expenses" "Expenses"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Expenses">
+    <view id="createForm1" type="Form" commandId="command1" label="New Expenses" tags="material-icon-attach-money">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">

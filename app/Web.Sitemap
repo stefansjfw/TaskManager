@@ -3,8 +3,8 @@
   <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
     <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
     <siteMapNode title="To-Do" description="View Tasks" url="~/pages/tasks" cssClass="material-icon-event" />
-    <siteMapNode title="Attachments" description="View Attachments" url="~/pages/attachments" />
-    <siteMapNode title="Expenses" description="View Expenses" url="~/pages/expenses" />
+    <siteMapNode title="Attachments" description="View Attachments" url="~/pages/attachments" cssClass="material-icon-attach-file" />
+    <siteMapNode title="Expenses" description="View Expenses" url="~/pages/expenses" cssClass="material-icon-attach-money" />
     <siteMapNode title="Admin" description="" roles="*">
       <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
       <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" />

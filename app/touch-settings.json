@@ -1,1 +1,11 @@
-﻿{}
+﻿{
+  "ui": {
+    "menu": {
+      "location": "sidebar",
+      "apps": {
+        "location": "toolbar"
+      },
+      "tabbar": false
+    }
+  }
+}

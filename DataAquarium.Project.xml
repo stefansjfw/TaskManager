@@ -26,7 +26,7 @@
   <reports enabled="true" version="15" />
   <host path="" url="" />
   <databaseObjectFilter generate="ControllersAndPages"></databaseObjectFilter>
-  <bll normalizeModelNames="true" discoveryDepth="3" labelFormatExpression="" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="false" includeViews="true" tabViewSelection="0">
+  <bll normalizeModelNames="true" discoveryDepth="3" labelFormatExpression="" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="true" includeViews="true" tabViewSelection="1">
     <fieldMap></fieldMap>
     <keys></keys>
     <fieldsToIgnore></fieldsToIgnore>

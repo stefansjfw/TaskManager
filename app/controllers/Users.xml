@@ -46,7 +46,7 @@ from "dbo"."Users" "Users"
           <dataFields>
             <dataField fieldName="UserName" columns="50" />
             <dataField fieldName="Password" textMode="Password" columns="50" />
-            <dataField fieldName="PasswordConfirm" columns="50" />
+            <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
             <dataField fieldName="Email" columns="50" />
             <dataField fieldName="Roles" rows="5" />
           </dataFields>
@@ -61,7 +61,7 @@ from "dbo"."Users" "Users"
           <dataFields>
             <dataField fieldName="UserName" columns="50" />
             <dataField fieldName="Password" textMode="Password" columns="50" />
-            <dataField fieldName="PasswordConfirm" columns="50" />
+            <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
             <dataField fieldName="Email" columns="50" />
             <dataField fieldName="Roles" rows="5" />
           </dataFields>

@@ -1355,6 +1355,46 @@ Length-Field: Length</BlobAdapterConfig>
       <dataField fieldName="Users" />
       <delete />
     </c>
+    <c y="NodeSet" t="2024-04-11T13:32:50.1588344Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <dataField fieldName="PasswordConfirm" />
+      <update>
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:32:55.2624615Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="PasswordConfirm" />
+      <update>
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:34:06.1429985Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="PasswordConfirm" />
+      <update>
+        <Search>Required</Search>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:34:23.2711630Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="PasswordConfirm" />
+      <update>
+        <Search />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

@@ -58,13 +58,13 @@ namespace StefanTutorialDemo.Web
         }
 
         [System.ComponentModel.Description("A path to a data controller web service.")]
-        [System.ComponentModel.DefaultValue("~/_invoke")]
+        [System.ComponentModel.DefaultValue("~/Services/DataControllerService.asmx")]
         public string ServicePath
         {
             get
             {
                 if (string.IsNullOrEmpty(_servicePath))
-                    return "~/_invoke";
+                    return "~/Services/DataControllerService.asmx";
                 return _servicePath;
             }
             set

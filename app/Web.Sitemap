@@ -8,7 +8,7 @@
     <siteMapNode title="Admin" description="" roles="*">
       <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
       <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" />
-      <siteMapNode title="^MembershipPath^Membership^MembershipPath^" description="^MembershipDesc^User and role manager^MembershipDesc^" url="~/pages/membership" roles="Administrators" />
+      <siteMapNode title="Membership" description="" url="~/pages/membership" roles="Administrators" />
     </siteMapNode>
   </siteMapNode>
 </siteMap>

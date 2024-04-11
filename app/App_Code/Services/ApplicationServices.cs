@@ -3439,32 +3439,6 @@ namespace StefanTutorialDemo.Services
         {
             if (AuthorizationIsSupported)
             {
-                // Confirm existence of schema version
-                try
-                {
-                    var css = ConfigurationManager.ConnectionStrings["LocalSqlServer"];
-                    if (css == null)
-                        css = ConfigurationManager.ConnectionStrings["StefanTutorialDemo"];
-                    if ((css != null) && (css.ProviderName == "System.Data.SqlClient"))
-                    {
-                        var count = 0;
-                        using (var sql = new SqlText("select count(*) from dbo.aspnet_SchemaVersions where Feature in ('common', 'membership', 'role manager')", css.Name))
-                            count = ((int)(sql.ExecuteScalar()));
-                        if (count == 0)
-                        {
-                            using (var sql = new SqlText("insert into dbo.aspnet_SchemaVersions values ('common', 1, 1)", css.Name))
-                                sql.ExecuteNonQuery();
-                            using (var sql = new SqlText("insert into dbo.aspnet_SchemaVersions values ('membership', 1, 1)", css.Name))
-                                sql.ExecuteNonQuery();
-                            using (var sql = new SqlText("insert into dbo.aspnet_SchemaVersions values ('role manager', 1, 1)", css.Name))
-                                sql.ExecuteNonQuery();
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    // Exceptions are ignored if app uses custom membership.
-                }
                 // Create standard 'admin' and 'user' accounts.
                 var admin = Membership.GetUser("admin");
                 if ((admin != null) && admin.IsLockedOut)

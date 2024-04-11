@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="UserRoles" alias="UserRoles" created="2024-04-11T14:48:14" modified="2024-04-11T14:48:15" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="User" parentTableSchema="dbo" parentTableName="Users" x="236" y="20">
+      <foreignKeyColumn columnName="UserID" parentColumnName="UserID" />
+    </foreignKey>
+    <foreignKey id="Role" parentTableSchema="dbo" parentTableName="Roles" x="236" y="181">
+      <foreignKeyColumn columnName="RoleID" parentColumnName="RoleID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="UserID" fieldName="UserID" label="User ID" aliasColumnName="UserName" aliasForeignKey="User" />
+    <column name="UserName" fieldName="UserName" label="User Name" foreignKey="User" />
+    <column name="RoleID" fieldName="RoleID" label="Role ID" aliasColumnName="RoleName" aliasForeignKey="Role" />
+    <column name="RoleName" fieldName="RoleName" label="Role Name" foreignKey="Role" />
+  </columns>
+</dataModel>

@@ -1109,6 +1109,252 @@ Content-Type-Field: ContentType
 Length-Field: Length</BlobAdapterConfig>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-11T12:50:59.3656211Z">
+      <controllers />
+      <insert type="controller">
+        <Name>MembershipDashboard</Name>
+        <ConflictDetection>overwriteChanges</ConflictDetection>
+        <GenerateDataAccessObjects>false</GenerateDataAccessObjects>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:51:08.3667471Z">
+      <controller name="MembershipDashboard" />
+      <move>
+        <controller name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:51:08.3672541Z">
+      <controller name="MembershipDashboard" />
+      <move>
+        <controller name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:51:40.0619527Z">
+      <controller name="MembershipDashboard" />
+      <insert type="view">
+        <ViewId>dashboard1</ViewId>
+        <Type>Form</Type>
+        <Legend>false</Legend>
+        <Label>Membership</Label>
+        <ShowInSelector>true</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:52:04.7298860Z">
+      <controller name="MembershipDashboard" />
+      <view id="dashboard1" />
+      <insert type="category">
+        <Tab>Users</Tab>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:52:13.7454893Z">
+      <controller name="MembershipDashboard" />
+      <view id="dashboard1" />
+      <insert type="category">
+        <Tab>Roles</Tab>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:52:24.6379254Z">
+      <controller name="MembershipDashboard" />
+      <view id="dashboard1" />
+      <category id="c1" />
+      <move>
+        <controller name="MembershipDashboard" />
+        <field name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:52:26.6015000Z">
+      <controller name="MembershipDashboard" />
+      <view id="dashboard1" />
+      <category id="c2" />
+      <move>
+        <controller name="MembershipDashboard" />
+        <field name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:53:51.4626217Z">
+      <controller name="Users" />
+      <insert type="field">
+        <Name>Roles</Name>
+        <Type>String</Type>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>false</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Roles</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <ItemsStyle>CheckBoxList</ItemsStyle>
+        <ItemsDataController>Roles</ItemsDataController>
+        <ItemsTargetController>UserRoles</ItemsTargetController>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:01.7961084Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:03.3347511Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:04.9062156Z">
+      <controller name="Users" />
+      <view id="grid1" />
+      <move>
+        <controller name="Users" />
+        <field name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:27.3579647Z">
+      <controller name="Users" />
+      <insert type="field">
+        <Name>PasswordConfirm</Name>
+        <Type>String</Type>
+        <Length>50</Length>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Password Confirm</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:42.2332627Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <move>
+        <controller name="Users" />
+        <field name="PasswordConfirm" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:44.0230067Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Password" />
+      <after>
+        <controller name="Users" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="PasswordConfirm" />
+      </after>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:47.1634191Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <move>
+        <controller name="Users" />
+        <field name="PasswordConfirm" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:54:48.9509974Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="Password" />
+      <after>
+        <controller name="Users" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="PasswordConfirm" />
+      </after>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:56:15.5887279Z">
+      <controller name="Users" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert|Update</CommandName>
+        <Phase>Execute</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:03:25.8788583Z">
+      <controller name="Users" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Select</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:06:35.3187034Z">
+      <controller name="Roles" />
+      <move>
+        <controller name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:06:44.0130559Z">
+      <controller name="Roles" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Roles" />
+        <field name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:07:10.0466844Z">
+      <controller name="Roles" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Select</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:12:39.5591563Z">
+      <controller name="Roles" />
+      <view id="grid1" />
+      <move>
+        <controller name="Roles" />
+        <field name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:12:41.2784331Z">
+      <controller name="Roles" />
+      <view id="grid1" />
+      <dataField fieldName="Users" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:13:14.8646100Z">
+      <controller name="Roles" />
+      <view id="grid1" />
+      <dataField fieldName="Users" />
+      <delete />
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">
@@ -1177,6 +1423,51 @@ Length-Field: Length</BlobAdapterConfig>
         <Kiosk>false</Kiosk>
         <CustomStyle>material-icon-attach-money</CustomStyle>
       </update>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:50:16.4472069Z">
+      <page name="Users" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:50:16.5038825Z">
+      <page name="Roles" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:50:16.5103461Z">
+      <page name="UserRoles" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:50:35.8659890Z">
+      <pages />
+      <insert type="page">
+        <Name>Membership</Name>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Membership</Path>
+        <Title>Membership</Title>
+        <Roles>Administrators</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:52:40.4217763Z">
+      <page name="Membership" />
+      <copyRef type="controller">
+        <Controller>MembershipDashboard</Controller>
+        <View>dashboard1</View>
+      </copyRef>
+    </c>
+    <c y="NodeSet" t="2024-04-11T12:52:53.6685668Z">
+      <page name="Membership" />
+      <dataView id="view1" />
+      <update>
+        <ShowActionButtons>None</ShowActionButtons>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-11T13:15:48.5499504Z">
+      <page name="Admin" />
+      <move>
+        <page name="Membership" />
+      </move>
     </c>
   </log>
 </logs>

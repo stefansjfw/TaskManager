@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="MembershipDashboard" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Roles" type="DataView" label="Roles">
+      <dataView controller="Roles" view="grid1" />
+    </field>
+    <field name="Users" type="DataView" label="Users">
+      <dataView controller="Users" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="dashboard1" type="Form" label="Membership">
+      <categories>
+        <category tab="Users" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Users" columns="15" />
+          </dataFields>
+        </category>
+        <category tab="Roles" id="c2">
+          <dataFields>
+            <dataField fieldName="Roles" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

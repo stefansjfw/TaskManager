@@ -1650,6 +1650,24 @@ Length-Field: Length</BlobAdapterConfig>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-12T22:41:00.7720496Z">
+      <controller name="Receipts" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+        <Script>SET @OrganizationID = @BusinessRules_OrganizationID</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T22:46:34.6731824Z">
+      <controller name="Receipts" />
+      <view id="createForm1" />
+      <dataField fieldName="OrganizationID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

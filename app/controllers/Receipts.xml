@@ -99,7 +99,7 @@ order by "Receipts"."CreatedOn" desc]]></text>
             <dataField fieldName="CreatedOn" columns="20" />
             <dataField fieldName="CreatedBy" aliasFieldName="CreatedByUserName" />
             <dataField fieldName="CreatedByOrganizationName" columns="50" />
-            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
             <dataField fieldName="Picture" columns="15" />
           </dataFields>
         </category>
@@ -165,4 +165,7 @@ order by "Receipts"."CreatedOn" desc]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OrganizationID = @BusinessRules_OrganizationID]]></rule>
+  </businessRules>
 </dataController>

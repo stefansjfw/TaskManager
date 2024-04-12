@@ -30,6 +30,10 @@ namespace StefanTutorialDemo.Rules
             {
                 RegisterAccessControlRule("OrganizationID", AccessPermission.Allow, OrganizationID);
                 RegisterAccessControlRule("RoleID", AccessPermission.Deny, 1);
+                if (!UserIsInRole("Owners"))
+                {
+                    RegisterAccessControlRule("CreatedBy", AccessPermission.Allow, UserId);
+                }
             }
         }
 
@@ -47,15 +51,19 @@ namespace StefanTutorialDemo.Rules
                     NodeSet().SelectActionGroup("ag1").CreateAction("Custom", "Impersonate")
                         .SetHeaderText("Impersonate").Attr("cssClass", "material-icon-group-add");
                 }
-                else
+            }
+
+            if (controllerName == "Users" || controllerName == "Receipts")
+            {
+                if (!UserIsInRole("Administrators"))
                 {
                     NodeSet().SelectViews("grid1", "createForm1", "editForm1").SelectDataField("OrganizationID").Hide();
                 }
             }
         }
 
-        // Handles the press of the button. Linked to the action of the controler using the controler action attribute.
-        [ControllerAction("Users", "Custom", "Impersonate")]
+            // Handles the press of the button. Linked to the action of the controler using the controler action attribute.
+            [ControllerAction("Users", "Custom", "Impersonate")]
         public void HandleImpersonate()
         {
             var userToImpersonate = (string)SelectFieldValue("UserName");

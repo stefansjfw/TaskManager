@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Receipts" alias="Receipts" created="2024-04-12T23:13:22" modified="2024-04-12T23:13:33" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CreatedBy" parentTableSchema="dbo" parentTableName="Users" x="314" y="20">
+      <foreignKeyColumn columnName="CreatedBy" parentColumnName="UserID" />
+    </foreignKey>
+    <foreignKey id="CreatedByOrganization" parentTableSchema="dbo" parentTableName="Organizations" baseForeignKey="CreatedBy" x="609" y="20">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organizations" x="314" y="204">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ReceiptID" fieldName="ReceiptID" label="Receipt ID" />
+    <column name="Vendor" fieldName="Vendor" label="Vendor" />
+    <column name="UnitPrice" fieldName="UnitPrice" label="Unit Price" format="c" />
+    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="Total" fieldName="Total" label="Total" format="c" />
+    <column name="Category" fieldName="Category" label="Category" />
+    <column name="CreatedOn" fieldName="CreatedOn" label="Created On" format="g" sortType="Descending" sortOrder="1" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" aliasColumnName="UserName" aliasForeignKey="CreatedBy" />
+    <column name="UserName" fieldName="CreatedByUserName" label="Created By User Name" foreignKey="CreatedBy" />
+    <column name="Name" fieldName="CreatedByOrganizationName" label="Created By Organization Name" foreignKey="CreatedByOrganization" />
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" aliasColumnName="Name" aliasForeignKey="Organization" />
+    <column name="Name" fieldName="OrganizationName" label="Organization Name" foreignKey="Organization" />
+    <column name="Picture" fieldName="Picture" label="Picture" />
+  </columns>
+</dataModel>

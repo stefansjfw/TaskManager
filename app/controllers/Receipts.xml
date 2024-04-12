@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Receipts" conflictDetection="overwriteChanges" label="Receipts" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Receipts"."ReceiptID" "ReceiptID"
+	,"Receipts"."Vendor" "Vendor"
+	,"Receipts"."UnitPrice" "UnitPrice"
+	,"Receipts"."Quantity" "Quantity"
+	,"Receipts"."Total" "Total"
+	,"Receipts"."Category" "Category"
+	,"Receipts"."CreatedOn" "CreatedOn"
+	,"Receipts"."CreatedBy" "CreatedBy"
+	,"CreatedBy"."UserName" "CreatedByUserName"
+	,"CreatedByOrganization"."Name" "CreatedByOrganizationName"
+	,"Receipts"."OrganizationID" "OrganizationID"
+	,"Organization"."Name" "OrganizationName"
+	,"Receipts"."Picture" "Picture"
+from "dbo"."Receipts" "Receipts"
+	left join "dbo"."Users" "CreatedBy" on "Receipts"."CreatedBy" = "CreatedBy"."UserID"
+	left join "dbo"."Organizations" "CreatedByOrganization" on "CreatedBy"."OrganizationID" = "CreatedByOrganization"."OrganizationID"
+	left join "dbo"."Organizations" "Organization" on "Receipts"."OrganizationID" = "Organization"."OrganizationID"
+order by "Receipts"."CreatedOn" desc]]></text>
+    </command>
+    <command id="ReceiptIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ReceiptID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ReceiptID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Receipt ID" readOnly="true" />
+    <field name="Vendor" type="String" label="Vendor" length="50" showInSummary="true" />
+    <field name="UnitPrice" type="Decimal" allowNulls="false" dataFormatString="c" label="Unit Price" showInSummary="true" />
+    <field name="Quantity" type="Int32" allowNulls="false" label="Quantity" showInSummary="true" />
+    <field name="Total" type="Decimal" allowNulls="false" dataFormatString="c" label="Total" showInSummary="true" />
+    <field name="Category" type="String" label="Category" length="50" showInSummary="true" />
+    <field name="CreatedOn" type="DateTime" allowNulls="false" dataFormatString="g" label="Created On" />
+    <field name="CreatedBy" type="Int32" allowNulls="false" label="Created By">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" dataValueField="UserID" dataTextField="UserName" copy="" />
+    </field>
+    <field name="CreatedByUserName" type="String" readOnly="true" label="Created By User Name" length="50" />
+    <field name="CreatedByOrganizationName" type="String" readOnly="true" label="Created By Organization Name" length="50" />
+    <field name="OrganizationID" type="Int32" allowNulls="false" label="Organization ID">
+      <items style="Lookup" dataController="Organizations" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
+    </field>
+    <field name="OrganizationName" type="String" readOnly="true" label="Organization Name" length="50" />
+    <field name="Picture" type="Byte[]" onDemand="true" sourceFields="ReceiptID" onDemandHandler="ReceiptsPicture" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Picture" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Receipts" sortExpression="CreatedOn desc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Vendor" columns="50" />
+        <dataField fieldName="UnitPrice" columns="15" />
+        <dataField fieldName="Quantity" columns="15" />
+        <dataField fieldName="Total" columns="15" />
+        <dataField fieldName="Category" columns="50" />
+        <dataField fieldName="CreatedOn" columns="20" />
+        <dataField fieldName="CreatedBy" aliasFieldName="CreatedByUserName" />
+        <dataField fieldName="CreatedByOrganizationName" columns="50" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+        <dataField fieldName="Picture" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Receipts">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Receipts" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Vendor" columns="50" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="Total" columns="15" />
+            <dataField fieldName="Category" columns="50" />
+            <dataField fieldName="CreatedOn" columns="20" />
+            <dataField fieldName="CreatedBy" aliasFieldName="CreatedByUserName" />
+            <dataField fieldName="CreatedByOrganizationName" columns="50" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="Picture" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Receipts">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Vendor" columns="50" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="Total" columns="15" />
+            <dataField fieldName="Category" columns="50" />
+            <dataField fieldName="CreatedOn" columns="20" />
+            <dataField fieldName="CreatedBy" aliasFieldName="CreatedByUserName" />
+            <dataField fieldName="CreatedByOrganizationName" columns="50" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="Picture" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1509,5 +1509,143 @@ Length-Field: Length</BlobAdapterConfig>
         <page name="Membership" />
       </move>
     </c>
+    <c y="NodeSet" t="2024-04-12T21:17:51.8187750Z">
+      <page name="Admin" />
+      <update>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:18:20.4057338Z">
+      <pages />
+      <insert type="page">
+        <Name>Roles</Name>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Roles</Path>
+        <Title>Roles</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:19:18.8552548Z">
+      <page name="Roles" />
+      <insert type="container">
+        <Flow>NewRow</Flow>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:20:11.3504941Z">
+      <page name="Roles" />
+      <container id="c101" />
+      <insert type="dataView">
+        <Controller>Roles</Controller>
+        <View>grid1</View>
+        <ShowInSummary>false</ShowInSummary>
+        <MultiSelect>false</MultiSelect>
+        <ShowActionBar>true</ShowActionBar>
+        <ShowDescription>true</ShowDescription>
+        <ShowViewSelector>true</ShowViewSelector>
+        <ShowSearchBar>true</ShowSearchBar>
+        <ShowQuickFind>true</ShowQuickFind>
+        <SearchByFirstLetter>false</SearchByFirstLetter>
+        <ShowRowNumber>false</ShowRowNumber>
+        <ShowPager>Bottom</ShowPager>
+        <ShowPageSize>true</ShowPageSize>
+        <ShowModalForms>false</ShowModalForms>
+        <SearchOnStart>false</SearchOnStart>
+        <ShowDetailsInListMode>true</ShowDetailsInListMode>
+        <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+        <AutoSelectFirstRow>false</AutoSelectFirstRow>
+        <AutoHide>Nothing</AutoHide>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:20:46.6931111Z">
+      <pages />
+      <insert type="page">
+        <Name>UserRoles</Name>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>User Roles</Path>
+        <Title>User Roles</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:02.2674099Z">
+      <page name="Roles" />
+      <update>
+        <Description>View Roles</Description>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:08.2720157Z">
+      <page name="UserRoles" />
+      <rename>UserRoles</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:13.3767921Z">
+      <page name="UserRoles" />
+      <rename>User Roles</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:22.4824997Z">
+      <page name="UserRoles" />
+      <update>
+        <Description>View UserRoles</Description>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:34.5366158Z">
+      <page name="Roles" />
+      <update>
+        <About>This page allows roles management.</About>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:40.7702846Z">
+      <page name="UserRoles" />
+      <update>
+        <About>This page allows user roles management.</About>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:21:45.8556834Z">
+      <page name="UserRoles" />
+      <insert type="container">
+        <Flow>NewRow</Flow>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:22:02.1673969Z">
+      <page name="UserRoles" />
+      <container id="c101" />
+      <insert type="dataView">
+        <Controller>UserRoles</Controller>
+        <View>grid1</View>
+        <ShowInSummary>false</ShowInSummary>
+        <MultiSelect>false</MultiSelect>
+        <ShowActionBar>true</ShowActionBar>
+        <ShowDescription>true</ShowDescription>
+        <ShowViewSelector>true</ShowViewSelector>
+        <ShowSearchBar>true</ShowSearchBar>
+        <ShowQuickFind>true</ShowQuickFind>
+        <SearchByFirstLetter>false</SearchByFirstLetter>
+        <ShowRowNumber>false</ShowRowNumber>
+        <ShowPager>Bottom</ShowPager>
+        <ShowPageSize>true</ShowPageSize>
+        <ShowModalForms>false</ShowModalForms>
+        <SearchOnStart>false</SearchOnStart>
+        <ShowDetailsInListMode>true</ShowDetailsInListMode>
+        <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+        <AutoSelectFirstRow>false</AutoSelectFirstRow>
+        <AutoHide>Nothing</AutoHide>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:22:29.5046475Z">
+      <page name="Admin" />
+      <move>
+        <page name="UserRoles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:22:29.5046475Z">
+      <page name="Admin" />
+      <move>
+        <page name="Roles" />
+      </move>
+    </c>
   </log>
 </logs>

@@ -7,10 +7,12 @@
     <siteMapNode title="Expenses" description="View Expenses" url="~/pages/expenses" cssClass="material-icon-attach-money" />
     <siteMapNode title="Organizations" description="View Organizations" url="~/pages/organizations" />
     <siteMapNode title="Receipts" description="View Receipts" url="~/pages/receipts" />
-    <siteMapNode title="Admin" description="" roles="*">
+    <siteMapNode title="Admin" description="" roles="Administrators">
       <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
       <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" />
       <siteMapNode title="Membership" description="" url="~/pages/membership" roles="Administrators" />
+      <siteMapNode title="User Roles" description="View UserRoles" url="~/pages/user-roles" roles="*" />
+      <siteMapNode title="Roles" description="View Roles" url="~/pages/roles" roles="*" />
     </siteMapNode>
   </siteMapNode>
 </siteMap>

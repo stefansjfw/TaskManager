@@ -1395,6 +1395,183 @@ Length-Field: Length</BlobAdapterConfig>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-12T21:26:31.3990475Z">
+      <controller name="Organizations" />
+      <insert type="field">
+        <Name>OwnerEmail</Name>
+        <Type>String</Type>
+        <Length>128</Length>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Owner Email</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:26:46.6638256Z">
+      <controller name="Organizations" />
+      <insert type="field">
+        <Name>OwnerPassword</Name>
+        <Type>String</Type>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Owner Password</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:26:58.5781064Z">
+      <controller name="Organizations" />
+      <insert type="field">
+        <Name>OwnerPasswordConfirmation</Name>
+        <Type>String</Type>
+        <Length>128</Length>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Owner Password Confirmation</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:03.0479969Z">
+      <controller name="Organizations" />
+      <field name="OwnerPassword" />
+      <update>
+        <Length>128</Length>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:09.8009401Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Organizations" />
+        <field name="OwnerEmail" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:09.8029397Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Organizations" />
+        <field name="OwnerPassword" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:09.8039411Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Organizations" />
+        <field name="OwnerPasswordConfirmation" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:17.5758705Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerEmail" />
+      <update>
+        <Rows />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:23.3016448Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerPassword" />
+      <update>
+        <Rows />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:30.1021450Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerPassword" />
+      <update>
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:27:36.6821768Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerPasswordConfirmation" />
+      <update>
+        <Rows />
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:28:04.2323289Z">
+      <controller name="Organizations" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:28:19.6078738Z">
+      <controller name="Organizations" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>After</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:38:42.2260430Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <dataField fieldName="PasswordConfirm" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">
@@ -1646,6 +1823,95 @@ Length-Field: Length</BlobAdapterConfig>
       <move>
         <page name="Roles" />
       </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:24:33.3817404Z">
+      <page name="Roles" />
+      <update>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:24:42.4547287Z">
+      <page name="UserRoles" />
+      <update>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:24:51.3389416Z">
+      <page name="Admin" />
+      <move>
+        <page name="Organizations" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:24:57.9718671Z">
+      <page name="Organizations" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:37:00.6469973Z">
+      <pages />
+      <insert type="page">
+        <Name>Users</Name>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Users</Path>
+        <Title>Users</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:37:02.9474914Z">
+      <page name="Admin" />
+      <move>
+        <page name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:37:13.2643965Z">
+      <page name="Users" />
+      <update>
+        <Description>View Users</Description>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:37:23.3047907Z">
+      <page name="Users" />
+      <update>
+        <About>This page allows users management.</About>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:37:27.4582719Z">
+      <page name="Users" />
+      <insert type="container">
+        <Flow>NewRow</Flow>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:37:42.6942298Z">
+      <page name="Users" />
+      <container id="c101" />
+      <insert type="dataView">
+        <Controller>Users</Controller>
+        <View>grid1</View>
+        <ShowInSummary>false</ShowInSummary>
+        <MultiSelect>false</MultiSelect>
+        <ShowActionBar>true</ShowActionBar>
+        <ShowDescription>true</ShowDescription>
+        <ShowViewSelector>true</ShowViewSelector>
+        <ShowSearchBar>true</ShowSearchBar>
+        <ShowQuickFind>true</ShowQuickFind>
+        <SearchByFirstLetter>false</SearchByFirstLetter>
+        <ShowRowNumber>false</ShowRowNumber>
+        <ShowPager>Bottom</ShowPager>
+        <ShowPageSize>true</ShowPageSize>
+        <ShowModalForms>false</ShowModalForms>
+        <SearchOnStart>false</SearchOnStart>
+        <ShowDetailsInListMode>true</ShowDetailsInListMode>
+        <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+        <AutoSelectFirstRow>false</AutoSelectFirstRow>
+        <AutoHide>Nothing</AutoHide>
+      </insert>
     </c>
   </log>
 </logs>

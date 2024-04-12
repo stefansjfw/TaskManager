@@ -39,7 +39,7 @@ order by "Receipts"."CreatedOn" desc]]></text>
     <field name="Category" type="String" label="Category" length="50" showInSummary="true" />
     <field name="CreatedOn" type="DateTime" allowNulls="false" dataFormatString="g" label="Created On" />
     <field name="CreatedBy" type="Int32" allowNulls="false" label="Created By">
-      <items style="Lookup" dataController="Users" newDataView="createForm1" dataValueField="UserID" dataTextField="UserName" copy="" />
+      <items style="Lookup" dataController="Users" newDataView="createForm1" dataValueField="UserID" dataTextField="UserName" copy="CreatedByOrganizationName=OrganizationName" />
     </field>
     <field name="CreatedByUserName" type="String" readOnly="true" label="Created By User Name" length="50" />
     <field name="CreatedByOrganizationName" type="String" readOnly="true" label="Created By Organization Name" length="50" />

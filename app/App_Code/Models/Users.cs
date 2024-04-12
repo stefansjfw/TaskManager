@@ -17,6 +17,8 @@ namespace StefanTutorialDemo.Models
 
         Email,
 
+        OrganizationName,
+
         Roles,
 
         PasswordConfirm,
@@ -36,6 +38,9 @@ namespace StefanTutorialDemo.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _email;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private string _organizationName;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _roles;
@@ -101,6 +106,19 @@ namespace StefanTutorialDemo.Models
             {
                 _email = value;
                 UpdateFieldValue("Email", value);
+            }
+        }
+
+        public string OrganizationName
+        {
+            get
+            {
+                return _organizationName;
+            }
+            set
+            {
+                _organizationName = value;
+                UpdateFieldValue("OrganizationName", value);
             }
         }
 

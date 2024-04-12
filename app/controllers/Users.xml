@@ -8,7 +8,9 @@ select
 	,"Users"."UserName" "UserName"
 	,"Users"."Password" "Password"
 	,"Users"."Email" "Email"
+	,"Organization"."Name" "OrganizationName"
 from "dbo"."Users" "Users"
+	left join "dbo"."Organizations" "Organization" on "Users"."OrganizationID" = "Organization"."OrganizationID"
 ]]></text>
     </command>
     <command id="UserIDIdentityCommand" type="Text" event="Inserted">
@@ -23,6 +25,7 @@ from "dbo"."Users" "Users"
     <field name="UserName" type="String" allowNulls="false" label="User Name" length="50" showInSummary="true" />
     <field name="Password" type="String" allowNulls="false" label="Password" length="50" />
     <field name="Email" type="String" allowNulls="false" label="Email" length="50" showInSummary="true" />
+    <field name="OrganizationName" type="String" readOnly="true" label="Organization Name" length="50" />
     <field name="Roles" type="String" label="Roles">
       <items style="CheckBoxList" dataController="Roles" targetController="UserRoles" />
     </field>
@@ -35,6 +38,7 @@ from "dbo"."Users" "Users"
         <dataField fieldName="UserName" columns="50" />
         <dataField fieldName="Password" textMode="Password" columns="50" />
         <dataField fieldName="Email" columns="50" />
+        <dataField fieldName="OrganizationName" columns="50" />
         <dataField fieldName="Roles" rows="5" />
       </dataFields>
     </view>
@@ -46,8 +50,9 @@ from "dbo"."Users" "Users"
           <dataFields>
             <dataField fieldName="UserName" columns="50" />
             <dataField fieldName="Password" textMode="Password" columns="50" />
-            <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
+            <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" hidden="true" />
             <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="OrganizationName" columns="50" />
             <dataField fieldName="Roles" rows="5" />
           </dataFields>
         </category>
@@ -63,6 +68,7 @@ from "dbo"."Users" "Users"
             <dataField fieldName="Password" textMode="Password" columns="50" />
             <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
             <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="OrganizationName" columns="50" />
             <dataField fieldName="Roles" rows="5" />
           </dataFields>
         </category>

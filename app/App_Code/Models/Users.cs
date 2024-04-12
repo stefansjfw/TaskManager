@@ -19,6 +19,8 @@ namespace StefanTutorialDemo.Models
 
         OrganizationName,
 
+        OrganizationID,
+
         Roles,
 
         PasswordConfirm,
@@ -41,6 +43,9 @@ namespace StefanTutorialDemo.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _organizationName;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private int? _organizationID;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _roles;
@@ -119,6 +124,19 @@ namespace StefanTutorialDemo.Models
             {
                 _organizationName = value;
                 UpdateFieldValue("OrganizationName", value);
+            }
+        }
+
+        public int? OrganizationID
+        {
+            get
+            {
+                return _organizationID;
+            }
+            set
+            {
+                _organizationID = value;
+                UpdateFieldValue("OrganizationID", value);
             }
         }
 

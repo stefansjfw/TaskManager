@@ -30,6 +30,11 @@ namespace StefanTutorialDemo.Rules
                 ApplicationMembershipProviderBase.ValidateUserPassword(user.UserName, user.Password);
 
                 user.Password = ApplicationMembershipProviderBase.EncodeUserPassword(user.Password);
+
+                if (!UserIsInRole("Administrators"))
+                {
+                    user.OrganizationID = OrganizationID;
+                }
             }
         }
     }

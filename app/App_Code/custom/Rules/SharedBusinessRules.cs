@@ -13,15 +13,44 @@ namespace StefanTutorialDemo.Rules
         {
         }
 
+        public int OrganizationID
+        {
+            get
+            {
+                object result = SqlText.ExecuteScalar("SELECT OrganizationID FROM Users WHERE UserID = @p0", UserId);
+                return result is DBNull ? -1 : (int)result;
+            }
+        }
+
+        protected override void EnumerateDynamicAccessControlRules(string controllerName)
+        {
+            base.EnumerateDynamicAccessControlRules(controllerName);
+
+            if (!UserIsInRole("Administrators"))
+            {
+                RegisterAccessControlRule("OrganizationID", AccessPermission.Allow, OrganizationID);
+                RegisterAccessControlRule("RoleID", AccessPermission.Deny, 1);
+            }
+        }
+
+
+
         // Called every time the controler is used as part of the request
         protected override void VirtualizeController(string controllerName)
         {
             base.VirtualizeController(controllerName);
 
-            if (controllerName == "Users" && UserIsInRole("Administrators"))
+            if (controllerName == "Users")
             {
-                NodeSet().SelectActionGroup("ag1").CreateAction("Custom", "Impersonate")
-                    .SetHeaderText("Impersonate").Attr("cssClass", "material-icon-group-add");
+                if (UserIsInRole("Administrators"))
+                {
+                    NodeSet().SelectActionGroup("ag1").CreateAction("Custom", "Impersonate")
+                        .SetHeaderText("Impersonate").Attr("cssClass", "material-icon-group-add");
+                }
+                else
+                {
+                    NodeSet().SelectViews("grid1", "createForm1", "editForm1").SelectDataField("OrganizationID").Hide();
+                }
             }
         }
 

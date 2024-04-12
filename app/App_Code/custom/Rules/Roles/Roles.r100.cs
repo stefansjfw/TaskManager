@@ -21,7 +21,7 @@ namespace StefanTutorialDemo.Rules
         {
             if (!UserIsInRole("Administrators"))
             {
-                throw new Exception("Not allowed.");
+                // throw new Exception("Not allowed.");
             }
         }
     }

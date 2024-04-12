@@ -1572,6 +1572,84 @@ Length-Field: Length</BlobAdapterConfig>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-12T21:56:13.2350292Z">
+      <controller name="Users" />
+      <view id="grid1" />
+      <dataField fieldName="OrganizationID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:58:05.7277261Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <dataField fieldName="OrganizationName" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T21:58:22.9359696Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="OrganizationID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T22:03:30.0008896Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="OrganizationID" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T22:09:19.2533576Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Password" />
+      <before>
+        <controller name="Users" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Email" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-12T22:09:22.2190362Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="Password" />
+      <before>
+        <controller name="Users" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="Email" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-12T22:10:59.4312501Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="OrganizationName" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-12T22:13:24.7185706Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <dataField fieldName="PasswordConfirm" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

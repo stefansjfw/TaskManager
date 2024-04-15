@@ -1985,6 +1985,578 @@ WHERE UserName = @UserName</Script>
         <CommandArgument>exportGrid</CommandArgument>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-15T11:58:08.8621009Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <update>
+        <Tags>view-style-calendar</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:03:11.6152830Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="EndDate" />
+      <update>
+        <Tag>calendar-end</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:06:52.3013105Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="EndDate" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:09:20.4947651Z">
+      <controller name="Tasks" />
+      <rule id="r100" />
+      <update>
+        <Script>SET @ASD = GETDATE()</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:09:42.3095783Z">
+      <controller name="Tasks" />
+      <rule id="r100" />
+      <update>
+        <Script>;</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:10:23.6665364Z">
+      <controller name="Tasks" />
+      <rule id="r101" />
+      <update>
+        <Script>// var d = new Date();
+
+// if (d.getMinutes() &lt; 30)
+//     d.setMinutes(30, 0, 0);
+// else
+//     d.setMinutes(60, 0, 0);
+
+// $row.Date = d;</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:11:11.4816710Z">
+      <controller name="Tasks" />
+      <rule id="r100" />
+      <update>
+        <Script>SET @Created = GETDATE()</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:12:38.8731310Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="StartDate" />
+      <update>
+        <Tag>calendar-start</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:13:19.8622834Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Attachments" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="Date" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:13:46.8225022Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="Date" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:13:57.6048816Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Status" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="Date" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:13:59.8156378Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Date" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:24:39.5967501Z">
+      <controller name="Tasks" />
+      <rule id="r100" />
+      <update>
+        <Script>--SET @Created = GETDATE()</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:28:45.1456034Z">
+      <controller name="Tasks" />
+      <rule id="r100" />
+      <update>
+        <Script>SET @Created = GETDATE()</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:29:02.7764540Z">
+      <controller name="Tasks" />
+      <rule id="r101" />
+      <update>
+        <Script>var d = new Date();
+
+if (d.getMinutes() &lt; 30)
+    d.setMinutes(30, 0, 0);
+else
+    d.setMinutes(60, 0, 0);
+
+$row.Date = d;</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:31:25.5659275Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Completed" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="Date" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:31:39.8203582Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Description" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Date" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:31:46.7771880Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="LocationID" />
+      <before>
+        <controller name="Tasks" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="Date" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:31:48.3014657Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="Date" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:36:41.8120029Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="StartDate" />
+      <update>
+        <Tag />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:40:23.3695657Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>JavaScript</Type>
+        <CommandName>New</CommandName>
+        <Phase>After</Phase>
+        <Script>$row.Title = "New Meeting";
+
+if (!$row.StartDate) {
+    var start = new Date();
+    start.setMnutes(0,0,0);
+    start.setHours(start.getHours(), + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.StartDate = start;
+    $row.EndDate = end;
+}</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:40:51.3338112Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = "New Meeting";
+
+if (!$row.StartDate) {
+    var start = new Date();
+    start.setMnutes(0,0,0);
+    start.setHours(start.getHours(), + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.StartDate = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:41:17.5715555Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = "New Meeting";
+
+if (!$row.StartDate) {
+    var start = new Date();
+    start.setMinutes(0,0,0);
+    start.setHours(start.getHours(), + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.StartDate = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:41:40.1570585Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = "New Meeting";
+
+if (!$row.StartDate) {
+    var start = new Date();
+    start.setMinutes(0,0,0);
+    start.setHours(start.getHours() + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.StartDate = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:48:28.8114469Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Completed" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="EndDate" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:48:39.8326392Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="LocationID" />
+      <before>
+        <controller name="Tasks" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="EndDate" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:48:41.5832870Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="EndDate" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:48:53.7953709Z">
+      <controller name="Tasks" />
+      <rule id="r101" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:49:09.8224459Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = "New Meeting";
+var d = new Date();
+
+$row.Date = d;
+if (!$row.StartDate) {
+    var start = new Date();
+    start.setMinutes(0,0,0);
+    start.setHours(start.getHours() + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.Date = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:53:15.0234689Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Tag>calendar-color</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:54:40.3230986Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T12:56:23.5492338Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Tag>calendar-color</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:09:41.9595701Z">
+      <controller name="Tasks" />
+      <copy>
+        <controller name="Tasks" />
+        <view id="createForm1" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:09:47.0105426Z">
+      <controller name="Tasks" />
+      <view id="v100" />
+      <rename>createMeeting</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:10:07.8339434Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="ScheduleID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:10:19.6774794Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="ScheduleDaysOfWeek" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:10:19.7343322Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="ScheduleWeeks" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:11:07.0871969Z">
+      <controller name="Tasks" />
+      <view id="createMeeting" />
+      <rename>createTask</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:11:18.6248820Z">
+      <controller name="Tasks" />
+      <view id="createTask" />
+      <dataField fieldName="ScheduleID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:12:13.7539518Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag3" />
+      <insert type="action">
+        <CommandName>New</CommandName>
+        <CommandArgument>createTask</CommandArgument>
+        <HeaderText>New Recurring Task</HeaderText>
+        <CausesValidation>true</CausesValidation>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:14:07.8742103Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Monday</Value>
+        <Text>Monday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:14:21.5816337Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Tuesday</Value>
+        <Text>Tuesday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:14:31.7730976Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Wednesday</Value>
+        <Text>Wednesday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:14:43.6166090Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Thursday</Value>
+        <Text>Thursday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:14:52.9844164Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Friday</Value>
+        <Text>Friday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:15:04.2865875Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Saturday</Value>
+        <Text>Saturday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:15:14.4790813Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Sunday</Value>
+        <Text>Sunday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:15:49.4285907Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <update>
+        <IsVirtual>true</IsVirtual>
+        <ReadOnly>false</ReadOnly>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:15:57.7632795Z">
+      <controller name="Tasks" />
+      <field name="ScheduleWeeks" />
+      <update>
+        <IsVirtual>true</IsVirtual>
+        <ReadOnly>false</ReadOnly>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:16:17.9863935Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:16:31.0526456Z">
+      <controller name="Tasks" />
+      <update>
+        <GenerateDataAccessObjects>true</GenerateDataAccessObjects>
+        <StatusBar>Status: New
+[New] &gt; In-Progress &gt; Done &gt;
+
+Status: Delegated
+New &gt; [Delegated] &gt; In-Progress &gt; Completed &gt;
+
+Status: In-Progress
+New &gt; [Being Worked On] &gt; Completed &gt;
+
+Status: Canceled
+Something Went Wrong &gt; [Canceled] &gt;
+
+Status: Completed
+New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:16:42.1488077Z">
+      <controller name="Schedules" />
+      <update>
+        <GenerateDataAccessObjects>true</GenerateDataAccessObjects>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:41:51.6905374Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <update>
+        <ItemsStyle>CheckBoxList</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:51:22.7952378Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Delete</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:56:58.3092752Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="ScheduleID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:57:38.3203788Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="ScheduleDaysOfWeek" />
+      <update>
+        <Hidden>false</Hidden>
+        <Visibility>$row.ScheduleID != null</Visibility>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:57:46.1898145Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="ScheduleWeeks" />
+      <update>
+        <Hidden>false</Hidden>
+        <Visibility>$row.ScheduleID != null</Visibility>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T19:58:43.4425099Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Update</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

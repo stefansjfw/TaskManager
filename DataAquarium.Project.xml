@@ -56,4 +56,5 @@ option Min Required Password Length = 3</config>
   <globalization uiCulture="en-US" culture="en-US" enableClientBasedCulture="false" supportedCultures="en-US,en-US; " googleTranslateApiKey="" />
   <layout name="Classic" menuStyle="MultiLevel" />
   <theme name="Aquarium" />
+  <objects />
 </project>

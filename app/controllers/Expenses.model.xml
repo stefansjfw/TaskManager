@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Expenses" alias="Expenses" created="2024-04-06T12:13:15" modified="2024-04-15T09:57:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Expenses" alias="Expenses" created="2024-04-06T12:13:15" modified="2024-04-15T11:45:24" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Task" parentTableSchema="dbo" parentTableName="Tasks" x="290" y="20">
       <foreignKeyColumn columnName="TaskID" parentColumnName="TaskID" />
@@ -8,6 +8,9 @@
   <columns>
     <column name="ExpenseID" fieldName="ExpenseID" label="Expense ID" />
     <column name="Price" fieldName="Price" label="Price" format="c" />
+    <column fieldName="UnitPriceEuro" type="decimal" dataType="Decimal" label="Unit Price Euro" format="€{0:N2}">
+      <formula>Expenses.Price * 0.9</formula>
+    </column>
     <column name="Quantity" fieldName="Quantity" label="Quantity" />
     <column fieldName="TotalPrice" type="money" dataType="Decimal" label="Total Price" format="c">
       <formula>Expenses.Price * Expenses.Quantity</formula>

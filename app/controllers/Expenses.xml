@@ -25,6 +25,9 @@ order by "Task"."Date" desc]]></text>
   <fields>
     <field name="ExpenseID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Expense ID" readOnly="true" />
     <field name="Price" type="Decimal" allowNulls="false" dataFormatString="c" label="Price" showInSummary="true" causesCalculate="true" />
+    <field name="UnitPriceEuro" type="Decimal" readOnly="true" dataFormatString="€{0:N2}" label="Unit Price Euro" computed="true" showInSummary="true">
+      <formula>Expenses.Price * 0.9</formula>
+    </field>
     <field name="Quantity" type="Int32" allowNulls="false" label="Quantity" showInSummary="true" causesCalculate="true" />
     <field name="TotalPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Total Price" computed="true" showInSummary="true">
       <formula>Expenses.Price * Expenses.Quantity</formula>
@@ -34,7 +37,7 @@ order by "Task"."Date" desc]]></text>
     </field>
     <field name="TaskDescription" type="String" readOnly="true" label="Task" length="50" />
     <field name="TaskDate" type="DateTime" readOnly="true" dataFormatString="g" label="Date" />
-    <field name="Description" type="String" allowNulls="false" label="Description" length="50" showInSummary="true" />
+    <field name="Description" type="String" allowNulls="false" label="Description" length="50" />
     <field name="Items" type="DataView" label="Items">
       <dataView controller="Items" view="grid1" filterFields="ExpenseID" />
     </field>
@@ -86,6 +89,18 @@ order by "Task"."Date" desc]]></text>
         </category>
       </categories>
     </view>
+    <view id="exportGrid" commandId="command1" type="Grid" label="Export Expenses" showInSelector="false">
+      <dataFields>
+        <dataField fieldName="Price" columns="15" aggregate="Average" />
+        <dataField fieldName="UnitPriceEuro" columns="15" />
+        <dataField fieldName="Quantity" columns="15" aggregate="Sum" />
+        <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
+        <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+        <dataField fieldName="TaskDate" columns="20" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="Items" columns="15" />
+      </dataFields>
+    </view>
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
@@ -118,7 +133,7 @@ order by "Task"."Date" desc]]></text>
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a1" commandName="ExportCsv" commandArgument="exportGrid" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
       <action id="a4" commandName="ExportRss" />

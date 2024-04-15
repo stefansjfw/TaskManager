@@ -1850,6 +1850,141 @@ SET EulaAcceptedOn = GETDATE()
 WHERE UserName = @UserName</Script>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-15T09:46:26.2855502Z">
+      <controller name="Expenses" />
+      <insert type="view">
+        <ViewId>exportGrid</ViewId>
+        <Type>Grid</Type>
+        <Legend>false</Legend>
+        <CommandId>command1</CommandId>
+        <Label>Export Expenses</Label>
+        <ShowInSelector>true</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3223282Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Price" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3233284Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="UnitPriceEuro" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3243286Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Quantity" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3243286Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="TotalPrice" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3253282Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="TaskID" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3253282Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="TaskDate" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3263282Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Description" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:38.3263282Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <copy>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Items" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:43.2726910Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="UnitPriceEuro" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:48.7261006Z">
+      <controller name="Expenses" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="UnitPriceEuro" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:46:53.7201094Z">
+      <controller name="Expenses" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="UnitPriceEuro" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:48:59.1797715Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <update>
+        <ShowInSelector>false</ShowInSelector>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:49:52.9640591Z">
+      <controller name="Expenses" />
+      <actionGroup id="ag5" />
+      <action id="a1" />
+      <update>
+        <CommandArgument>Expenses,exportGrid</CommandArgument>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:52:23.6775988Z">
+      <controller name="Expenses" />
+      <actionGroup id="ag5" />
+      <action id="a1" />
+      <update>
+        <CommandArgument />
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:53:21.7321602Z">
+      <controller name="Expenses" />
+      <actionGroup id="ag5" />
+      <action id="a1" />
+      <update>
+        <CommandArgument>exportGrid</CommandArgument>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

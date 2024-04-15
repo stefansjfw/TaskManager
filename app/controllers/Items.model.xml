@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Items" alias="Items" created="2024-04-14T12:17:42" modified="2024-04-14T12:39:50" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Items" alias="Items" created="2024-04-14T12:17:42" modified="2024-04-15T09:56:33" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Manufacturer" parentTableSchema="dbo" parentTableName="Manufacturers" x="311" y="20">
       <foreignKeyColumn columnName="ManufacturerID" parentColumnName="ManufacturerID" />
@@ -10,6 +10,9 @@
     <foreignKey id="Submodel" parentTableSchema="dbo" parentTableName="Submodels" x="311" y="324">
       <foreignKeyColumn columnName="SubmodelID" parentColumnName="SubmodelID" />
     </foreignKey>
+    <foreignKey id="Expense" parentTableSchema="dbo" parentTableName="Expenses" x="633" y="20">
+      <foreignKeyColumn columnName="ExpenseID" parentColumnName="ExpenseID" />
+    </foreignKey>
   </foreignKeys>
   <columns>
     <column name="ItemID" fieldName="ItemID" label="Item ID" />
@@ -19,5 +22,7 @@
     <column name="ModelName" fieldName="ModelName" label="Model" foreignKey="Model" />
     <column name="SubmodelID" fieldName="SubmodelID" label="Submodel ID" aliasColumnName="SubmodelName" aliasForeignKey="Submodel" />
     <column name="SubmodelName" fieldName="SubmodelName" label="Submodel" foreignKey="Submodel" />
+    <column name="ExpenseID" fieldName="ExpenseID" label="Expense ID" aliasColumnName="Description" aliasForeignKey="Expense" />
+    <column name="Description" fieldName="ExpenseDescription" label="Expense Description" foreignKey="Expense" />
   </columns>
 </dataModel>

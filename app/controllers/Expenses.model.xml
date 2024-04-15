@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Expenses" alias="Expenses" created="2024-04-06T12:13:15" modified="2024-04-08T22:03:25" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Expenses" alias="Expenses" created="2024-04-06T12:13:15" modified="2024-04-15T09:57:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Task" parentTableSchema="dbo" parentTableName="Tasks" x="290" y="20">
       <foreignKeyColumn columnName="TaskID" parentColumnName="TaskID" />
@@ -15,5 +15,6 @@
     <column name="TaskID" fieldName="TaskID" label="Task ID" aliasColumnName="Description" aliasForeignKey="Task" />
     <column name="Description" fieldName="TaskDescription" label="Task" foreignKey="Task" />
     <column name="Date" fieldName="TaskDate" label="Date" foreignKey="Task" format="g" sortType="Descending" sortOrder="1" />
+    <column name="Description" fieldName="Description" label="Description" />
   </columns>
 </dataModel>

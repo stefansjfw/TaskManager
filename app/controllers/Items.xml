@@ -11,10 +11,13 @@ select
 	,"Model"."ModelName" "ModelName"
 	,"Items"."SubmodelID" "SubmodelID"
 	,"Submodel"."SubmodelName" "SubmodelName"
+	,"Items"."ExpenseID" "ExpenseID"
+	,"Expense"."Description" "ExpenseDescription"
 from "dbo"."Items" "Items"
 	left join "dbo"."Manufacturers" "Manufacturer" on "Items"."ManufacturerID" = "Manufacturer"."ManufacturerID"
 	left join "dbo"."Models" "Model" on "Items"."ModelID" = "Model"."ModelID"
 	left join "dbo"."Submodels" "Submodel" on "Items"."SubmodelID" = "Submodel"."SubmodelID"
+	left join "dbo"."Expenses" "Expense" on "Items"."ExpenseID" = "Expense"."ExpenseID"
 ]]></text>
     </command>
     <command id="ItemIDIdentityCommand" type="Text" event="Inserted">
@@ -38,14 +41,19 @@ from "dbo"."Items" "Items"
       <items style="RadioButtonList" dataController="Submodels" newDataView="createForm1" dataValueField="SubmodelID" dataTextField="SubmodelName" />
     </field>
     <field name="SubmodelName" type="String" readOnly="true" label="Submodel" length="50" />
+    <field name="ExpenseID" type="Int32" allowNulls="false" label="Expense ID" showInSummary="true">
+      <items style="Lookup" dataController="Expenses" newDataView="createForm1" dataValueField="ExpenseID" dataTextField="TaskDescription" />
+    </field>
+    <field name="ExpenseDescription" type="String" readOnly="true" label="Expense Description" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Items">
+    <view id="grid1" type="Grid" commandId="command1" label="Items" tags="modal-max-md modal-fit-content">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ManufacturerID" aliasFieldName="ManufacturerName" />
         <dataField fieldName="ModelID" aliasFieldName="ModelName" />
         <dataField fieldName="SubmodelID" aliasFieldName="SubmodelName" />
+        <dataField fieldName="ExpenseID" aliasFieldName="ExpenseDescription" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Items">
@@ -57,11 +65,12 @@ from "dbo"."Items" "Items"
             <dataField fieldName="ManufacturerID" aliasFieldName="ManufacturerName" />
             <dataField fieldName="ModelID" aliasFieldName="ModelName" />
             <dataField fieldName="SubmodelID" aliasFieldName="SubmodelName" />
+            <dataField fieldName="ExpenseID" aliasFieldName="ExpenseDescription" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Items">
+    <view id="createForm1" type="Form" commandId="command1" label="New Items" tags="modal-max-xs modal-when-sm modal-fit-content">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -70,6 +79,7 @@ from "dbo"."Items" "Items"
             <dataField fieldName="ManufacturerID" aliasFieldName="ManufacturerName" />
             <dataField fieldName="ModelID" aliasFieldName="ModelName" />
             <dataField fieldName="SubmodelID" aliasFieldName="SubmodelName" />
+            <dataField fieldName="ExpenseID" aliasFieldName="ExpenseDescription" />
           </dataFields>
         </category>
       </categories>

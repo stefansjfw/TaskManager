@@ -1684,6 +1684,59 @@ Length-Field: Length</BlobAdapterConfig>
         <ContextFields>ModelID=ModelID</ContextFields>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-15T07:58:16.3956543Z">
+      <controller name="Expenses" />
+      <move>
+        <controller name="Items" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-15T07:58:20.6365979Z">
+      <controller name="Expenses" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Expenses" />
+        <field name="Items" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-15T07:58:21.8189984Z">
+      <controller name="Expenses" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Expenses" />
+        <field name="Items" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-15T07:58:22.9594952Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <move>
+        <controller name="Expenses" />
+        <field name="Items" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-15T07:58:23.9971258Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="Items" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:02:50.7520323Z">
+      <controller name="Items" />
+      <view id="grid1" />
+      <update>
+        <Tags>modal-max-md modal-fit-content</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:04:13.1616528Z">
+      <controller name="Items" />
+      <view id="createForm1" />
+      <update>
+        <Tags>modal-max-xs modal-when-sm modal-fit-content</Tags>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

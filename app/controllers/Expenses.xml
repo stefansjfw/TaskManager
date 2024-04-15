@@ -10,6 +10,7 @@ select
 	,"Expenses"."TaskID" "TaskID"
 	,"Task"."Description" "TaskDescription"
 	,"Task"."Date" "TaskDate"
+	,"Expenses"."Description" "Description"
 from "dbo"."Expenses" "Expenses"
 	left join "dbo"."Tasks" "Task" on "Expenses"."TaskID" = "Task"."TaskID"
 order by "Task"."Date" desc]]></text>
@@ -33,6 +34,10 @@ order by "Task"."Date" desc]]></text>
     </field>
     <field name="TaskDescription" type="String" readOnly="true" label="Task" length="50" />
     <field name="TaskDate" type="DateTime" readOnly="true" dataFormatString="g" label="Date" />
+    <field name="Description" type="String" allowNulls="false" label="Description" length="50" showInSummary="true" />
+    <field name="Items" type="DataView" label="Items">
+      <dataView controller="Items" view="grid1" filterFields="ExpenseID" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Expenses" sortExpression="TaskDate desc">
@@ -43,6 +48,8 @@ order by "Task"."Date" desc]]></text>
         <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
         <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
         <dataField fieldName="TaskDate" columns="20" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="Items" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Expenses" tags="material-icon-attach-money">
@@ -56,6 +63,8 @@ order by "Task"."Date" desc]]></text>
             <dataField fieldName="TotalPrice" columns="15" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
             <dataField fieldName="TaskDate" columns="20" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="Items" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -71,6 +80,8 @@ order by "Task"."Date" desc]]></text>
             <dataField fieldName="TotalPrice" columns="15" />
             <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
             <dataField fieldName="TaskDate" columns="20" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="Items" columns="15" />
           </dataFields>
         </category>
       </categories>

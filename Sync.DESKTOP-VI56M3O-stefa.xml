@@ -1668,6 +1668,22 @@ Length-Field: Length</BlobAdapterConfig>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-15T07:07:31.8714817Z">
+      <controller name="Items" />
+      <field name="ModelID" />
+      <update>
+        <ItemsStyle>ListBox</ItemsStyle>
+        <ContextFields>ManufacturerID=ManufacturerID</ContextFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T07:07:56.6108715Z">
+      <controller name="Items" />
+      <field name="SubmodelID" />
+      <update>
+        <ItemsStyle>RadioButtonList</ItemsStyle>
+        <ContextFields>ModelID=ModelID</ContextFields>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">

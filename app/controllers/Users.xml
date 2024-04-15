@@ -34,9 +34,6 @@ from "dbo"."Users" "Users"
       <items style="CheckBoxList" dataController="Roles" targetController="UserRoles" />
     </field>
     <field name="PasswordConfirm" type="String" label="Password Confirm" isVirtual="true" length="50" />
-    <field name="Receipts" type="DataView" label="Receipts">
-      <dataView controller="Receipts" view="grid1" filterFields="CreatedBy" />
-    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Users">
@@ -61,7 +58,6 @@ from "dbo"."Users" "Users"
             <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
             <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
             <dataField fieldName="Roles" rows="5" />
-            <dataField fieldName="Receipts" columns="15" />
           </dataFields>
         </category>
       </categories>

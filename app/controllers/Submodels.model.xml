@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Submodels" alias="Submodels" created="2024-04-14T12:40:06" modified="2024-04-14T12:40:12" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Model" parentTableSchema="dbo" parentTableName="Models" x="320" y="20">
+      <foreignKeyColumn columnName="ModelID" parentColumnName="ModelID" />
+    </foreignKey>
+    <foreignKey id="ModelManufacturer" parentTableSchema="dbo" parentTableName="Manufacturers" baseForeignKey="Model" x="621" y="20">
+      <foreignKeyColumn columnName="ManufacturerID" parentColumnName="ManufacturerID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="SubmodelID" fieldName="SubmodelID" label="Submodel ID" />
+    <column name="SubmodelName" fieldName="SubmodelName" label="Submodel Name" />
+    <column name="ModelID" fieldName="ModelID" label="Model ID" aliasColumnName="ModelName" aliasForeignKey="Model" />
+    <column name="ModelName" fieldName="ModelName" label="Model Name" foreignKey="Model" />
+    <column name="ManufacturerName" fieldName="ModelManufacturerName" label="Model Manufacturer Name" foreignKey="ModelManufacturer" />
+  </columns>
+</dataModel>

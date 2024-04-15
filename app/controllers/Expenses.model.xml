@@ -7,7 +7,6 @@
   </foreignKeys>
   <columns>
     <column name="ExpenseID" fieldName="ExpenseID" label="Expense ID" />
-    <column name="Item" fieldName="Item" label="Item" />
     <column name="Price" fieldName="Price" label="Price" format="c" />
     <column name="Quantity" fieldName="Quantity" label="Quantity" />
     <column fieldName="TotalPrice" type="money" dataType="Decimal" label="Total Price" format="c">

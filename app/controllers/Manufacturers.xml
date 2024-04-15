@@ -1,76 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Expenses" conflictDetection="overwriteChanges" label="Expenses" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Manufacturers" conflictDetection="overwriteChanges" label="Manufacturers" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
 select
-	"Expenses"."ExpenseID" "ExpenseID"
-	,"Expenses"."Price" "Price"
-	,"Expenses"."Quantity" "Quantity"
-	,"Expenses"."TaskID" "TaskID"
-	,"Task"."Description" "TaskDescription"
-	,"Task"."Date" "TaskDate"
-from "dbo"."Expenses" "Expenses"
-	left join "dbo"."Tasks" "Task" on "Expenses"."TaskID" = "Task"."TaskID"
-order by "Task"."Date" desc]]></text>
+	"Manufacturers"."ManufacturerID" "ManufacturerID"
+	,"Manufacturers"."ManufacturerName" "ManufacturerName"
+from "dbo"."Manufacturers" "Manufacturers"
+]]></text>
     </command>
-    <command id="ExpenseIDIdentityCommand" type="Text" event="Inserted">
+    <command id="ManufacturerIDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
       <output>
-        <fieldOutput fieldName="ExpenseID" />
+        <fieldOutput fieldName="ManufacturerID" />
       </output>
     </command>
   </commands>
   <fields>
-    <field name="ExpenseID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Expense ID" readOnly="true" />
-    <field name="Price" type="Decimal" allowNulls="false" dataFormatString="c" label="Price" showInSummary="true" causesCalculate="true" />
-    <field name="Quantity" type="Int32" allowNulls="false" label="Quantity" showInSummary="true" causesCalculate="true" />
-    <field name="TotalPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Total Price" computed="true" showInSummary="true">
-      <formula>Expenses.Price * Expenses.Quantity</formula>
-    </field>
-    <field name="TaskID" type="Int32" allowNulls="false" label="Task ID" showInSummary="true">
-      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" copy="TaskDate=Date" />
-    </field>
-    <field name="TaskDescription" type="String" readOnly="true" label="Task" length="50" />
-    <field name="TaskDate" type="DateTime" readOnly="true" dataFormatString="g" label="Date" />
+    <field name="ManufacturerID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Manufacturer ID" readOnly="true" />
+    <field name="ManufacturerName" type="String" allowNulls="false" label="Manufacturer Name" length="50" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Expenses" sortExpression="TaskDate desc">
+    <view id="grid1" type="Grid" commandId="command1" label="Manufacturers">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Price" columns="15" aggregate="Average" />
-        <dataField fieldName="Quantity" columns="15" aggregate="Sum" />
-        <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
-        <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
-        <dataField fieldName="TaskDate" columns="20" />
+        <dataField fieldName="ManufacturerName" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Expenses" tags="material-icon-attach-money">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Manufacturers">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Expenses" flow="NewColumn">
+        <category id="c1" headerText="Manufacturers" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Price" columns="15" />
-            <dataField fieldName="Quantity" columns="15" />
-            <dataField fieldName="TotalPrice" columns="15" />
-            <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
-            <dataField fieldName="TaskDate" columns="20" />
+            <dataField fieldName="ManufacturerName" columns="50" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Expenses" tags="material-icon-attach-money modal-dock-right modal-max-tn modal-always">
+    <view id="createForm1" type="Form" commandId="command1" label="New Manufacturers">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Price" columns="15" />
-            <dataField fieldName="Quantity" columns="15" />
-            <dataField fieldName="TotalPrice" columns="15" />
-            <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
-            <dataField fieldName="TaskDate" columns="20" />
+            <dataField fieldName="ManufacturerName" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -135,11 +109,4 @@ order by "Task"."Date" desc]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Calculate" type="Sql" phase="Execute"><![CDATA[IF @Price IS NULL OR @Quantity IS NULL
-    SET @TotalPrice = 0
-ELSE
-    SET @TotalPrice = @Price * @Quantity]]></rule>
-    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Quantity = 1]]></rule>
-  </businessRules>
 </dataController>

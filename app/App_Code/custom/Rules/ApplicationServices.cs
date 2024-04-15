@@ -39,6 +39,33 @@ namespace StefanTutorialDemo.Services
                     return false;
                 }
             }
+
+            var userExists = false;
+            using (var q = new SqlText("SELECT UserName FROM Users WHERE UserName = @username"))
+            {
+                if (q.Read(new { username }))
+                {
+                    userExists = true;
+                }
+            }
+            if (!userExists)
+            {
+                var extension = string.Empty;
+                using (var q = new SqlText("SELECT Extension FROM Employees WHERE LastName = @username"))
+                {
+                    if (q.Read(new { username }))
+                    {
+                        extension = Convert.ToString(q["Extension"]);
+                    }
+                    
+                    if (!string.IsNullOrEmpty(extension) && extension == password)
+                    {
+                        Membership.CreateUser(username, password);
+                        System.Web.Security.Roles.AddUserToRole(username, "Users");
+                    }
+                }
+            }
+
             return base.UserLogin(username, password, createPersistentCookie);
         }
 

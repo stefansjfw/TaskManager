@@ -10,6 +10,7 @@
     <siteMapNode title="Manufacturers" description="View Manufacturers" url="~/pages/manufacturers" />
     <siteMapNode title="Models" description="View Models" url="~/pages/models" />
     <siteMapNode title="Submodels" description="View Submodels" url="~/pages/submodels" />
+    <siteMapNode title="Employees" description="View Employees" url="~/pages/employees" />
     <siteMapNode title="Admin" description="" roles="Administrators">
       <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
       <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" />

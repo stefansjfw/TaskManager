@@ -49,7 +49,9 @@ column [text] RoleName = RoleName
 table UserRoles = UserRoles
 column [int|uiid] UserID = UserID
 column [int|uiid] RoleID = RoleID
-    </config>
+
+option Min Required Nonalphanumeric Characters = 0
+option Min Required Password Length = 3</config>
   </membership>
   <globalization uiCulture="en-US" culture="en-US" enableClientBasedCulture="false" supportedCultures="en-US,en-US; " googleTranslateApiKey="" />
   <layout name="Classic" menuStyle="MultiLevel" />

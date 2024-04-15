@@ -10,6 +10,8 @@ select
 	,"Users"."Email" "Email"
 	,"Organization"."Name" "OrganizationName"
 	,"Users"."OrganizationID" "OrganizationID"
+	,"Users"."Comment" "Comment"
+	,"Users"."EulaAcceptedOn" "EulaAcceptedOn"
 from "dbo"."Users" "Users"
 	left join "dbo"."Organizations" "Organization" on "Users"."OrganizationID" = "Organization"."OrganizationID"
 ]]></text>
@@ -30,6 +32,8 @@ from "dbo"."Users" "Users"
     <field name="OrganizationID" type="Int32" label="Organization ID" showInSummary="true">
       <items style="Lookup" dataController="Organizations" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
     </field>
+    <field name="Comment" type="String" label="Comment" length="50" showInSummary="true" />
+    <field name="EulaAcceptedOn" type="DateTime" dataFormatString="g" label="Eula Accepted On" showInSummary="true" />
     <field name="Roles" type="String" label="Roles">
       <items style="CheckBoxList" dataController="Roles" targetController="UserRoles" />
     </field>
@@ -43,6 +47,8 @@ from "dbo"."Users" "Users"
         <dataField fieldName="Password" textMode="Password" columns="50" />
         <dataField fieldName="Email" columns="50" />
         <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+        <dataField fieldName="Comment" columns="50" />
+        <dataField fieldName="EulaAcceptedOn" columns="20" />
         <dataField fieldName="Roles" rows="5" />
       </dataFields>
     </view>
@@ -57,6 +63,8 @@ from "dbo"."Users" "Users"
             <dataField fieldName="Password" textMode="Password" columns="50" />
             <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
             <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="Comment" columns="50" />
+            <dataField fieldName="EulaAcceptedOn" columns="20" />
             <dataField fieldName="Roles" rows="5" />
           </dataFields>
         </category>
@@ -73,6 +81,8 @@ from "dbo"."Users" "Users"
             <dataField fieldName="Password" textMode="Password" columns="50" />
             <dataField fieldName="PasswordConfirm" columns="50" textMode="Password" />
             <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="Comment" columns="50" />
+            <dataField fieldName="EulaAcceptedOn" columns="20" />
             <dataField fieldName="Roles" rows="5" />
           </dataFields>
         </category>

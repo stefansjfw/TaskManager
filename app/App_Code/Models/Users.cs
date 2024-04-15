@@ -21,6 +21,10 @@ namespace StefanTutorialDemo.Models
 
         OrganizationID,
 
+        Comment,
+
+        EulaAcceptedOn,
+
         Roles,
 
         PasswordConfirm,
@@ -46,6 +50,12 @@ namespace StefanTutorialDemo.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private int? _organizationID;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private string _comment;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private DateTime? _eulaAcceptedOn;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _roles;
@@ -137,6 +147,32 @@ namespace StefanTutorialDemo.Models
             {
                 _organizationID = value;
                 UpdateFieldValue("OrganizationID", value);
+            }
+        }
+
+        public string Comment
+        {
+            get
+            {
+                return _comment;
+            }
+            set
+            {
+                _comment = value;
+                UpdateFieldValue("Comment", value);
+            }
+        }
+
+        public DateTime? EulaAcceptedOn
+        {
+            get
+            {
+                return _eulaAcceptedOn;
+            }
+            set
+            {
+                _eulaAcceptedOn = value;
+                UpdateFieldValue("EulaAcceptedOn", value);
             }
         }
 

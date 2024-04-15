@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Users" alias="Users" created="2024-04-11T14:48:06" modified="2024-04-13T00:25:44" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Users" alias="Users" created="2024-04-11T14:48:06" modified="2024-04-15T11:11:22" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organizations" x="314" y="20">
       <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
@@ -12,5 +12,7 @@
     <column name="Email" fieldName="Email" label="Email" />
     <column name="Name" fieldName="OrganizationName" label="Organization Name" foreignKey="Organization" />
     <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" aliasColumnName="Name" aliasForeignKey="Organization" />
+    <column name="Comment" fieldName="Comment" label="Comment" />
+    <column name="EulaAcceptedOn" fieldName="EulaAcceptedOn" label="Eula Accepted On" format="g" />
   </columns>
 </dataModel>

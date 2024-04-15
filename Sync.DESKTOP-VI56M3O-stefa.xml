@@ -1737,6 +1737,119 @@ Length-Field: Length</BlobAdapterConfig>
         <Tags>modal-max-xs modal-when-sm modal-fit-content</Tags>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-15T08:26:26.3261746Z">
+      <controller name="MyProfile" />
+      <insert type="view">
+        <ViewId>agreeForm</ViewId>
+        <Type>Form</Type>
+        <Legend>false</Legend>
+        <Label>Agree Form</Label>
+        <ShowInSelector>false</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:26:36.5809170Z">
+      <controller name="MyProfile" />
+      <view id="agreeForm" />
+      <move>
+        <controller name="MyProfile" />
+        <field name="UserName" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:26:40.3792438Z">
+      <controller name="MyProfile" />
+      <view id="agreeForm" />
+      <dataField fieldName="UserName" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:27:37.6576863Z">
+      <controller name="MyProfile" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Custom</CommandName>
+        <CommandArgument>Agree</CommandArgument>
+        <View>agreeForm</View>
+        <Phase>Execute</Phase>
+        <Script>UPDATE aspnet_Membership
+SET Commnet = 'EULAAccepted'
+WHERE UserID = @BusinessRules_UserId</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:30:57.3881890Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE aspnet_Membership
+SET Commnet = 'EULAAccepted'
+WHERE UserID = @BusinessRules_UserId</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:32:16.3971537Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE aspnet_Membership
+SET Comment = 'EULAAccepted'
+WHERE UserID = @BusinessRules_UserId</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:33:21.0705478Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE aspnet_Membership
+SET Comment = 'EULAAccepted'
+WHERE UserId = @BusinessRules_UserId</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:37:58.8940216Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET Comment = 'EULAAccepted'
+WHERE UserId = @BusinessRules_UserId</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:38:06.3151878Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET Comment = 'EULAAccepted'
+WHERE UserID = @BusinessRules_UserId</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:39:06.2132306Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET Comment = 'EULAAccepted'
+WHERE UserID = @BusinessRules_UserId</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:49:46.7275982Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET Comment = 'EULAAccepted'
+WHERE UserName = @BusinessRules_UserNAme</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T09:12:38.1500597Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET EulaAcceptedOn = GETDATE()
+WHERE UserName = @UserName</Script>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">
@@ -2077,6 +2190,35 @@ Length-Field: Length</BlobAdapterConfig>
         <AutoSelectFirstRow>false</AutoSelectFirstRow>
         <AutoHide>Nothing</AutoHide>
       </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:14:47.8433632Z">
+      <pages />
+      <insert type="page" context="/page/Tasks">
+        <Name>EULA</Name>
+        <Template>Jumbotron</Template>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Title>EULA</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:14:56.6214525Z">
+      <page name="Admin" />
+      <before>
+        <page name="EULA" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:15:35.7154569Z">
+      <page name="EULA" />
+      <update>
+        <Generate>FirstTimeOnly</Generate>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-15T08:15:54.3940873Z">
+      <page name="EULA" />
+      <configure type="Exclude" />
     </c>
   </log>
 </logs>

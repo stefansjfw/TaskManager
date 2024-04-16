@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Dashboard" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Tasks" type="DataView" label="Tasks">
+      <dataView controller="Tasks" view="grid1" />
+    </field>
+    <field name="Expenses" type="DataView" label="Expenses">
+      <dataView controller="Expenses" view="grid1" filterSource="Tasks" filterFields="TaskID" />
+    </field>
+    <field name="Items" type="DataView" label="Items">
+      <dataView controller="Items" view="grid1" filterSource="Expenses" filterFields="ExpenseID" />
+    </field>
+  </fields>
+  <views>
+    <view id="form1" type="Form" label="Dashboard">
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Tasks" columns="15">
+              <dataView pageSize="3" autoHighlightFirstRow="true" />
+            </dataField>
+            <dataField fieldName="Expenses" columns="15" tag="inline-editing">
+              <dataView pageSize="5" autoHighlightFirstRow="true" />
+            </dataField>
+            <dataField fieldName="Items" columns="15" tag="inline-editing">
+              <dataView pageSize="10" />
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

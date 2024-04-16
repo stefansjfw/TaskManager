@@ -2557,6 +2557,149 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <Phase>Before</Phase>
       </insert>
     </c>
+    <c y="NodeSet" t="2024-04-16T08:08:53.1583265Z">
+      <controllers />
+      <insert type="controller">
+        <Name>Dashboard</Name>
+        <ConflictDetection>overwriteChanges</ConflictDetection>
+        <GenerateDataAccessObjects>false</GenerateDataAccessObjects>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:09:26.7188009Z">
+      <controller name="Dashboard" />
+      <copy>
+        <controller name="Tasks" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:09:26.7209750Z">
+      <controller name="Dashboard" />
+      <copy>
+        <controller name="Expenses" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:09:26.7227411Z">
+      <controller name="Dashboard" />
+      <copy>
+        <controller name="Items" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:10:14.0916035Z">
+      <controller name="Dashboard" />
+      <field name="Items" />
+      <update>
+        <DataViewFilterSource>Items</DataViewFilterSource>
+        <DataViewFilterFields>ExpenseID</DataViewFilterFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:10:34.5272365Z">
+      <controller name="Dashboard" />
+      <field name="Items" />
+      <update>
+        <DataViewFilterSource>Expenses</DataViewFilterSource>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:10:45.6606280Z">
+      <controller name="Dashboard" />
+      <field name="Expenses" />
+      <update>
+        <DataViewFilterSource>Tasks</DataViewFilterSource>
+        <DataViewFilterFields>TaskID</DataViewFilterFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:04.3856499Z">
+      <controller name="Dashboard" />
+      <insert type="view">
+        <ViewId>form1</ViewId>
+        <Type>Form</Type>
+        <Legend>false</Legend>
+        <Label>Dashboard</Label>
+        <ShowInSelector>true</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:11.4943438Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <move>
+        <controller name="Dashboard" />
+        <field name="Tasks" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:11.4996948Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <move>
+        <controller name="Dashboard" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:11.5030315Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <move>
+        <controller name="Dashboard" />
+        <field name="Items" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:18:15.8662323Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <category id="c1" />
+      <update>
+        <HeaderText />
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:18:30.6053012Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Tasks" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewPageSize>3</DataViewPageSize>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:18:41.6819473Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Tasks" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewAutoHighlightFirstRow>true</DataViewAutoHighlightFirstRow>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:19:08.1730493Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Expenses" />
+      <update>
+        <Tag>inline-editing</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewPageSize>5</DataViewPageSize>
+        <DataViewAutoHighlightFirstRow>true</DataViewAutoHighlightFirstRow>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:19:31.0441535Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Items" />
+      <update>
+        <Tag>inline-editing</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewPageSize>10</DataViewPageSize>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:21:29.4434238Z">
+      <controller name="Expenses" />
+      <field name="TaskID" />
+      <update>
+        <Copy>TaskDate=Date
+Description=Description</Copy>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-08T08:12:54.2680094Z">
@@ -2926,6 +3069,39 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
     <c y="NodeSet" t="2024-04-15T08:15:54.3940873Z">
       <page name="EULA" />
       <configure type="Exclude" />
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:33.8997164Z">
+      <pages />
+      <insert type="page">
+        <Name>Dashboard</Name>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Dashboard</Path>
+        <Title>Dashboard</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:38.4006829Z">
+      <page name="Dashboard" />
+      <copyRef type="controller">
+        <Controller>Dashboard</Controller>
+        <View>form1</View>
+      </copyRef>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:11:44.1145217Z">
+      <page name="Tasks" />
+      <before>
+        <page name="Dashboard" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-16T08:12:04.5743119Z">
+      <page name="Dashboard" />
+      <dataView id="view1" />
+      <update>
+        <ShowActionButtons>None</ShowActionButtons>
+      </update>
     </c>
   </log>
 </logs>

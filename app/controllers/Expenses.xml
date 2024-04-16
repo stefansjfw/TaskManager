@@ -33,7 +33,7 @@ order by "Task"."Date" desc]]></text>
       <formula>Expenses.Price * Expenses.Quantity</formula>
     </field>
     <field name="TaskID" type="Int32" allowNulls="false" label="Task ID" showInSummary="true">
-      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" copy="TaskDate=Date" />
+      <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" copy="TaskDate=Date&#xD;&#xA;Description=Description" />
     </field>
     <field name="TaskDescription" type="String" readOnly="true" label="Task" length="50" />
     <field name="TaskDate" type="DateTime" readOnly="true" dataFormatString="g" label="Date" />

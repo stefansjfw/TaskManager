@@ -49,6 +49,9 @@ order by "Tasks"."Date" desc]]></text>
     <field name="State" type="String" readOnly="true" label="State" length="50" />
     <field name="PostalCode" type="String" readOnly="true" label="Postal Code" length="50" />
     <field name="Country" type="String" readOnly="true" label="Country" length="50" />
+    <field name="Attachments" type="DataView" label="Attachments">
+      <dataView controller="Attachments" view="grid1" filterFields="TaskID" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null">
@@ -65,6 +68,7 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="State" columns="50" />
         <dataField fieldName="PostalCode" columns="50" />
         <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Attachments" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tasks" tags="material-icon-event">
@@ -84,6 +88,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Attachments" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -104,6 +109,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Attachments" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -122,6 +128,7 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="State" columns="50" />
         <dataField fieldName="PostalCode" columns="50" />
         <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Attachments" columns="15" />
       </dataFields>
     </view>
   </views>

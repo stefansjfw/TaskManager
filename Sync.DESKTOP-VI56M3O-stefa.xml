@@ -154,6 +154,44 @@ WHERE TaskID = @TaskID</Script>
         <FilterExpression />
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T08:18:48.3840742Z">
+      <controller name="Tasks" />
+      <move>
+        <controller name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:18:58.9649369Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:19:00.9293496Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:19:02.7688879Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:19:04.3254535Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Attachments" />
+      </move>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

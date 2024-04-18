@@ -1,8 +1,9 @@
-﻿<!-- 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
   This file is provided to store the settings for your Data Aquarium project. 
   You can safely delete this file if no further code generation is planned.
 -->
-<project compatibility="20111118" dataModel="required" appFolder="app" displayName="TaskManager2" group="" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="TaskManager2" prettyName="Task Manager 2" appGenVersion="8.9.40.0" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
+<project compatibility="20111118" dataModel="required" appFolder="app" displayName="TaskManager2" group="" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="TaskManager2" prettyName="Task Manager 2" appGenVersion="8.9.40.0" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project" dbCMS="false">
   <connectionString hostDatabaseSharing="false" sessionStateMode="None">Data Source=;Initial Catalog=TaskManager2;Integrated Security=True;</connectionString>
   <providerName>System.Data.SqlClient</providerName>
   <namespace>MyCompany</namespace>
@@ -26,7 +27,7 @@
   <reports enabled="true" version="15" />
   <host path="" url="" />
   <databaseObjectFilter generate="ControllersAndPages"></databaseObjectFilter>
-  <bll normalizeModelNames="true" discoveryDepth="3" labelFormatExpression="" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="false" includeViews="true" tabViewSelection="0">
+  <bll normalizeModelNames="true" discoveryDepth="3" labelFormatExpression="" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="false" includeViews="true" tabViewSelection="0" updatetMethod="Update">
     <fieldMap></fieldMap>
     <keys></keys>
     <fieldsToIgnore></fieldsToIgnore>
@@ -40,4 +41,5 @@
   <globalization uiCulture="en-US" culture="en-US" enableClientBasedCulture="false" supportedCultures="en-US,en-US; " googleTranslateApiKey="" />
   <layout name="Classic" menuStyle="MultiLevel" />
   <theme name="Aquarium" />
+  <objects />
 </project>

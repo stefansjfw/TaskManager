@@ -90,25 +90,45 @@ order by "Tasks"."Date" desc]]></text>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tasks" tags="material-icon-event">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Tasks" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="Task" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="Date" columns="20" />
-            <dataField fieldName="Created" columns="20" textMode="Static" />
-            <dataField fieldName="Completed" columns="20" textMode="Static" />
             <dataField fieldName="Status" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="Details" id="c6" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+            <dataField fieldName="Tags" rows="5" />
+          </dataFields>
+        </category>
+        <category tab="Attachments" id="c3" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="Attachments" columns="15" />
+          </dataFields>
+        </category>
+        <category tab="Expenses" id="c4">
+          <dataFields>
+            <dataField fieldName="Expenses" columns="15" tag="modal-always modal-fit-content modal-max-xs page-header-none" />
+          </dataFields>
+        </category>
+        <category tab="Address" id="c5">
+          <dataFields>
             <dataField fieldName="Address" columns="50" />
             <dataField fieldName="City" columns="50" />
             <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Country" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="Audit" id="c2" floating="true" flow="NewRow">
+          <dataFields>
             <dataField fieldName="Creator" columns="50" />
-            <dataField fieldName="Owner" columns="50" />
-            <dataField fieldName="Attachments" columns="15" />
-            <dataField fieldName="Expenses" columns="15" />
-            <dataField fieldName="Tags" rows="5" />
+            <dataField fieldName="Completed" columns="20" textMode="Static" />
+            <dataField fieldName="Created" columns="20" textMode="Static" />
           </dataFields>
         </category>
       </categories>

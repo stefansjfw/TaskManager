@@ -667,6 +667,256 @@ Status: Completed
 New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T09:10:15.8083527Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <update>
+        <HeaderText>Task</HeaderText>
+        <Description />
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:10:46.6295390Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Status" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:11:02.0208520Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <HeaderText>Audit</HeaderText>
+        <Floating>true</Floating>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:11:12.5176879Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Creator" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:11:12.5176879Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Completed" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:11:12.5187123Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Created" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:07.7696349Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <Flow>NewRow</Flow>
+        <Tab>Attachments</Tab>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:12.6997742Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c3" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:26.5448256Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <Tab>Expenses</Tab>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:30.2099278Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c4" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:43.0517914Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <Tab>Address</Tab>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:53.1781796Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c5" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Address" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:53.1791806Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c5" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="City" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:53.1791806Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c5" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="State" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:53.1801802Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c5" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="PostalCode" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:12:53.1801802Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c5" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Country" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:13:05.6294972Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c5" />
+      <after>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c2" />
+      </after>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:13:15.7825549Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c2" />
+      <update>
+        <Flow>NewRow</Flow>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:16:56.2014003Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <insert type="category">
+        <HeaderText>Details</HeaderText>
+        <Flow>NewColumn</Flow>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:17:02.0597658Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c3" />
+      <before>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c6" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:17:08.8428234Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c6" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Owner" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:17:08.8478465Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c6" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="LocationID" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:17:08.8483826Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c6" />
+      <move>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:19:12.8618922Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="Expenses" />
+      <update>
+        <Tag>modal-always modal-fit-content modal-max-xs page-header-none</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:20:38.6767669Z">
+      <controller name="Attachments" />
+      <view id="editForm1" />
+      <dataField fieldName="Attachment" />
+      <update>
+        <Tag>header-image-original</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

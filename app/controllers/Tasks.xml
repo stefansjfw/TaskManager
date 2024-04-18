@@ -11,8 +11,16 @@ select
 	,"Tasks"."Completed" "Completed"
 	,"Tasks"."CategoryId" "CategoryId"
 	,"Category"."CategoryName" "CategoryName"
+	,"Tasks"."LocationID" "LocationID"
+	,"Location"."Name" "LocationName"
+	,"Location"."Address" "Address"
+	,"Location"."City" "City"
+	,"Location"."State" "State"
+	,"Location"."PostalCode" "PostalCode"
+	,"Location"."Country" "Country"
 from "dbo"."Tasks" "Tasks"
 	left join "dbo"."Categories" "Category" on "Tasks"."CategoryId" = "Category"."CategoryID"
+	left join "dbo"."Locations" "Location" on "Tasks"."LocationID" = "Location"."LocationID"
 order by "Tasks"."Date" desc]]></text>
     </command>
     <command id="TaskIDIdentityCommand" type="Text" event="Inserted">
@@ -32,6 +40,15 @@ order by "Tasks"."Date" desc]]></text>
       <items style="Lookup" dataController="Categories" newDataView="createForm1" dataValueField="CategoryID" dataTextField="CategoryName" />
     </field>
     <field name="CategoryName" type="String" readOnly="true" label="Category Name" length="50" />
+    <field name="LocationID" type="Int32" label="Location ID">
+      <items style="Lookup" dataController="Locations" newDataView="createForm1" dataValueField="LocationID" dataTextField="Name" copy="Address=Address, City=City, State=State, PostalCode=PostalCode, Country=Country" />
+    </field>
+    <field name="LocationName" type="String" readOnly="true" label="Location Name" length="50" />
+    <field name="Address" type="String" readOnly="true" label="Address" length="50" />
+    <field name="City" type="String" readOnly="true" label="City" length="50" />
+    <field name="State" type="String" readOnly="true" label="State" length="50" />
+    <field name="PostalCode" type="String" readOnly="true" label="Postal Code" length="50" />
+    <field name="Country" type="String" readOnly="true" label="Country" length="50" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null">
@@ -42,6 +59,12 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="CategoryId" aliasFieldName="CategoryName" />
+        <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+        <dataField fieldName="Address" columns="50" />
+        <dataField fieldName="City" columns="50" />
+        <dataField fieldName="State" columns="50" />
+        <dataField fieldName="PostalCode" columns="50" />
+        <dataField fieldName="Country" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tasks" tags="material-icon-event">
@@ -55,6 +78,12 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Created" columns="20" textMode="Static" />
             <dataField fieldName="Completed" columns="20" textMode="Static" />
             <dataField fieldName="CategoryId" aliasFieldName="CategoryName" />
+            <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="State" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="Country" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -69,6 +98,12 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Date" columns="20" />
             <dataField fieldName="Created" columns="20" hidden="true" />
             <dataField fieldName="CategoryId" aliasFieldName="CategoryName" />
+            <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="State" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="Country" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -81,6 +116,12 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Created" columns="20" />
         <dataField fieldName="Completed" columns="20" />
         <dataField fieldName="CategoryId" aliasFieldName="CategoryName" />
+        <dataField fieldName="LocationID" aliasFieldName="LocationName" />
+        <dataField fieldName="Address" columns="50" />
+        <dataField fieldName="City" columns="50" />
+        <dataField fieldName="State" columns="50" />
+        <dataField fieldName="PostalCode" columns="50" />
+        <dataField fieldName="Country" columns="50" />
       </dataFields>
     </view>
   </views>

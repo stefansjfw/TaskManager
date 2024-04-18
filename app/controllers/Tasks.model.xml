@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Tasks" alias="Tasks" created="2024-04-18T09:40:39" modified="2024-04-18T10:24:51" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Tasks" alias="Tasks" created="2024-04-18T09:40:39" modified="2024-04-18T10:56:48" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Location" parentTableSchema="dbo" parentTableName="Locations" x="592" y="20">
       <foreignKeyColumn columnName="LocationID" parentColumnName="LocationID" />
@@ -20,5 +20,6 @@
     <column name="Country" fieldName="Country" label="Country" foreignKey="Location" />
     <column name="Creator" fieldName="Creator" label="Creator" />
     <column name="Owner" fieldName="Owner" label="Owner" />
+    <column name="Status" fieldName="Status" label="Status" />
   </columns>
 </dataModel>

@@ -514,6 +514,159 @@ ELSE
         <ItemsStyle>DropDownList</ItemsStyle>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T08:57:31.2550751Z">
+      <controller name="Tasks" />
+      <field name="Status" />
+      <update>
+        <ItemsStyle>DropDownList</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:57:43.1977590Z">
+      <controller name="Tasks" />
+      <field name="Status" />
+      <insert type="item">
+        <Value>New</Value>
+        <Text>New</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:57:52.2469946Z">
+      <controller name="Tasks" />
+      <field name="Status" />
+      <insert type="item">
+        <Value>Delegated</Value>
+        <Text>Delegated</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:58:02.6844559Z">
+      <controller name="Tasks" />
+      <field name="Status" />
+      <insert type="item">
+        <Value>In-Progress</Value>
+        <Text>In-Progress</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:58:14.7871821Z">
+      <controller name="Tasks" />
+      <field name="Status" />
+      <insert type="item">
+        <Value>Canceled</Value>
+        <Text>Canceled</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:58:23.6293364Z">
+      <controller name="Tasks" />
+      <field name="Status" />
+      <insert type="item">
+        <Value>Completed</Value>
+        <Text>Completed</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:58:40.1840508Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="Status" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:58:46.6899629Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="Status" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:59:25.9244759Z">
+      <controller name="Tasks" />
+      <rule id="r103" />
+      <update>
+        <Script>SET @Creator = @BusinessRules_UserName
+SET @Status = 'New'
+IF (@Owner IS NULL)
+    SET @Owner = @BusinessRules_UserName
+ELSE
+	SET @Status = 'Delegated'</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:59:33.4158448Z">
+      <controller name="Tasks" />
+      <rule id="r103" />
+      <update>
+        <Script>SET @Creator = @BusinessRules_UserName
+SET @Status = 'New'
+IF (@Owner IS NULL)
+    SET @Owner = @BusinessRules_UserName
+ELSE
+	SET @Status = 'Delegated'</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:59:57.7856090Z">
+      <controller name="Tasks" />
+      <rule id="r102" />
+      <update>
+        <Script>UPDATE Tasks
+SET Completed = GETDATE(), "Status" = 'Completed'
+WHERE TaskID = @TaskID</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:02:30.0443700Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="gridAllTasks" />
+        <dataField fieldName="Status" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:03:26.4030192Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="LocationID" />
+      <before>
+        <controller name="Tasks" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="Status" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:03:32.3784327Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="LocationID" />
+      <before>
+        <controller name="Tasks" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Status" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:06:44.0969293Z">
+      <controller name="Tasks" />
+      <update>
+        <GenerateDataAccessObjects>false</GenerateDataAccessObjects>
+        <StatusBar>Status: New
+[New] &gt; In-Progress &gt; Done &gt;
+
+Status: Delegated
+New &gt; [Delegated] &gt; In Progress &gt; Completed &gt;
+
+Status: In-Progress
+New &gt; [Being Worked On] &gt; Completed &gt;
+
+Status: Canceled
+Something Went Wrong &gt; [Canceled] &gt;
+
+Status: Completed
+New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

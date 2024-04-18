@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logs>
+  <log type="Controllers">
+    <c y="NodeSet" t="2024-04-18T07:44:47.4472356Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <update>
+        <Tags>material-icon-event</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:45:05.4118392Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-event</Tags>
+      </update>
+    </c>
+  </log>
+  <log type="Application"></log>
+</logs>

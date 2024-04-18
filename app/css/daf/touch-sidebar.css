@@ -1,0 +1,109 @@
+/* sidebar resizer */
+
+[data-draggable="sidebar-resizer"] {
+    position: absolute;
+    z-index: 1001;
+    width: 4px;
+    cursor: ew-resize;
+    z-index: 1000;
+    left: unset;
+}
+
+    [data-draggable="sidebar-resizer"]::after {
+        content: ' ';
+        position: absolute;
+        top: 0px;
+        width: 1px;
+        bottom: 0;
+        background-color: transparent;
+        transition: background-color ease-in 100ms;
+    }
+
+    [data-draggable="sidebar-resizer"]::after {
+        right: 0;
+    }
+
+    [data-draggable="sidebar-resizer"]:hover::after {
+        background-color: #999;
+    }
+
+    [data-draggable="sidebar-resizer"].app-dragging::after {
+        background-color: #333;
+    }
+
+/*.app-theme-dark [data-draggable="sidebar-resizer"]::after {
+    content: ' ';
+    background-color: #333;
+}*/
+
+.app-theme-dark [data-draggable="sidebar-resizer"]:hover::after {
+    background-color: #555;
+}
+
+.app-theme-dark [data-draggable="sidebar-resizer"].app-dragging::after {
+    background-color: #777;
+}
+
+
+.app-sidebar .app-calendar-plugin {
+    min-width: 160px;
+}
+
+.app-sidebar .ui-listview {
+    min-width: 120px;
+}
+
+.app-sidebar .app-treeview {
+    width: auto;
+    height: auto;
+    margin: -8px -16px 0;
+    padding-left: 12px;
+    margin-top: -16px;
+}
+
+    .app-sidebar .app-treeview:not(.app-treeview-hidden) {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
+
+        .app-sidebar .app-treeview:not(.app-treeview-hidden) + .ui-listview {
+            margin-top: 0;
+        }
+
+    .app-sidebar .app-treeview .app-node:hover {
+        cursor: pointer;
+    }
+
+        .app-sidebar .app-treeview .app-node:hover .app-toggle {
+            cursor: default;
+        }
+
+
+    .app-sidebar .app-treeview > ul {
+        margin: 8px 0;
+    }
+
+
+    .app-sidebar .app-treeview /*-noicons*/ .app-node .app-toggle:after {
+        content: 'expand_more'
+    }
+
+    .app-sidebar .app-treeview /*-noicons*/ .app-collapsed > .app-node .app-toggle:after {
+        content: 'chevron_right';
+    }
+
+.app-sidebar .app-treeview-hidden {
+    display: none;
+}
+
+.app-sidebar .ui-listview + .app-treeview:not(.app-treeview-hidden) {
+    margin-top: 16px;
+}
+
+.app-has-modal-glass-pane [data-draggable="sidebar-resizer"] {
+    display: none;
+}
+
+.app-theme-dark .app-node .material-icon :after {
+    color: #aaa;
+}

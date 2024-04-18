@@ -15,6 +15,145 @@
         <Tags>material-icon-event</Tags>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T07:48:57.3230962Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>New</CommandName>
+        <Phase>Execute</Phase>
+        <Script>SET @Created = GETDATE()</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:52:59.7171734Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>JavaScript</Type>
+        <CommandName>New</CommandName>
+        <Phase>After</Phase>
+        <Script>var d = new Date();
+
+if (d.getMinutes() &lt; 30)
+    d.setMinutes(30,0,0);
+else
+    d.setMinutes(60,0,0);
+
+$row.Date = d;</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:53:33.1670460Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="Created" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:53:42.4551305Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="Created" />
+      <update>
+        <TextMode>Static</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:54:18.5439894Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="Completed" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:54:24.9877593Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="Completed" />
+      <update>
+        <TextMode>Static</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:55:10.5929619Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag2" />
+      <insert type="action">
+        <CommandName>Custom</CommandName>
+        <CommandArgument>Complete</CommandArgument>
+        <HeaderText>Complete</HeaderText>
+        <CausesValidation>true</CausesValidation>
+        <WhenClientScript>$row.Completed == null</WhenClientScript>
+        <CssClass>material-icon-assignment-turned-in</CssClass>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:55:17.2809588Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag1" />
+      <copy>
+        <controller name="Tasks" />
+        <actionGroup id="ag2" />
+        <action id="a100" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:55:56.7254797Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Custom</CommandName>
+        <CommandArgument>CompleteTask</CommandArgument>
+        <Phase>Execute</Phase>
+        <Script>UPDATE Tasks
+SET Completed = GETDATE()
+WHERE TaskID = @TaskID</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:56:43.5010995Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag1" />
+      <action id="a100" />
+      <update>
+        <CommandArgument>CompleteTask</CommandArgument>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:56:47.4884080Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag2" />
+      <action id="a100" />
+      <update>
+        <CommandArgument>CompleteTask</CommandArgument>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:57:27.7999493Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <update>
+        <Label>Active Tasks</Label>
+        <FilterExpression>Completed is null</FilterExpression>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:57:29.5234491Z">
+      <controller name="Tasks" />
+      <copy>
+        <controller name="Tasks" />
+        <view id="grid1" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:57:39.4933983Z">
+      <controller name="Tasks" />
+      <view id="v100" />
+      <rename>gridAllTasks</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-18T07:57:58.6990929Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <update>
+        <Label>All Tasks</Label>
+        <SortExpression>Completed desc</SortExpression>
+        <FilterExpression />
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

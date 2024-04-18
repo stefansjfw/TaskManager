@@ -2,7 +2,7 @@
   This file is provided to store the settings for your Data Aquarium project. 
   You can safely delete this file if no further code generation is planned.
 -->
-<project compatibility="20111118" dataModel="required" appFolder="app" displayName="TaskManager2" group="" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="TaskManager2" prettyName="Task Manager 2" appGenVersion="8.9.40.0" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
+<project compatibility="20111118" dataModel="required" appFolder="app" displayName="TaskManager2" group="" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="TaskManager2" prettyName="Task Manager 2" appGenVersion="8.9.40.0" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
   <connectionString hostDatabaseSharing="false" sessionStateMode="None">Data Source=;Initial Catalog=TaskManager2;Integrated Security=True;</connectionString>
   <providerName>System.Data.SqlClient</providerName>
   <namespace>MyCompany</namespace>

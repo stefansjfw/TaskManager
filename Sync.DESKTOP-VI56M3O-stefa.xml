@@ -300,6 +300,100 @@ IF (@Owner IS NULL)
         <FilterExpression>Owner = @BusinessRules_UserName OR Creator = @BusinessRules_UserName</FilterExpression>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T08:37:51.2799699Z">
+      <controller name="Tasks" />
+      <move>
+        <controller name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:37:58.5583063Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:38:00.8470919Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:38:02.4629203Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:38:03.8409082Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Expenses" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:40:08.1618843Z">
+      <controller name="Expenses" />
+      <field name="Price" />
+      <update>
+        <CausesCalculate>true</CausesCalculate>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:40:12.4279118Z">
+      <controller name="Expenses" />
+      <field name="Quantity" />
+      <update>
+        <CausesCalculate>true</CausesCalculate>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:41:21.2531823Z">
+      <controller name="Expenses" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Calculate</CommandName>
+        <Phase>Execute</Phase>
+        <Script>IF @Price IS NULL OR @Quantity IS NULL
+    SET @TotalPrice = 0
+ELSE
+    SET @TotalPrice = @Price * @Quantity</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:41:36.5011102Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="Price" />
+      <update>
+        <Hidden>false</Hidden>
+        <Aggregate>Average</Aggregate>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:41:47.1914873Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="Quantity" />
+      <update>
+        <Hidden>false</Hidden>
+        <Aggregate>Sum</Aggregate>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:41:53.8378101Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="TotalPrice" />
+      <update>
+        <Hidden>false</Hidden>
+        <Aggregate>Sum</Aggregate>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

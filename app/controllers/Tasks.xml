@@ -60,6 +60,9 @@ order by "Tasks"."Date" desc]]></text>
     <field name="Attachments" type="DataView" label="Attachments">
       <dataView controller="Attachments" view="grid1" filterFields="TaskID" />
     </field>
+    <field name="Expenses" type="DataView" label="Expenses">
+      <dataView controller="Expenses" view="grid1" filterFields="TaskID" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Tasks" sortExpression="Date desc" filter="Completed is null AND (Owner = @BusinessRules_UserName OR Creator = @BusinessRules_UserName)">
@@ -74,6 +77,7 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Creator" columns="50" />
         <dataField fieldName="Owner" columns="50" />
         <dataField fieldName="Attachments" columns="15" />
+        <dataField fieldName="Expenses" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tasks" tags="material-icon-event">
@@ -96,6 +100,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Creator" columns="50" />
             <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
+            <dataField fieldName="Expenses" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -119,6 +124,7 @@ order by "Tasks"."Date" desc]]></text>
             <dataField fieldName="Creator" columns="50" hidden="true" />
             <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="Attachments" columns="15" />
+            <dataField fieldName="Expenses" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -135,6 +141,7 @@ order by "Tasks"."Date" desc]]></text>
         <dataField fieldName="Creator" columns="50" />
         <dataField fieldName="Owner" columns="50" />
         <dataField fieldName="Attachments" columns="15" />
+        <dataField fieldName="Expenses" columns="15" />
       </dataFields>
     </view>
   </views>

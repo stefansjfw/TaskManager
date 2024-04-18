@@ -8,21 +8,24 @@ select
 	,"User"."UserName" "UserName"
 	,"UserRoles"."RoleID" "RoleID"
 	,"Role"."RoleName" "RoleName"
+	,"Organization"."Name" "OrganizationName"
 from "dbo"."UserRoles" "UserRoles"
 	left join "dbo"."Users" "User" on "UserRoles"."UserID" = "User"."UserID"
+	left join "dbo"."Organizations" "Organization" on "User"."OrganizationID" = "Organization"."OrganizationID"
 	left join "dbo"."Roles" "Role" on "UserRoles"."RoleID" = "Role"."RoleID"
 ]]></text>
     </command>
   </commands>
   <fields>
     <field name="UserID" type="Int32" allowNulls="false" isPrimaryKey="true" label="User ID" showInSummary="true">
-      <items style="Lookup" dataController="Users" newDataView="createForm1" dataValueField="UserID" dataTextField="UserName" />
+      <items style="Lookup" dataController="Users" newDataView="createForm1" dataValueField="UserID" dataTextField="UserName" copy="OrganizationName=OrganizationName" />
     </field>
     <field name="UserName" type="String" readOnly="true" label="User Name" length="128" />
     <field name="RoleID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Role ID" showInSummary="true">
       <items style="Lookup" dataController="Roles" newDataView="createForm1" dataValueField="RoleID" dataTextField="RoleName" />
     </field>
     <field name="RoleName" type="String" readOnly="true" label="Role Name" length="50" />
+    <field name="OrganizationName" type="String" readOnly="true" label="Organization Name" length="50" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="User Roles">
@@ -30,6 +33,7 @@ from "dbo"."UserRoles" "UserRoles"
       <dataFields>
         <dataField fieldName="UserID" aliasFieldName="UserName" />
         <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+        <dataField fieldName="OrganizationName" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review User Roles">
@@ -40,6 +44,7 @@ from "dbo"."UserRoles" "UserRoles"
           <dataFields>
             <dataField fieldName="UserID" aliasFieldName="UserName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+            <dataField fieldName="OrganizationName" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -52,6 +57,7 @@ from "dbo"."UserRoles" "UserRoles"
           <dataFields>
             <dataField fieldName="UserID" aliasFieldName="UserName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+            <dataField fieldName="OrganizationName" columns="50" />
           </dataFields>
         </category>
       </categories>

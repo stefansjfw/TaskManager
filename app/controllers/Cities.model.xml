@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Cities" alias="Cities" created="2024-04-18T21:45:26" modified="2024-04-18T21:45:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="State" parentTableSchema="dbo" parentTableName="States" x="274" y="20">
+      <foreignKeyColumn columnName="StateID" parentColumnName="StateID" />
+    </foreignKey>
+    <foreignKey id="StateCountry" parentTableSchema="dbo" parentTableName="Countries" baseForeignKey="State" x="543" y="20">
+      <foreignKeyColumn columnName="CountryID" parentColumnName="CountryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CityID" fieldName="CityID" label="City ID" />
+    <column name="Name" fieldName="Name" label="Name" />
+    <column name="StateID" fieldName="StateID" label="State ID" aliasColumnName="Name" aliasForeignKey="State" />
+    <column name="Name" fieldName="StateName" label="State Name" foreignKey="State" />
+    <column name="Name" fieldName="StateCountryName" label="State Country Name" foreignKey="StateCountry" />
+  </columns>
+</dataModel>

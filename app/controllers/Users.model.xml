@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Users" alias="Users" created="2024-04-18T13:54:05" modified="2024-04-18T13:54:08" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
-  <foreignKeys />
+<dataModel baseSchema="dbo" baseTable="Users" alias="Users" created="2024-04-18T13:54:05" modified="2024-04-19T09:30:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organizations" x="320" y="20">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+  </foreignKeys>
   <columns>
     <column name="UserID" fieldName="UserID" label="User ID" />
     <column name="UserName" fieldName="UserName" label="User Name" />
     <column name="Password" fieldName="Password" label="Password" />
     <column name="Email" fieldName="Email" label="Email" />
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" aliasColumnName="Name" aliasForeignKey="Organization" />
+    <column name="Name" fieldName="OrganizationName" label="Organization Name" foreignKey="Organization" />
+    <column name="EulaAcceptedOn" fieldName="EulaAcceptedOn" label="Eula Accepted On" format="g" />
   </columns>
 </dataModel>

@@ -2,15 +2,23 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
   <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
     <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
+    <siteMapNode title="Dashboard" description="" url="~/pages/dashboard" roles="*" />
     <siteMapNode title="To-Do" description="View Tasks" url="~/pages/tasks" cssClass="material-icon-event" />
     <siteMapNode title="Attachments" description="View Attachments" url="~/pages/attachments" cssClass="material-icon-attach-file" />
     <siteMapNode title="Expenses" description="View Expenses" url="~/pages/expenses" cssClass="material-icon-attach-money" />
-    <siteMapNode title="Users" description="View Users" url="~/pages/users" />
-    <siteMapNode title="Roles" description="View Roles" url="~/pages/roles" />
-    <siteMapNode title="User Roles" description="View User Roles" url="~/pages/user-roles" />
-    <siteMapNode title="Admin" description="" roles="*">
-      <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
-      <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" />
+    <siteMapNode title="Users" description="View Users" url="~/pages/users" roles="Administrators,Owners" />
+    <siteMapNode title="Organizations" description="View Organizations" url="~/pages/organizations" roles="Administrators" />
+    <siteMapNode title="Receipts" description="View Receipts" url="~/pages/receipts" />
+    <siteMapNode title="Countries" description="View Countries" url="~/pages/countries" />
+    <siteMapNode title="States" description="View States" url="~/pages/states" />
+    <siteMapNode title="Cities" description="View Cities" url="~/pages/cities" />
+    <siteMapNode title="Employees" description="View Employees" url="~/pages/employees" />
+    <siteMapNode title="Schedules" description="View Schedules" url="~/pages/schedules" />
+    <siteMapNode title="Admin" description="" roles="Administrators">
+      <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" roles="Administrators" />
+      <siteMapNode title="Tags" description="View Tags" url="~/pages/tags" roles="Administrators" />
+      <siteMapNode title="Roles" description="View Roles" url="~/pages/roles" roles="Administrators" />
+      <siteMapNode title="User Roles" description="View User Roles" url="~/pages/user-roles" roles="Administrators" />
     </siteMapNode>
   </siteMapNode>
 </siteMap>

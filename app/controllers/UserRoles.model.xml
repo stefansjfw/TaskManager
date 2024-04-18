@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="UserRoles" alias="UserRoles" created="2024-04-18T13:54:14" modified="2024-04-18T13:54:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="UserRoles" alias="UserRoles" created="2024-04-18T13:54:14" modified="2024-04-18T14:29:58" x="20" y="28" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
-    <foreignKey id="User" parentTableSchema="dbo" parentTableName="Users" x="236" y="20">
+    <foreignKey id="User" parentTableSchema="dbo" parentTableName="Users" x="237" y="20">
       <foreignKeyColumn columnName="UserID" parentColumnName="UserID" />
     </foreignKey>
-    <foreignKey id="Role" parentTableSchema="dbo" parentTableName="Roles" x="236" y="181">
+    <foreignKey id="Role" parentTableSchema="dbo" parentTableName="Roles" x="243" y="216">
       <foreignKeyColumn columnName="RoleID" parentColumnName="RoleID" />
+    </foreignKey>
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organizations" x="536" y="28" baseForeignKey="User">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -13,5 +16,6 @@
     <column name="UserName" fieldName="UserName" label="User Name" foreignKey="User" />
     <column name="RoleID" fieldName="RoleID" label="Role ID" aliasColumnName="RoleName" aliasForeignKey="Role" />
     <column name="RoleName" fieldName="RoleName" label="Role Name" foreignKey="Role" />
+    <column name="Name" fieldName="OrganizationName" label="Organization Name" foreignKey="Organization" />
   </columns>
 </dataModel>

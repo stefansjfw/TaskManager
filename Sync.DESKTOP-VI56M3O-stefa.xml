@@ -1010,6 +1010,1291 @@ Content-Type-Field: ContentType
 Length-Field: Length</BlobAdapterConfig>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T12:32:45.9417972Z">
+      <controller name="Users" />
+      <insert type="field">
+        <Name>Roles</Name>
+        <Type>String</Type>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>false</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Roles</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <ItemsStyle>CheckBoxList</ItemsStyle>
+        <ItemsDataController>Roles</ItemsDataController>
+        <ItemsTargetController>UserRoles</ItemsTargetController>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:32:50.2503834Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:32:52.4345576Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:09.5939152Z">
+      <controller name="Organizations" />
+      <insert type="field">
+        <Name>OwnerEmail</Name>
+        <Type>String</Type>
+        <Length>128</Length>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Owner Email</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:21.7873996Z">
+      <controller name="Organizations" />
+      <insert type="field">
+        <Name>OwnerPassword</Name>
+        <Type>String</Type>
+        <Length>128</Length>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Owner Password</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:31.6273534Z">
+      <controller name="Organizations" />
+      <insert type="field">
+        <Name>OwnerPasswordConfirmation</Name>
+        <Type>String</Type>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Owner Password Confirmation</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:37.0122402Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Organizations" />
+        <field name="OwnerPasswordConfirmation" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:39.9978925Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Organizations" />
+        <field name="OwnerPassword" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:39.9983991Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Organizations" />
+        <field name="OwnerEmail" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:45.8334858Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="OwnerPasswordConfirmation" />
+      <before>
+        <controller name="Organizations" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="OwnerEmail" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:47.9856739Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="OwnerPasswordConfirmation" />
+      <before>
+        <controller name="Organizations" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="OwnerPassword" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:33:57.9558109Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerEmail" />
+      <update>
+        <Rows />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:34:05.6957949Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerPassword" />
+      <update>
+        <Rows />
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:34:12.5828727Z">
+      <controller name="Organizations" />
+      <view id="createForm1" />
+      <dataField fieldName="OwnerPasswordConfirmation" />
+      <update>
+        <Rows />
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:34:26.8599619Z">
+      <controller name="Organizations" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:34:36.1570418Z">
+      <controller name="Organizations" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>After</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:41:11.0171347Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Password" />
+      <before>
+        <controller name="Users" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Email" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:41:18.2360065Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="Password" />
+      <before>
+        <controller name="Users" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="Email" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:43:11.1005769Z">
+      <controller name="Users" />
+      <move>
+        <controller name="Receipts" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:43:16.8892342Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Receipts" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:43:43.0687538Z">
+      <controller name="Users" />
+      <insert type="field">
+        <Name>PasswordConfirmation</Name>
+        <Type>String</Type>
+        <Length>128</Length>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>true</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Password Confirmations</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:44:01.7366712Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="PasswordConfirmation" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:44:03.9766643Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="OrganizationID" />
+      <before>
+        <controller name="Users" />
+        <view id="createForm1" />
+        <category id="c1" />
+        <dataField fieldName="PasswordConfirmation" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:44:24.2526963Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <dataField fieldName="PasswordConfirmation" />
+      <update>
+        <Rows />
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:44:44.4965529Z">
+      <controller name="Users" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert|Update</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T13:09:57.4571277Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="PasswordConfirmation" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T13:10:00.6785879Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="OrganizationID" />
+      <before>
+        <controller name="Users" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="PasswordConfirmation" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T13:10:15.4556843Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <dataField fieldName="PasswordConfirmation" />
+      <update>
+        <Rows />
+        <TextMode>Password</TextMode>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T13:12:30.8117961Z">
+      <controller name="Receipts" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+        <Script>SET @OrganizationID = @BusinessRules_OrganizationID</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T13:16:54.1461992Z">
+      <controller name="Receipts" />
+      <view id="createForm1" />
+      <dataField fieldName="OrganizationID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T19:48:01.0473991Z">
+      <controller name="Locations" />
+      <field name="StateID" />
+      <update>
+        <ItemsStyle>ListBox</ItemsStyle>
+        <ContextFields>CountryID=CountryID</ContextFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T19:48:33.8238599Z">
+      <controller name="Locations" />
+      <field name="CityID" />
+      <update>
+        <ItemsStyle>RadioButtonList</ItemsStyle>
+        <ContextFields>StateID=StateID</ContextFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T20:09:16.4493385Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <update>
+        <Tags>modal-max-md modal-fit-content</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T20:12:25.4247530Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-event modal-max-xs modal-when-sm modal-fit-content</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:22:20.8555129Z">
+      <controller name="MyProfile" />
+      <insert type="view">
+        <ViewId>agreeForm</ViewId>
+        <Type>Form</Type>
+        <Legend>false</Legend>
+        <Label>Agree Form</Label>
+        <ShowInSelector>false</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:22:26.1245114Z">
+      <controller name="MyProfile" />
+      <view id="agreeForm" />
+      <move>
+        <controller name="MyProfile" />
+        <field name="UserName" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:23:13.3782473Z">
+      <controller name="MyProfile" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Custom</CommandName>
+        <CommandArgument>Agree</CommandArgument>
+        <View>agreeForm</View>
+        <Phase>Execute</Phase>
+        <Script>UPDATE aspnet_Membership
+SET Comment = 'EULAccepted'
+WHERE UserID = @UserID</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:29:54.5310824Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE aspnet_Membership
+SET Comment = 'EULAccepted'
+WHERE UserID = @UserID</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:31:41.6291758Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET EulaAcceptedOn = GETDATE()
+WHERE UserName = @UserName</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:33:06.1980306Z">
+      <controller name="MyProfile" />
+      <rule id="r103" />
+      <update>
+        <Script>UPDATE Users
+SET EulaAcceptedOn = GETDATE()
+WHERE UserName = @UserName</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:29.1084742Z">
+      <controller name="Expenses" />
+      <insert type="view">
+        <ViewId>exportGrid</ViewId>
+        <Type>Grid</Type>
+        <Legend>false</Legend>
+        <CommandId>command1</CommandId>
+        <Label>Export Expenses</Label>
+        <ShowInSelector>true</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:36.3568953Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <move>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Item" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:36.3579283Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <move>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Price" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:36.3589280Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <move>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="PriceInEuro" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:36.3589280Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <move>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="Quantity" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:36.3599279Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <move>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="TotalPrice" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:36.3599279Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <move>
+        <controller name="Expenses" />
+        <view id="grid1" />
+        <dataField fieldName="TaskID" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:48.6233450Z">
+      <controller name="Expenses" />
+      <view id="grid1" />
+      <dataField fieldName="PriceInEuro" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:53.4047056Z">
+      <controller name="Expenses" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="PriceInEuro" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:50:58.3839343Z">
+      <controller name="Expenses" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="PriceInEuro" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:53:08.3108792Z">
+      <controller name="Expenses" />
+      <view id="exportGrid" />
+      <update>
+        <ShowInSelector>false</ShowInSelector>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:53:52.3070862Z">
+      <controller name="Expenses" />
+      <actionGroup id="ag5" />
+      <action id="a1" />
+      <update>
+        <CommandArgument>exportGrid</CommandArgument>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:37:48.2076582Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <update>
+        <Tags>view-style-calendar</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:38:02.4028567Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="EndDate" />
+      <update>
+        <Tag>calendar-end</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:43:54.6821191Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>JavaScript</Type>
+        <CommandName>New</CommandName>
+        <Phase>After</Phase>
+        <Script>$row.Description = 'New Task';
+
+if(!$row.StartDate){
+  var start = new Date();
+  start.setMinutes(0,0,0);
+  start.setHours(start.getHours() + 1);
+  
+  var end = new Date(start);
+  end.setHours(end.getHours() + 1);
+  
+  $row.StartDate = start;
+  $row.EndDate = end;
+}</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:45:51.3999858Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Tag>calendar-color</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:49:08.0788822Z">
+      <controller name="Tasks" />
+      <copy>
+        <controller name="Tasks" />
+        <view id="createForm1" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:49:12.1814246Z">
+      <controller name="Tasks" />
+      <view id="v100" />
+      <rename>createTask</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:49:29.6036327Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="ScheduleID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:49:33.6776435Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="ScheduleWeeks" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:49:33.7118730Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="ScheduleDaysOfWeek" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:49:44.4549621Z">
+      <controller name="Tasks" />
+      <view id="createTask" />
+      <dataField fieldName="ScheduleID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:50:17.4206847Z">
+      <controller name="Tasks" />
+      <actionGroup id="ag3" />
+      <insert type="action">
+        <CommandName>New</CommandName>
+        <CommandArgument>createTask</CommandArgument>
+        <HeaderText>New Recurring Task</HeaderText>
+        <CausesValidation>true</CausesValidation>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:50:49.5532926Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <update>
+        <ItemsStyle>CheckBoxList</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:50:58.9564216Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Monday</Value>
+        <Text>Monday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:51:08.0130121Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Tuesday</Value>
+        <Text>Tuesday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:51:15.8504383Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Wednesday</Value>
+        <Text>Wednesday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:51:24.3362117Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Thursday</Value>
+        <Text>Thursday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:51:33.3317255Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Friday</Value>
+        <Text>Friday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:51:39.8121663Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Saturday</Value>
+        <Text>Saturday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:51:47.1550800Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <insert type="item">
+        <Value>Sunday</Value>
+        <Text>Sunday</Text>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:52:12.6102562Z">
+      <controller name="Tasks" />
+      <field name="ScheduleDaysOfWeek" />
+      <update>
+        <IsVirtual>true</IsVirtual>
+        <ReadOnly>false</ReadOnly>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:52:17.4615545Z">
+      <controller name="Tasks" />
+      <field name="ScheduleWeeks" />
+      <update>
+        <IsVirtual>true</IsVirtual>
+        <ReadOnly>false</ReadOnly>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:52:32.4501227Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:52:42.6443422Z">
+      <controller name="Tasks" />
+      <update>
+        <GenerateDataAccessObjects>true</GenerateDataAccessObjects>
+        <StatusBar>Status: New
+[New] &gt; In-Progress &gt; Done &gt;
+
+Status: Delegated
+New &gt; [Delegated] &gt; In Progress &gt; Completed &gt;
+
+Status: In-Progress
+New &gt; [Being Worked On] &gt; Completed &gt;
+
+Status: Canceled
+Something Went Wrong &gt; [Canceled] &gt;
+
+Status: Completed
+New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T09:52:52.7316138Z">
+      <controller name="Schedules" />
+      <update>
+        <GenerateDataAccessObjects>true</GenerateDataAccessObjects>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:35:56.5085339Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="EndDate" />
+      <update>
+        <Tag>calendar-end</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:36:06.9051759Z">
+      <controller name="Tasks" />
+      <rule id="r101" />
+      <update>
+        <Script>var d = new Date();
+
+if (d.getMinutes() &lt; 30)
+    d.setMinutes(30,0,0);
+else
+    d.setMinutes(60,0,0);
+
+// $row.Date = d;</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:37:50.8230565Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="StartDate" />
+      <update>
+        <Tag>calendar-start</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:37:57.4178057Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="StartDate" />
+      <update>
+        <Tag>calendar-start</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:39:33.4649788Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = 'New Task';
+
+if(!$row.StartDate){
+  var start = new Date();
+  start.setMinutes(0,0,0);
+  start.setHours(start.getHours() + 1);
+  
+  var end = new Date(start);
+  end.setHours(end.getHours() + 1);
+  
+  $row.StartDate = start;
+  $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:40:00.5979224Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = 'New Task';
+</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:41:37.3592252Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="EndDate" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:41:37.3628722Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="StartDate" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:41:43.5967475Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="gridAllTasks" />
+        <dataField fieldName="StartDate" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:41:43.5977552Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Created" />
+      <before>
+        <controller name="Tasks" />
+        <view id="gridAllTasks" />
+        <dataField fieldName="EndDate" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:41:44.6676868Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="EndDate" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:41:58.9732513Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="StartDate" />
+      <update>
+        <Tag />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:42:04.1659400Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="StartDate" />
+      <update>
+        <Tag />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:51:23.3638529Z">
+      <controller name="Tasks" />
+      <rule id="r101" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:52:27.1375153Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = 'New Task';
+
+var d = new Date();
+
+$row.Date = d;
+if (!$row.StartDate) {
+    var start = new Date();
+    start.setMinutes(0,0,0);
+    start.setHours(start.getHours() + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.Date = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:55:08.3810574Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = 'New Task';
+
+var d = new Date();
+
+$row.Date = d;
+if (!$row.Date) {
+    var start = new Date();
+    start.setMinutes(0,0,0);
+    start.setHours(start.getHours() + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.Date = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:55:34.9276079Z">
+      <controller name="Tasks" />
+      <rule id="r104" />
+      <update>
+        <Script>$row.Description = 'New Task';
+
+var d = new Date();
+
+if (!$row.Date) {
+    var start = new Date();
+    start.setMinutes(0,0,0);
+    start.setHours(start.getHours() + 1);
+
+    var end = new Date(start);
+    end.setHours(end.getHours() + 1);
+
+    $row.Date = start;
+    $row.EndDate = end;
+}</Script>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T10:57:00.3815058Z">
+      <controller name="Tasks" />
+      <field name="Date" />
+      <update>
+        <Label>Start Date</Label>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:04:01.7277894Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Delete</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:06:57.4353122Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="ScheduleID" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:07:21.2040820Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="ScheduleDaysOfWeek" />
+      <update>
+        <Hidden>false</Hidden>
+        <Visibility>$row.ScheduleID != null</Visibility>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:07:26.8227889Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <dataField fieldName="ScheduleWeeks" />
+      <update>
+        <Hidden>false</Hidden>
+        <Visibility>$row.ScheduleID != null</Visibility>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:08:57.4164521Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Code</Type>
+        <CommandName>Update</CommandName>
+        <Phase>Before</Phase>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:10:47.9439560Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Tag>calendar-color</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:12:57.5656005Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Tag />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:13:00.8411211Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="LocationID" />
+      <update>
+        <Tag>calendar-color</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:13:06.9404263Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Tag />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T11:13:10.1020737Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="LocationID" />
+      <update>
+        <Tag>calendar-color</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:14:09.5493940Z">
+      <controller name="Users" />
+      <copy>
+        <controller name="Tasks" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:14:29.5980001Z">
+      <controller name="Users" />
+      <field name="Tasks" />
+      <update>
+        <DataViewFilterSource>Tasks</DataViewFilterSource>
+        <DataViewFilterFields>CreatedBy</DataViewFilterFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:14:37.1677991Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Tasks" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:14:38.7449694Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Users" />
+        <field name="Tasks" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:14:40.0675793Z">
+      <controller name="Users" />
+      <view id="grid1" />
+      <move>
+        <controller name="Users" />
+        <field name="Tasks" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:17:21.0277044Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Receipts" />
+      <before>
+        <controller name="Users" />
+        <view id="editForm1" />
+        <category id="c1" />
+        <dataField fieldName="Tasks" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:18:09.6795691Z">
+      <controller name="Users" />
+      <view id="editForm1" />
+      <category id="c1" />
+      <dataField fieldName="Tasks" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:19:04.1550021Z">
+      <controller name="Users" />
+      <view id="createForm1" />
+      <category id="c1" />
+      <dataField fieldName="Tasks" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:19:07.9600046Z">
+      <controller name="Users" />
+      <view id="grid1" />
+      <dataField fieldName="Tasks" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:19:12.8605900Z">
+      <controller name="Users" />
+      <field name="Tasks" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:20:36.9585809Z">
+      <controllers />
+      <insert type="controller">
+        <Name>Dashboard</Name>
+        <ConflictDetection>overwriteChanges</ConflictDetection>
+        <GenerateDataAccessObjects>false</GenerateDataAccessObjects>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:20:44.8777933Z">
+      <controller name="Dashboard" />
+      <copy>
+        <controller name="Users" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:20:44.8777933Z">
+      <controller name="Dashboard" />
+      <copy>
+        <controller name="Tasks" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:20:44.8787933Z">
+      <controller name="Dashboard" />
+      <copy>
+        <controller name="Attachments" />
+      </copy>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:21:20.1156250Z">
+      <controller name="Dashboard" />
+      <field name="Attachments" />
+      <update>
+        <DataViewFilterSource>Tasks</DataViewFilterSource>
+        <DataViewFilterFields>TaskID</DataViewFilterFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:21:33.4238181Z">
+      <controller name="Dashboard" />
+      <field name="Tasks" />
+      <update>
+        <DataViewFilterSource>Users</DataViewFilterSource>
+        <DataViewFilterFields>CreatedBy</DataViewFilterFields>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:21:47.4815026Z">
+      <controller name="Dashboard" />
+      <insert type="view">
+        <ViewId>form1</ViewId>
+        <Type>Form</Type>
+        <Legend>false</Legend>
+        <Label>Dashboard</Label>
+        <ShowInSelector>true</ShowInSelector>
+        <ReportTemplate>false</ReportTemplate>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:21:50.9704728Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <move>
+        <controller name="Dashboard" />
+        <field name="Users" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:21:50.9704728Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <move>
+        <controller name="Dashboard" />
+        <field name="Tasks" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:21:50.9714784Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <move>
+        <controller name="Dashboard" />
+        <field name="Attachments" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:23:18.0873615Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <category id="c1" />
+      <update>
+        <HeaderText />
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:23:33.2959295Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Users" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewPageSize>3</DataViewPageSize>
+        <DataViewAutoHighlightFirstRow>true</DataViewAutoHighlightFirstRow>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:23:51.2444110Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Tasks" />
+      <update>
+        <Tag>inline-editing</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewPageSize>5</DataViewPageSize>
+        <DataViewAutoHighlightFirstRow>true</DataViewAutoHighlightFirstRow>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:24:10.3467151Z">
+      <controller name="Dashboard" />
+      <view id="form1" />
+      <dataField fieldName="Attachments" />
+      <update>
+        <Tag>inline-editing</Tag>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+        <DataViewPageSize>10</DataViewPageSize>
+      </update>
+    </c>
   </log>
   <log type="Application">
     <c y="NodeSet" t="2024-04-18T09:32:36.3439506Z">
@@ -1085,6 +2370,137 @@ Length-Field: Length</BlobAdapterConfig>
         <Offline>false</Offline>
         <Kiosk>false</Kiosk>
         <CustomStyle>material-icon-attach-money</CustomStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:22.1498217Z">
+      <page name="Admin" />
+      <update>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:25.6387596Z">
+      <page name="Admin" />
+      <move>
+        <page name="Roles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:25.6458012Z">
+      <page name="Admin" />
+      <move>
+        <page name="UserRoles" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:40.9114983Z">
+      <page name="Roles" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:45.8940586Z">
+      <page name="UserRoles" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:50.4090710Z">
+      <page name="Tags" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:31:55.3011278Z">
+      <page name="Locations" />
+      <update>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:32:14.4734595Z">
+      <page name="Organizations" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Roles>Administrators</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T12:43:04.6393453Z">
+      <page name="Users" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Roles>Administrators,Owners</Roles>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:16:21.1607490Z">
+      <pages />
+      <insert type="page" context="/page/Home">
+        <Name>EULA</Name>
+        <Template>Jumbotron</Template>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Title>EULA</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:16:24.3795876Z">
+      <page name="Admin" />
+      <before>
+        <page name="EULA" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:16:36.4339280Z">
+      <page name="EULA" />
+      <update>
+        <Generate>FirstTimeOnly</Generate>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-19T07:16:49.0682525Z">
+      <page name="EULA" />
+      <configure type="Exclude" />
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:22:06.6941015Z">
+      <pages />
+      <insert type="page">
+        <Name>Dashboard</Name>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Dashboard</Path>
+        <Title>Dashboard</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:22:08.7292406Z">
+      <page name="Dashboard" />
+      <copyRef type="controller">
+        <Controller>Dashboard</Controller>
+        <View>form1</View>
+      </copyRef>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:22:12.5370798Z">
+      <page name="Tasks" />
+      <before>
+        <page name="Dashboard" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-19T12:22:26.2709043Z">
+      <page name="Dashboard" />
+      <dataView id="view1" />
+      <update>
+        <ShowActionButtons>None</ShowActionButtons>
       </update>
     </c>
   </log>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Employees" alias="Employees" created="2024-04-19T10:31:32" modified="2024-04-19T10:31:35" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="EmployeeID" fieldName="EmployeeID" label="Employee ID" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" />
+    <column name="LastName" fieldName="LastName" label="Last Name" />
+    <column name="Title" fieldName="Title" label="Title" />
+    <column name="BirthDate" fieldName="BirthDate" label="Birth Date" format="g" />
+    <column name="HireDate" fieldName="HireDate" label="Hire Date" format="g" />
+    <column name="Phone" fieldName="Phone" label="Phone" />
+    <column name="Email" fieldName="Email" label="Email" />
+    <column name="Extension" fieldName="Extension" label="Extension" />
+  </columns>
+</dataModel>

@@ -143,6 +143,15 @@
         </category>
       </categories>
     </view>
+    <view id="agreeForm" type="Form" label="Agree Form" showInSelector="false">
+      <categories>
+        <category id="c1" headerText="My Profile" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="UserName" rows="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
   </views>
   <actions>
     <actionGroup id="ag1" scope="Form">
@@ -204,5 +213,8 @@ $app.touch.show({
 });
 
 									]]></rule>
+    <rule id="r103" commandName="Custom" commandArgument="Agree" view="agreeForm" type="Sql" phase="Execute"><![CDATA[UPDATE Users
+SET EulaAcceptedOn = GETDATE()
+WHERE UserName = @UserName]]></rule>
   </businessRules>
 </dataController>

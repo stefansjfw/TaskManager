@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Countries" alias="Countries" created="2024-04-18T21:45:12" modified="2024-04-18T21:45:14" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="CountryID" fieldName="CountryID" label="Country ID" />
+    <column name="Name" fieldName="Name" label="Name" />
+  </columns>
+</dataModel>

@@ -630,6 +630,7 @@ namespace MyCompany.Data
                 if (rules.CompleteConfiguration())
                     ResetViewPage(page);
             }
+            MyCompany.Security.EventTracker.Process(page, request);
             if (rules != null)
                 rules.AfterSelect(request);
             else
@@ -752,6 +753,7 @@ namespace MyCompany.Data
                 EnsureFieldValues(args);
                 if (args.SqlCommandType != CommandConfigurationType.None)
                 {
+                    MyCompany.Security.EventTracker.Process(args, _config);
                     if (args.IsBatchEditOrDelete)
                     {
                         var page = CreateViewPage();

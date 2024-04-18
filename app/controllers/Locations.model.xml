@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Locations" alias="Locations" created="2024-04-18T10:11:20" modified="2024-04-18T10:11:24" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
-  <foreignKeys />
+<dataModel baseSchema="dbo" baseTable="Locations" alias="Locations" created="2024-04-18T10:11:20" modified="2024-04-18T21:45:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Country" parentTableSchema="dbo" parentTableName="Countries" x="294" y="20">
+      <foreignKeyColumn columnName="CountryID" parentColumnName="CountryID" />
+    </foreignKey>
+    <foreignKey id="State" parentTableSchema="dbo" parentTableName="States" x="294" y="160">
+      <foreignKeyColumn columnName="StateID" parentColumnName="StateID" />
+    </foreignKey>
+    <foreignKey id="City" parentTableSchema="dbo" parentTableName="Cities" x="294" y="323">
+      <foreignKeyColumn columnName="CityID" parentColumnName="CityID" />
+    </foreignKey>
+  </foreignKeys>
   <columns>
     <column name="LocationID" fieldName="LocationID" label="Location ID" />
     <column name="Name" fieldName="Name" label="Name" />
     <column name="Address" fieldName="Address" label="Address" />
-    <column name="City" fieldName="City" label="City" />
-    <column name="State" fieldName="State" label="State" />
     <column name="PostalCode" fieldName="PostalCode" label="Postal Code" />
-    <column name="Country" fieldName="Country" label="Country" />
+    <column name="CityID" fieldName="CityID" label="City ID" aliasColumnName="Name" aliasForeignKey="City" />
+    <column name="Name" fieldName="CityName" label="City" foreignKey="City" />
+    <column name="StateID" fieldName="StateID" label="State ID" aliasColumnName="Name" aliasForeignKey="State" />
+    <column name="Name" fieldName="StateName" label="State" foreignKey="State" />
+    <column name="CountryID" fieldName="CountryID" label="Country ID" aliasColumnName="Name" aliasForeignKey="Country" />
+    <column name="Name" fieldName="CountryName" label="Country" foreignKey="Country" />
   </columns>
 </dataModel>

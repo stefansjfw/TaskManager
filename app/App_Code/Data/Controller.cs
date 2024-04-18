@@ -557,6 +557,8 @@ namespace MyCompany.Data
             PopulatePageFields(page);
             if (command == null)
                 return true;
+            if (values != null)
+                MyCompany.Security.EventTracker.EnsureTrackingFields(page, _config);
             if (command.CommandType == CommandType.Text)
             {
                 var statementMatch = SqlSelectRegex1.Match(command.CommandText);

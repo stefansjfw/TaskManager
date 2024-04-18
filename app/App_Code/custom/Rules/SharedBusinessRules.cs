@@ -13,6 +13,15 @@ namespace MyCompany.Rules
         {
         }
 
+        public int OrganizationID
+        {
+            get
+            {
+                object result = SqlText.ExecuteScalar("SELECT OrganizationID FROM Users WHERE UserID = @p0", UserId);
+                return result is DBNull ? -1 : (int)result;
+            }
+        }
+
         protected override void VirtualizeController(string controllerName)
         {
             base.VirtualizeController(controllerName);
@@ -20,6 +29,14 @@ namespace MyCompany.Rules
             {
                 NodeSet().SelectActionGroup("ag1").CreateAction("Custom", "Impersonate")
                     .SetHeaderText("Impersonate").Attr("cssClass", "material-icon-group-add");
+            }
+
+            if (!UserIsInRole("Administrators"))
+            {
+                if (controllerName == "Users" || controllerName == "Receipts")
+                {
+                    NodeSet().SelectViews("grid1", "createForm1", "editForm1").SelectDataField("OrganizationID").Hide();
+                }
             }
         }
 
@@ -47,6 +64,28 @@ $app.login('" + userToImpersonate + @"', 'impersonate:" + password + @"', false,
             if (controllerName == "Users")
                 return true;
             return base.SupportsVirtualization(controllerName);
+        }
+
+        protected override void EnumerateDynamicAccessControlRules(string controllerName)
+        {
+            base.EnumerateDynamicAccessControlRules(controllerName);
+            if (!UserIsInRole("Administrators"))
+            {
+                if (UserIsInRole("Owners"))
+                {
+                    RegisterAccessControlRule("OrganizationID", AccessPermission.Allow, OrganizationID);
+                }
+                else
+                {
+                    RegisterAccessControlRule("UserID", AccessPermission.Allow, UserId);
+                }
+
+                RegisterAccessControlRule("RoleID", AccessPermission.Deny, 1);
+                if (!UserIsInRole("Owners"))
+                {
+                    RegisterAccessControlRule("CreatedBy", AccessPermission.Allow, UserId);
+                }
+            }
         }
     }
 }

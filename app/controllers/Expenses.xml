@@ -25,11 +25,14 @@ from "dbo"."Expenses" "Expenses"
     <field name="ExpenseID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Expense ID" readOnly="true" />
     <field name="Item" type="String" allowNulls="false" label="Item" length="50" showInSummary="true" />
     <field name="Price" type="Decimal" allowNulls="false" dataFormatString="c" label="Price" showInSummary="true" causesCalculate="true" />
+    <field name="PriceInEuro" type="Decimal" readOnly="true" dataFormatString="€{0:N2}" label="Price In Euro" computed="true" showInSummary="true">
+      <formula>Expenses.Price * 0.9</formula>
+    </field>
     <field name="Quantity" type="Int32" allowNulls="false" label="Quantity" showInSummary="true" causesCalculate="true" />
     <field name="TotalPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Total Price" computed="true" showInSummary="true">
       <formula>Expenses.Price * Expenses.Quantity</formula>
     </field>
-    <field name="TaskID" type="Int32" allowNulls="false" label="Task ID" showInSummary="true">
+    <field name="TaskID" type="Int32" allowNulls="false" label="Task ID">
       <items style="Lookup" dataController="Tasks" newDataView="createForm1" dataValueField="TaskID" dataTextField="Description" />
     </field>
     <field name="TaskDescription" type="String" readOnly="true" label="Task Description" length="50" />
@@ -75,6 +78,16 @@ from "dbo"."Expenses" "Expenses"
         </category>
       </categories>
     </view>
+    <view id="exportGrid" commandId="command1" type="Grid" label="Export Expenses" showInSelector="false">
+      <dataFields>
+        <dataField fieldName="Item" columns="50" />
+        <dataField fieldName="Price" columns="15" aggregate="Average" />
+        <dataField fieldName="PriceInEuro" columns="15" />
+        <dataField fieldName="Quantity" columns="15" aggregate="Sum" />
+        <dataField fieldName="TotalPrice" columns="15" aggregate="Sum" />
+        <dataField fieldName="TaskID" aliasFieldName="TaskDescription" />
+      </dataFields>
+    </view>
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
@@ -107,7 +120,7 @@ from "dbo"."Expenses" "Expenses"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a1" commandName="ExportCsv" commandArgument="exportGrid" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
       <action id="a4" commandName="ExportRss" />

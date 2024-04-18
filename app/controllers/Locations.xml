@@ -7,11 +7,17 @@ select
 	"Locations"."LocationID" "LocationID"
 	,"Locations"."Name" "Name"
 	,"Locations"."Address" "Address"
-	,"Locations"."City" "City"
-	,"Locations"."State" "State"
 	,"Locations"."PostalCode" "PostalCode"
-	,"Locations"."Country" "Country"
+	,"Locations"."CityID" "CityID"
+	,"City"."Name" "CityName"
+	,"Locations"."StateID" "StateID"
+	,"State"."Name" "StateName"
+	,"Locations"."CountryID" "CountryID"
+	,"Country"."Name" "CountryName"
 from "dbo"."Locations" "Locations"
+	left join "dbo"."Countries" "Country" on "Locations"."CountryID" = "Country"."CountryID"
+	left join "dbo"."States" "State" on "Locations"."StateID" = "State"."StateID"
+	left join "dbo"."Cities" "City" on "Locations"."CityID" = "City"."CityID"
 ]]></text>
     </command>
     <command id="LocationIDIdentityCommand" type="Text" event="Inserted">
@@ -25,10 +31,19 @@ from "dbo"."Locations" "Locations"
     <field name="LocationID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Location ID" readOnly="true" />
     <field name="Name" type="String" allowNulls="false" label="Name" length="50" showInSummary="true" />
     <field name="Address" type="String" allowNulls="false" label="Address" length="50" showInSummary="true" />
-    <field name="City" type="String" allowNulls="false" label="City" length="50" showInSummary="true" />
-    <field name="State" type="String" label="State" length="50" showInSummary="true" />
     <field name="PostalCode" type="String" label="Postal Code" length="50" showInSummary="true" />
-    <field name="Country" type="String" allowNulls="false" label="Country" length="50" />
+    <field name="CityID" type="Int32" allowNulls="false" label="City ID" showInSummary="true" contextFields="StateID=StateID">
+      <items style="RadioButtonList" dataController="Cities" newDataView="createForm1" dataValueField="CityID" dataTextField="Name" />
+    </field>
+    <field name="CityName" type="String" readOnly="true" label="City" length="50" />
+    <field name="StateID" type="Int32" allowNulls="false" label="State ID" showInSummary="true" contextFields="CountryID=CountryID">
+      <items style="ListBox" dataController="States" newDataView="createForm1" dataValueField="StateID" dataTextField="Name" />
+    </field>
+    <field name="StateName" type="String" readOnly="true" label="State" length="50" />
+    <field name="CountryID" type="Int32" allowNulls="false" label="Country ID">
+      <items style="Lookup" dataController="Countries" newDataView="createForm1" dataValueField="CountryID" dataTextField="Name" />
+    </field>
+    <field name="CountryName" type="String" readOnly="true" label="Country" length="50" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Locations">
@@ -36,10 +51,10 @@ from "dbo"."Locations" "Locations"
       <dataFields>
         <dataField fieldName="Name" columns="50" />
         <dataField fieldName="Address" columns="50" />
-        <dataField fieldName="City" columns="50" />
-        <dataField fieldName="State" columns="50" />
         <dataField fieldName="PostalCode" columns="50" />
-        <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="CityID" aliasFieldName="CityName" />
+        <dataField fieldName="StateID" aliasFieldName="StateName" />
+        <dataField fieldName="CountryID" aliasFieldName="CountryName" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Locations">
@@ -50,10 +65,10 @@ from "dbo"."Locations" "Locations"
           <dataFields>
             <dataField fieldName="Name" columns="50" />
             <dataField fieldName="Address" columns="50" />
-            <dataField fieldName="City" columns="50" />
-            <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
-            <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="CityID" aliasFieldName="CityName" />
+            <dataField fieldName="StateID" aliasFieldName="StateName" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
           </dataFields>
         </category>
       </categories>
@@ -66,10 +81,10 @@ from "dbo"."Locations" "Locations"
           <dataFields>
             <dataField fieldName="Name" columns="50" />
             <dataField fieldName="Address" columns="50" />
-            <dataField fieldName="City" columns="50" />
-            <dataField fieldName="State" columns="50" />
             <dataField fieldName="PostalCode" columns="50" />
-            <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="CityID" aliasFieldName="CityName" />
+            <dataField fieldName="StateID" aliasFieldName="StateName" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
           </dataFields>
         </category>
       </categories>

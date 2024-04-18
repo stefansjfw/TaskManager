@@ -13,7 +13,7 @@ using MyCompany.Services;
 
 namespace MyCompany.Rules
 {
-    public class MyProfileBusinessRulesBase : BusinessRules
+    public class MyProfileBusinessRulesBase : SharedBusinessRules
     {
 
         public static SortedDictionary<MembershipCreateStatus, string> CreateErrors = new SortedDictionary<MembershipCreateStatus, string>();

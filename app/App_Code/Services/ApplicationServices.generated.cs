@@ -10,7 +10,7 @@ namespace MyCompany.Services
         public virtual void Initialize()
         {
             ApplicationServices.FrameworkAppName = "Task Manager 2";
-            ApplicationServices.Version = "8.9.40.1";
+            ApplicationServices.Version = "8.9.40.3";
             ApplicationServices.HostVersion = "1.2.5.0";
             var compilation = ((CompilationSection)(WebConfigurationManager.GetSection("system.web/compilation")));
             var releaseMode = !compilation.Debug;

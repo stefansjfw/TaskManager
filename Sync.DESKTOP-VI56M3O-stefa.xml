@@ -917,6 +917,110 @@ New &gt; In-Progress &gt; [Completed] &gt;</StatusBar>
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T09:34:51.7778477Z">
+      <controller name="Attachments" />
+      <view id="editForm1" />
+      <update>
+        <Tags>material-icon-attach-file</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:34:55.9770400Z">
+      <controller name="Attachments" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-attach-file</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:35:16.4876561Z">
+      <controller name="Expenses" />
+      <view id="editForm1" />
+      <update>
+        <Tags>material-icon-attach-money</Tags>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:35:20.0333349Z">
+      <controller name="Expenses" />
+      <view id="createForm1" />
+      <update>
+        <Tags>material-icon-attach-money</Tags>
+      </update>
+    </c>
   </log>
-  <log type="Application"></log>
+  <log type="Application">
+    <c y="NodeSet" t="2024-04-18T09:32:36.3439506Z">
+      <page name="Tasks" />
+      <rename>To-Do</rename>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:32:41.5388122Z">
+      <page name="TaskTags" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:33:00.5080610Z">
+      <pages />
+      <insert type="page">
+        <Name>Admin</Name>
+        <Url>about:blank</Url>
+        <Generate>Always</Generate>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <Path>Admin</Path>
+        <Title>Admin</Title>
+        <Roles>*</Roles>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:33:05.6618996Z">
+      <page name="Admin" />
+      <move>
+        <page name="Locations" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:33:05.6629006Z">
+      <page name="Admin" />
+      <move>
+        <page name="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:33:05.6629006Z">
+      <page name="Admin" />
+      <move>
+        <page name="Membership" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:33:08.5011821Z">
+      <page name="Locations" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:33:48.5977098Z">
+      <page name="Tasks" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <CustomStyle>material-icon-event</CustomStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:34:28.3872434Z">
+      <page name="Attachments" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <CustomStyle>material-icon-attach-file</CustomStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T09:35:09.8900034Z">
+      <page name="Expenses" />
+      <update>
+        <UseExtenders>false</UseExtenders>
+        <Offline>false</Offline>
+        <Kiosk>false</Kiosk>
+        <CustomStyle>material-icon-attach-money</CustomStyle>
+      </update>
+    </c>
+  </log>
 </logs>

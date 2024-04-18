@@ -394,6 +394,126 @@ ELSE
         <DataViewShowInSummary>false</DataViewShowInSummary>
       </update>
     </c>
+    <c y="NodeSet" t="2024-04-18T08:48:14.6659798Z">
+      <controller name="Tasks" />
+      <insert type="field">
+        <Name>Tags</Name>
+        <Type>String</Type>
+        <AllowNulls>true</AllowNulls>
+        <IsPrimaryKey>false</IsPrimaryKey>
+        <IsVirtual>false</IsVirtual>
+        <Computed>false</Computed>
+        <Calculated>false</Calculated>
+        <CausesCalculate>false</CausesCalculate>
+        <OnDemand>false</OnDemand>
+        <Label>Tags</Label>
+        <ReadOnly>false</ReadOnly>
+        <ShowInSummary>false</ShowInSummary>
+        <HtmlEncode>true</HtmlEncode>
+        <FormatOnClient>true</FormatOnClient>
+        <ItemsStyle>CheckBoxList</ItemsStyle>
+        <ItemsDataController>Tags</ItemsDataController>
+        <ItemsNewDataView>createForm1</ItemsNewDataView>
+        <ItemsTargetController>TaskTags</ItemsTargetController>
+        <SearchOnStart>false</SearchOnStart>
+        <AutoSelect>false</AutoSelect>
+        <ItemsLetters>false</ItemsLetters>
+        <AllowQBE>true</AllowQBE>
+        <AllowSorting>true</AllowSorting>
+        <MaskType>None</MaskType>
+        <AllowLEV>false</AllowLEV>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:48:21.8025428Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:48:23.7028416Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:48:26.6882541Z">
+      <controller name="Tasks" />
+      <view id="editForm1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:48:29.0675574Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <move>
+        <controller name="Tasks" />
+        <field name="Tags" />
+      </move>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:48:47.0969047Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Columns>30</Columns>
+        <Rows />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:48:56.6171089Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="LocationID" />
+      <before>
+        <controller name="Tasks" />
+        <view id="gridAllTasks" />
+        <dataField fieldName="Tags" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:49:22.0065734Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Columns>30</Columns>
+        <Rows />
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:49:26.3747233Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="LocationID" />
+      <before>
+        <controller name="Tasks" />
+        <view id="grid1" />
+        <dataField fieldName="Tags" />
+      </before>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:49:27.5807136Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Tags" />
+      <update>
+        <Hidden>false</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:51:35.0649315Z">
+      <controller name="Tasks" />
+      <field name="Tags" />
+      <update>
+        <ItemsStyle>DropDownList</ItemsStyle>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

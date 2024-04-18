@@ -244,7 +244,12 @@ namespace MyCompany.Services
             try
             {
                 if (controllerName == "saas")
-                    context.Response.StatusCode = 404;
+                {
+                    var service = ((string)(routeValues["Segment1"]));
+                    var handler = OAuthHandlerFactory.Create(service);
+                    if (handler != null)
+                        handler.ProcessRequest(context);
+                }
                 else
                 {
                     if (controllerName == "_authenticate")
@@ -1207,6 +1212,636 @@ namespace MyCompany.Services
                 }
             }
             return new StreamWriter(output);
+        }
+    }
+
+    public partial class FacebookOAuthHandler : FacebookOAuthHandlerBase
+    {
+    }
+
+    public partial class FacebookOAuthHandlerBase : OAuthHandler
+    {
+
+        private JObject _userObj;
+
+        protected override string Scope
+        {
+            get
+            {
+                return (("email" + Config["Scope"])).Trim();
+            }
+        }
+
+        protected virtual string GetVersion()
+        {
+            var version = Config["Version"];
+            if (string.IsNullOrEmpty(version))
+                version = "v2.8";
+            return version;
+        }
+
+        public override string GetHandlerName()
+        {
+            return "Facebook";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            return string.Format("https://www.facebook.com/{0}/dialog/oauth?response_type=code&client_id={1}&redirect_uri={2}&scope={3}&state={4}", GetVersion(), Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(Scope), Uri.EscapeDataString(GetState()));
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            return WebRequest.Create(string.Format("https://graph.facebook.com/{0}/oauth/access_token?client_id={1}&redirect_uri={2}&client_secret={3}&code={4}", GetVersion(), Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Config.ClientSecret, code));
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create((("https://graph.facebook.com/" + GetVersion()) + ("/" + method)));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        public override string GetUserName()
+        {
+            _userObj = Query(("me?fields=" + ProfileFieldList()), false);
+            return ((string)(_userObj["email"]));
+        }
+
+        public override string GetUserImageUrl(MembershipUser user)
+        {
+            return ("https://graph.facebook.com/" + (GetVersion() + ("/" + (((string)(_userObj["id"])) + "/picture"))));
+        }
+
+        protected override void HandleError(HttpContext context)
+        {
+            if (context.Request.QueryString["error_reason"] == "user_denied")
+                context.Response.Redirect(ApplicationServices.HomePageUrl);
+            base.HandleError(context);
+        }
+
+        protected virtual string ProfileFieldList()
+        {
+            var fieldList = new List<string>();
+            var s = Config["Profile Field List"];
+            if (!string.IsNullOrEmpty(s))
+                fieldList.AddRange(Regex.Split(s, "\\s*\\,\\s*"));
+            if (!fieldList.Contains("email"))
+                fieldList.Insert(0, "email");
+            return string.Join(",", fieldList.ToArray());
+        }
+    }
+
+    public partial class GoogleOAuthHandler : GoogleOAuthHandlerBase
+    {
+    }
+
+    public partial class GoogleOAuthHandlerBase : OAuthHandler
+    {
+
+        private JObject _userObj;
+
+        protected override string Scope
+        {
+            get
+            {
+                var defaultScope = (("email " + Config["Scope"])).Trim();
+                if (StoreToken)
+                    defaultScope = (defaultScope + " https://www.googleapis.com/auth/admin.directory.group.readonly");
+                return defaultScope;
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "Google";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            var accessType = "online";
+            if (StoreToken)
+                accessType = "offline";
+            var authUrl = string.Format("https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={0}&redirect_uri={1}&scope={2}&state={3}&access_type={4}&prompt=select_account", Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(Scope), Uri.EscapeDataString(GetState()), accessType);
+            return authUrl;
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var request = WebRequest.Create("https://www.googleapis.com/oauth2/v4/token");
+            request.Method = "POST";
+            var codeType = "code";
+            if (refresh)
+                codeType = "access_token";
+            var body = string.Format("{0}={1}&client_id={2}&client_secret={3}&redirect_uri={4}&grant_type=authorization_code", codeType, code, Config.ClientId, Config.ClientSecret, Uri.EscapeDataString(BuildRedirectUri()));
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create(("https://www.googleapis.com/" + method));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        public override string GetUserName()
+        {
+            _userObj = Query("userinfo/v2/me", false);
+            return ((string)(_userObj["email"]));
+        }
+
+        public override List<string> GetUserRoles(MembershipUser user)
+        {
+            var roles = base.GetUserRoles(user);
+            var result = Query(("admin/directory/v1/groups?userKey=" + ((string)(_userObj["id"]))), true);
+            if (result != null)
+                foreach (var group in ((JArray)(result["groups"])))
+                    roles.Add(((string)(group["name"])));
+            else
+                throw new Exception("Unable to get roles.");
+            return roles;
+        }
+
+        public override string GetUserImageUrl(MembershipUser user)
+        {
+            return ((string)(_userObj["picture"]));
+        }
+    }
+
+    public partial class MSGraphOAuthHandler : MSGraphOAuthHandlerBase
+    {
+    }
+
+    public partial class MSGraphOAuthHandlerBase : OAuthHandler
+    {
+
+        private string _userID = null;
+
+        private string _tenantID;
+
+        protected override string Scope
+        {
+            get
+            {
+                var sc = Config["Scope"];
+                if (StoreToken)
+                    sc = (sc + " https://graph.microsoft.com/.default");
+                else
+                    sc = (sc + " User.Read");
+                return sc.Trim();
+            }
+        }
+
+        public virtual string TenantID
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_tenantID))
+                {
+                    _tenantID = Config["Tenant ID"];
+                    if (string.IsNullOrEmpty(_tenantID))
+                        _tenantID = "common";
+                }
+                return _tenantID;
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "MSGraph";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            var sb = new StringBuilder("https://login.microsoftonline.com/");
+            sb.Append(TenantID);
+            if (!StoreToken)
+                sb.Append("/oauth2/v2.0/authorize");
+            else
+                sb.Append("/adminconsent");
+            sb.AppendFormat("?client_id={0}&redirect_uri={1}&state={2}", Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(GetState()));
+            if (!StoreToken)
+            {
+                sb.Append("&response_type=code&response_mode=query&scope=");
+                sb.Append(Uri.EscapeDataString(Scope));
+            }
+            return sb.ToString();
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var request = WebRequest.Create(string.Format("https://login.microsoftonline.com/{0}/oauth2/v2.0/token", TenantID));
+            request.Method = "POST";
+            var body = string.Format("client_id={0}&redirect_uri={1}&client_secret={2}&scope={3}", Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Config.ClientSecret, Uri.EscapeDataString(Scope));
+            if (refresh)
+                body = (body + ("&grant_type=refresh_token&refresh_token=" + code));
+            else
+            {
+                if (!StoreToken)
+                    body = (body + ("&grant_type=authorization_code&code=" + code));
+                else
+                    body = (body + "&grant_type=client_credentials");
+            }
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create(("https://graph.microsoft.com/v1.0/" + method));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        protected override bool RefreshTokens(bool useSystemToken)
+        {
+            if (!useSystemToken)
+                return base.RefreshTokens(useSystemToken);
+            var success = GetAccessTokens("True", false);
+            if (success)
+                StoreTokens(Tokens, true);
+            return success;
+        }
+
+        public override string GetUserName()
+        {
+            var userObj = Query("me", false);
+            _userID = ((string)(userObj["id"]));
+            return ((string)(userObj["userPrincipalName"]));
+        }
+
+        public override List<string> GetUserRoles(MembershipUser user)
+        {
+            var roles = base.GetUserRoles(user);
+            var roleObj = Query((("users/" + _userID) + "/memberOf"), true);
+            if (roleObj != null)
+                foreach (var role in ((JArray)(roleObj["value"])))
+                    roles.Add(((string)(role["displayName"])));
+            return roles;
+        }
+
+        protected override string GetAuthCode(HttpRequest request)
+        {
+            if (StoreToken)
+                return request.QueryString["admin_consent"];
+            return base.GetAuthCode(request);
+        }
+
+        public override void SetUserAvatar(MembershipUser user)
+        {
+        }
+    }
+
+    public partial class LinkedInOAuthHandler : LinkedInOAuthHandlerBase
+    {
+    }
+
+    public partial class LinkedInOAuthHandlerBase : OAuthHandler
+    {
+
+        private JObject _userObj;
+
+        protected override string Scope
+        {
+            get
+            {
+                return (("r_liteprofile r_emailaddress " + Config["Scope"])).Trim();
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "LinkedIn";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            return string.Format("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={0}&redirect_uri={1}&state={2}&scope={3}", Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(GetState()), Uri.EscapeDataString(Scope));
+        }
+
+        public override string GetUserName()
+        {
+            var obj = Query("emailAddress?q=members&projection=(elements*(handle~))", false);
+            _userObj = Query("me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))", false);
+            return ((string)(obj["elements"][0]["handle~"]["emailAddress"]));
+        }
+
+        public override string GetUserImageUrl(MembershipUser user)
+        {
+            return ((string)(_userObj["profilePicture"]["displayImage~"]["elements"].Last["identifiers"][0]["identifier"]));
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var request = WebRequest.Create("https://www.linkedin.com/oauth/v2/accessToken");
+            request.Method = "POST";
+            var codeType = "code";
+            if (refresh)
+                codeType = "access_token";
+            var body = string.Format("{0}={1}&client_id={2}&client_secret={3}&redirect_uri={4}&grant_type=authorization_code", codeType, code, Config.ClientId, Config.ClientSecret, Uri.EscapeDataString(BuildRedirectUri()));
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create(("https://api.linkedin.com/v2/" + method));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+    }
+
+    public partial class SharePointOAuthHandler : SharePointOAuthHandlerBase
+    {
+    }
+
+    public class SharePointOAuthHandlerBase : OAuthHandler
+    {
+
+        private string _realm;
+
+        private string _showNavigation;
+
+        private JObject _userObj;
+
+        protected override string Scope
+        {
+            get
+            {
+                var sc = Config["Scope"];
+                if (StoreToken)
+                    sc = (sc + " Web.Read AllProfiles.Read");
+                return sc.Trim();
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "SharePoint";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            var version = Config["Version"];
+            if (string.IsNullOrEmpty(version))
+                version = "15";
+            var authUrl = string.Format("{0}/_layouts/{1}/OAuthAuthorize.aspx?client_id={2}&scope={3}&response_type=code&redirect_uri={4}&state={5}", ClientUri, version, Config.ClientId, Uri.EscapeDataString(Scope), Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(GetState()));
+            return authUrl;
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            if (string.IsNullOrEmpty(_realm))
+            {
+                var getRealm = WebRequest.Create((ClientUri + "/_vti_bin/client.svc"));
+                getRealm.Headers.Add(HttpRequestHeader.Authorization, "Bearer");
+                WebResponse response;
+                try
+                {
+                    response = getRealm.GetResponse();
+                }
+                catch (WebException ex)
+                {
+                    response = ex.Response;
+                }
+                var wwwAuthentication = response.Headers["WWW-Authenticate"];
+                var realmMatch = Regex.Match(wwwAuthentication, "Bearer realm=\"(.+?)\"");
+                _realm = realmMatch.Groups[1].Value;
+            }
+            var request = WebRequest.Create((("https://accounts.accesscontrol.windows.net/" + _realm) + "/tokens/OAuth/2"));
+            request.Method = "POST";
+            var grantType = "authorization_code";
+            var codeName = "code";
+            if (refresh)
+            {
+                grantType = "refresh_token";
+                codeName = grantType;
+            }
+            var body = string.Format("grant_type={0}&client_id={1}%40{2}&client_secret={3}&{4}={5}&redirect_uri={6}&resource=00000003-0000-0ff1-ce00-000000000000%2F{7}%40{2}", grantType, Config.ClientId, _realm, Uri.EscapeDataString(Config.ClientSecret), codeName, code, Uri.EscapeDataString(BuildRedirectUri()), ClientUri.Substring(8));
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create(string.Format("{0}/_api/{1}", ClientUri, method));
+            ((HttpWebRequest)(request)).Accept = "application/json;odata=verbose";
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        public override JObject Query(string method, bool useSystemToken)
+        {
+            var result = base.Query(method, useSystemToken);
+            if ((result == null) || (result["d"] == null))
+                return result;
+            return ((JObject)(result["d"]));
+        }
+
+        public override string GetState()
+        {
+            return ((base.GetState() + "|showNavigation=") + _showNavigation);
+        }
+
+        public override void SetState(string state)
+        {
+            base.SetState(state);
+            foreach (var part in state.Split('|'))
+            {
+                var ps = part.Split('=');
+                if (ps[0] == "showNavigation")
+                    _showNavigation = ps[1];
+            }
+        }
+
+        public override string GetUserName()
+        {
+            _userObj = Query("Web/CurrentUser", false);
+            return ((string)(_userObj["LoginName"])).Split('|').Last();
+        }
+
+        public override List<string> GetUserRoles(MembershipUser user)
+        {
+            var roles = base.GetUserRoles(user);
+            var groups = Query(("Web/GetUserById(" + (((string)(_userObj["Id"])) + ")/Groups")), !StoreToken);
+            if (groups == null)
+                throw new Exception("Unable to get roles.");
+            foreach (var group in ((JArray)(groups["results"])).Children())
+            {
+                var name = ((string)(group["LoginName"]));
+                if (!name.StartsWith("SharingLinks."))
+                    roles.Add(name);
+            }
+            return roles;
+        }
+
+        public override void RestoreSession(HttpContext context)
+        {
+            if (string.IsNullOrEmpty(_showNavigation))
+                _showNavigation = context.Request.QueryString["showNavigation"];
+            var session = context.Request.QueryString["session"];
+            if (!string.IsNullOrEmpty(session) && (session == "new"))
+                ApplicationServices.Current.UserLogout();
+            else
+            {
+                base.RestoreSession(context);
+                if (!StoreToken && context.User.Identity.IsAuthenticated)
+                    RedirectToStartPage(context);
+            }
+        }
+
+        public override void RedirectToStartPage(HttpContext context)
+        {
+            var connector = "?";
+            if (StartPage.Contains("?"))
+                connector = "&";
+            StartPage = ((StartPage + (connector + "_showNavigation=")) + _showNavigation);
+            base.RedirectToStartPage(context);
+        }
+
+        public override string GetUserImageUrl(MembershipUser user)
+        {
+            var info = Query(string.Format("SP.UserProfiles.PeopleManager/GetPropertiesFor(accountName=@v)?@v='{0}'&$select=PictureUrl", HttpUtility.UrlEncode(((string)(_userObj["LoginName"])))), true);
+            return ((string)(info["PictureUrl"]));
+        }
+    }
+
+    public partial class WindowsLiveOAuthHandler : WindowsLiveOAuthHandlerBase
+    {
+    }
+
+    public partial class WindowsLiveOAuthHandlerBase : OAuthHandler
+    {
+
+        protected override string Scope
+        {
+            get
+            {
+                return (("wl.emails " + Config["Scope"])).Trim();
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "WindowsLive";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            return string.Format("https://login.live.com/oauth20_authorize.srf?client_id={0}&scope={1}&response_type=code&redirect_uri={2}&state={3}", Config.ClientId, Uri.EscapeDataString(Scope), Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(GetState()));
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var request = WebRequest.Create("https://login.live.com/oauth20_token.srf");
+            request.Method = "POST";
+            var codeName = "code";
+            var grantType = "authorization_code";
+            if (refresh)
+            {
+                codeName = "refresh_token";
+                grantType = codeName;
+            }
+            var body = string.Format("client_id={0}&redirect_uri={1}&client_secret={2}&{3}={4}&grant_type={5}", Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Config.ClientSecret, codeName, code, grantType);
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var version = Config["Version"];
+            if (string.IsNullOrEmpty(version))
+                version = "v5.0";
+            return WebRequest.Create(string.Format("https://apis.live.net/{0}/{1}?access_token={2}", version, method, token));
+        }
+
+        public override string GetUserName()
+        {
+            var userObj = Query("me", false);
+            return ((string)(userObj["emails"]["account"]));
+        }
+    }
+
+    public partial class IdentityServerOAuthHandler : IdentityServerOAuthHandlerBase
+    {
+    }
+
+    public partial class IdentityServerOAuthHandlerBase : OAuthHandler
+    {
+
+        protected override string Scope
+        {
+            get
+            {
+                var configScope = Config["Scope"];
+                if (!string.IsNullOrEmpty(configScope))
+                    return configScope;
+                return "openid email";
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "IdentityServer";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            return string.Format("{0}/connect/authorize?response_type=code&client_id={1}&redirect_uri={2}&scope={3}&state={4}", ClientUri, Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(Scope), Uri.EscapeDataString(GetState()));
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var request = WebRequest.Create((ClientUri + "/connect/token"));
+            request.Method = "POST";
+            var codeName = "code";
+            var grantType = "authorization_code";
+            if (refresh)
+            {
+                codeName = "refresh_token";
+                grantType = codeName;
+            }
+            var body = string.Format("client_id={0}&redirect_uri={1}&client_secret={2}&{3}={4}&grant_type={5}", Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Config.ClientSecret, codeName, code, grantType);
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create(string.Format("{0}/connect/{1}", ClientUri, method));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        public override string GetUserName()
+        {
+            var userObj = Query("userinfo", false);
+            return ((string)(userObj["email"]));
         }
     }
 }

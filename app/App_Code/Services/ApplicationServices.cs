@@ -118,6 +118,14 @@ namespace MyCompany.Services
     public class GetControllerListServiceRequestHandler : ServiceRequestHandler
     {
 
+        public override bool RequiresAuthentication
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public override object HandleRequest(DataControllerService service, JObject args)
         {
             var jsonArray = new StringBuilder("[");
@@ -140,6 +148,14 @@ namespace MyCompany.Services
 
     public class CommitServiceRequestHandler : ServiceRequestHandler
     {
+
+        public override bool RequiresAuthentication
+        {
+            get
+            {
+                return true;
+            }
+        }
 
         public override object HandleRequest(DataControllerService service, JObject args)
         {
@@ -350,6 +366,34 @@ namespace MyCompany.Services
         public override object HandleRequest(DataControllerService service, JObject args)
         {
             return service.GetSurvey(((string)(args["name"])));
+        }
+    }
+
+    public class DnnOAuthServiceRequestHandler : ServiceRequestHandler
+    {
+
+        public override string[] AllowedMethods
+        {
+            get
+            {
+                return new string[] {
+                        "GET",
+                        "POST"};
+            }
+        }
+
+        public override object HandleRequest(DataControllerService service, JObject args)
+        {
+            var handler = new DnnOAuthHandler();
+            handler.ProcessRequest(HttpContext.Current);
+            return null;
+        }
+
+        public override object HandleException(JObject args, Exception ex)
+        {
+            if (ex is ThreadAbortException)
+                throw ex;
+            return base.HandleException(args, ex);
         }
     }
 
@@ -1544,6 +1588,14 @@ namespace MyCompany.Services
         public static string OAuthGetAuthorizationUrl(string provider, string state)
         {
             string authorizationUrl = null;
+            Type oauthHandlerType = null;
+            if (OAuthHandlerFactory.Handlers.TryGetValue(provider.ToLower(), out oauthHandlerType))
+            {
+                var handler = ((OAuthHandler)(Activator.CreateInstance(oauthHandlerType)));
+                handler.StartPage = Create().UserHomePageUrl();
+                handler.AppState = state;
+                authorizationUrl = handler.GetAuthorizationUrl();
+            }
             return authorizationUrl;
         }
 
@@ -2011,6 +2063,8 @@ namespace MyCompany.Services
             RequestHandlers.Add("listallpermalinks", new ListAllPermalinksServiceRequestHandler());
             RequestHandlers.Add("getsurvey", new GetSurveyServiceRequestHandler());
             RequestHandlers.Add("addon", new AddonServiceRequestHandler());
+            RequestHandlers.Add("v2", new V2ServiceRequestHandler());
+            OAuthHandlerFactory.Handlers.Add("dnn", typeof(DnnOAuthHandler));
             RequestHandlers.Add("getidentity", new GetIdentityServiceRequestHandler());
             RequestHandlers.Add("getcontrollerlist", new GetControllerListServiceRequestHandler());
             RequestHandlers.Add("commit", new CommitServiceRequestHandler());
@@ -2980,6 +3034,9 @@ namespace MyCompany.Services
 
         public virtual void CreateStandardMembershipAccounts()
         {
+            // Create a separate code file with a definition of the partial class ApplicationServices overriding
+            // this method to prevent automatic registration of 'admin', 'user', and 'offline'. Do not change this file directly.
+            RegisterStandardMembershipAccounts();
         }
 
         public virtual bool RequiresAuthentication(HttpRequest request)
@@ -3000,6 +3057,13 @@ namespace MyCompany.Services
 
         public virtual void RedirectToLoginPage()
         {
+            var handler = OAuthHandlerFactory.GetActiveHandler();
+            if ((handler != null) && !HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                handler.StartPage = HttpContext.Current.Request.Url.AbsolutePath;
+                handler.RedirectToLoginPage();
+                return;
+            }
             FormsAuthentication.RedirectToLoginPage();
         }
 
@@ -3060,7 +3124,26 @@ namespace MyCompany.Services
                 settings["membership"] = new JObject();
             var userKey = string.Empty;
             var allow2FA = false;
-            settings["membership"]["enabled"] = false;
+            MembershipUser user = null;
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+                user = Membership.GetUser();
+            if (user != null)
+            {
+                userKey = Convert.ToString(user.ProviderUserKey);
+                allow2FA = Convert.ToBoolean(SettingsProperty("server.2FA.enabled", true));
+                var userAuthData = UserAuthenticationData(user.UserName);
+                if (userAuthData != null)
+                {
+                    var source = userAuthData["Source"];
+                    if (source != null)
+                    {
+                        var handler = OAuthHandlerFactory.Create(Convert.ToString(source));
+                        if (handler != null)
+                            settings["membership"]["profile"] = handler.GetUserProfile();
+                        allow2FA = false;
+                    }
+                }
+            }
             if (allow2FA)
                 settings["membership"]["2FA"] = true;
             if (Convert.ToBoolean(SettingsProperty("server.2FA.disableLoginPassword", false)))
@@ -3098,6 +3181,7 @@ namespace MyCompany.Services
                 ((JObject)(settings["client"])).Remove("importScripts");
             }
             settings.AddFirst(new JProperty("version", ApplicationServices.Version));
+            settings.Remove("odp");
             if (HttpContext.Current.Request.IsLocal)
             {
                 var appStudio = ((JObject)(HttpContext.Current.Cache["appstudio.json"]));
@@ -3336,7 +3420,18 @@ namespace MyCompany.Services
                 }
             }
             if (path == FormsAuthentication.LoginUrl)
+            {
                 requiresAuthorization = false;
+                if (!isAuthenticated && (HttpContext.Current.Request.QueryString["_autoLogin"] != "false" && (HttpContext.Current.Request.Cookies[".ID_TOKEN"] == null)))
+                {
+                    var handler = OAuthHandlerFactory.CreateAutoLogin();
+                    if (handler != null)
+                    {
+                        ApplicationServices.SetCookie(".ID_PROVIDER", handler.GetHandlerName());
+                        requiresAuthorization = true;
+                    }
+                }
+            }
             return requiresAuthorization;
         }
 
@@ -3344,6 +3439,32 @@ namespace MyCompany.Services
         {
             if (AuthorizationIsSupported)
             {
+                // Confirm existence of schema version
+                try
+                {
+                    var css = ConfigurationManager.ConnectionStrings["LocalSqlServer"];
+                    if (css == null)
+                        css = ConfigurationManager.ConnectionStrings["MyCompany"];
+                    if ((css != null) && (css.ProviderName == "System.Data.SqlClient"))
+                    {
+                        var count = 0;
+                        using (var sql = new SqlText("select count(*) from dbo.aspnet_SchemaVersions where Feature in ('common', 'membership', 'role manager')", css.Name))
+                            count = ((int)(sql.ExecuteScalar()));
+                        if (count == 0)
+                        {
+                            using (var sql = new SqlText("insert into dbo.aspnet_SchemaVersions values ('common', 1, 1)", css.Name))
+                                sql.ExecuteNonQuery();
+                            using (var sql = new SqlText("insert into dbo.aspnet_SchemaVersions values ('membership', 1, 1)", css.Name))
+                                sql.ExecuteNonQuery();
+                            using (var sql = new SqlText("insert into dbo.aspnet_SchemaVersions values ('role manager', 1, 1)", css.Name))
+                                sql.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    // Exceptions are ignored if app uses custom membership.
+                }
                 // Create standard 'admin' and 'user' accounts.
                 var admin = Membership.GetUser("admin");
                 if ((admin != null) && admin.IsLockedOut)

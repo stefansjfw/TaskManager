@@ -265,6 +265,13 @@ namespace MyCompany.Handlers
             string bodyAttributes = null;
             if (contentInfo.TryGetValue("BodyAttributes", out bodyAttributes))
                 _bodyAttributes.Parse(bodyAttributes);
+            if (!ApplicationServices.UserIsAuthorizedToAccessResource(HttpContext.Current.Request.Path, _bodyAttributes["data-authorize-roles"]))
+            {
+                var requestPath = Request.Path.Substring(1);
+                if (!((WorkflowRegister.IsEnabled || WorkflowRegister.Allows(requestPath))))
+                    app.RedirectToLoginPage();
+            }
+            _bodyAttributes.Remove("data-authorize-roles");
             var classAttr = _bodyAttributes["class"];
             if (string.IsNullOrEmpty(classAttr))
                 classAttr = string.Empty;
@@ -492,6 +499,32 @@ namespace MyCompany.Handlers
         {
             if (placeholder == "membership-bar")
             {
+                var mb = new MembershipBar()
+                {
+                    ID = "mb"
+                };
+                if (attributes["data-display-remember-me"] == "false")
+                    mb.DisplayRememberMe = false;
+                if (attributes["data-remember-me-set"] == "true")
+                    mb.RememberMeSet = true;
+                if (attributes["data-display-password-recovery"] == "false")
+                    mb.DisplayPasswordRecovery = false;
+                if (attributes["data-display-sign-up"] == "false")
+                    mb.DisplaySignUp = false;
+                if (attributes["data-display-my-account"] == "false")
+                    mb.DisplayMyAccount = false;
+                if (attributes["data-display-help"] == "false")
+                    mb.DisplayHelp = false;
+                if (attributes["data-display-login"] == "false")
+                    mb.DisplayLogin = false;
+                if (!string.IsNullOrEmpty(attributes["data-idle-user-timeout"]))
+                    mb.IdleUserTimeout = Convert.ToInt32(attributes["data-idle-user-timeout"]);
+                if (attributes["data-enable-history"] == "true")
+                    mb.EnableHistory = true;
+                if (attributes["data-enable-permalinks"] == "true")
+                    mb.EnablePermalinks = true;
+                container.Add(mb);
+                return true;
             }
             if (placeholder == "menu-bar")
             {

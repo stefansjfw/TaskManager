@@ -1666,7 +1666,7 @@ function UploadSuccess(key, message) {
         {
             get
             {
-                return true;
+                return false;
             }
         }
 

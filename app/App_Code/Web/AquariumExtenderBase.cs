@@ -252,6 +252,8 @@ namespace MyCompany.Web
             scripts.Add(CreateScriptReference(("~/js/daf/daf" + fileType)));
             scripts.Add(CreateScriptReference(("~/js/daf/daf-odp" + fileType)));
             scripts.Add(CreateScriptReference(("~/js/daf/daf-ifttt" + fileType)));
+            if (EnableCombinedScript || !uiFramework)
+                scripts.Add(CreateScriptReference(("~/js/daf/daf-membership" + fileType)));
             ConfigureScripts(scripts);
             if (uiFramework)
             {

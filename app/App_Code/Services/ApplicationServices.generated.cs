@@ -18,7 +18,6 @@ namespace MyCompany.Services
             AquariumExtenderBase.EnableCombinedScript = releaseMode;
             ApplicationServices.EnableMinifiedCss = releaseMode;
             ApplicationServices.EnableCombinedCss = releaseMode;
-            ApplicationServicesBase.AuthorizationIsSupported = false;
             BlobFactoryConfig.Initialize();
         }
     }

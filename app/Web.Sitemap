@@ -6,5 +6,6 @@
     <siteMapNode title="Categories" description="View Categories" url="~/pages/categories" />
     <siteMapNode title="Locations" description="View Locations" url="~/pages/locations" />
     <siteMapNode title="Attachments" description="View Attachments" url="~/pages/attachments" />
+    <siteMapNode title="^MembershipPath^Membership^MembershipPath^" description="^MembershipDesc^User and role manager^MembershipDesc^" url="~/pages/membership" roles="Administrators" />
   </siteMapNode>
 </siteMap>

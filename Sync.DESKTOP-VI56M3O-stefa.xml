@@ -192,6 +192,114 @@ WHERE TaskID = @TaskID</Script>
         <field name="Attachments" />
       </move>
     </c>
+    <c y="NodeSet" t="2024-04-18T08:25:25.1662679Z">
+      <controller name="Tasks" />
+      <field name="Creator" />
+      <update>
+        <ItemsStyle>UserNameLookup</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:25:32.2958793Z">
+      <controller name="Tasks" />
+      <field name="Owner" />
+      <update>
+        <ItemsStyle>UserNameLookup</ItemsStyle>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:26:40.8239475Z">
+      <controller name="Tasks" />
+      <insert type="rule">
+        <Type>Sql</Type>
+        <CommandName>Insert</CommandName>
+        <Phase>Before</Phase>
+        <Script>SET @Creator = @BusinessRules_UserName
+IF (@Owner IS NULL)
+    SET @Owner = @BusinessRules_UserName</Script>
+      </insert>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:01.6347340Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Address" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:01.6570505Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="City" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:01.6738836Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="State" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:01.6909228Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="PostalCode" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:01.7081872Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <dataField fieldName="Country" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:11.7907401Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Address" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:11.8097769Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="City" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:11.8289246Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="State" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:11.8483013Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="PostalCode" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:27:11.8661141Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <dataField fieldName="Country" />
+      <delete />
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:31:03.0050537Z">
+      <controller name="Tasks" />
+      <view id="createForm1" />
+      <dataField fieldName="Creator" />
+      <update>
+        <Hidden>true</Hidden>
+        <DataViewShowInSummary>false</DataViewShowInSummary>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:32:37.8818599Z">
+      <controller name="Tasks" />
+      <view id="grid1" />
+      <update>
+        <FilterExpression>Completed is null AND (Owner = @BusinessRules_UserName OR Creator = @BusinessRules_UserName)</FilterExpression>
+      </update>
+    </c>
+    <c y="NodeSet" t="2024-04-18T08:32:51.7268727Z">
+      <controller name="Tasks" />
+      <view id="gridAllTasks" />
+      <update>
+        <FilterExpression>Owner = @BusinessRules_UserName OR Creator = @BusinessRules_UserName</FilterExpression>
+      </update>
+    </c>
   </log>
   <log type="Application"></log>
 </logs>

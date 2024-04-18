@@ -2514,6 +2514,17 @@ offline_access:
                 if (links != null)
                 {
                     var oauthLinkName = "oauth2";
+                    var appIdentity = new AppIdentityOAuthHandler().LookupConfigObject();
+                    servicesUri = "~/oauth2/v2/services";
+                    var providerUri = Convert.ToString(appIdentity["Client Uri"]);
+                    if (!string.IsNullOrEmpty(providerUri))
+                    {
+                        oauthLinkName = (oauthLinkName + "-self");
+                        if (!providerUri.EndsWith("/"))
+                            providerUri = (providerUri + "/");
+                        options.AddLink("oauth2", "GET", links, new Uri(new Uri(providerUri), "oauth2/v2").ToString());
+                        servicesUri = new Uri(new Uri(providerUri), "oauth2/v2/services").ToString();
+                    }
                     if (RESTfulResource.IsOAuth)
                         options.OAuthHypermedia(links, result);
                     else

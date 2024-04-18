@@ -1597,7 +1597,15 @@ namespace MyCompany.Data
                 return true;
             if (AccessControlList.Current.Enabled)
                 return true;
+            if (controller.Equals(ApplicationServicesBase.SiteContentControllerName, StringComparison.OrdinalIgnoreCase) && !UserIsInRole(ApplicationServices.SiteContentEditors))
+                return false;
             var allow = true;
+            var executionFilePath = context.Request.AppRelativeCurrentExecutionFilePath;
+            if (!executionFilePath.StartsWith("~/appservices/", StringComparison.OrdinalIgnoreCase) && !executionFilePath.Equals("~/charthost.aspx", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!context.User.Identity.IsAuthenticated && !controller.StartsWith("aspnet_"))
+                    allow = (access == "Public");
+            }
             return allow;
         }
 

@@ -278,7 +278,7 @@ namespace MyCompany.Web
                         var description = ((string)(props["Description"].GetValue(data)));
                         var url = ((string)(props["Url"].GetValue(data)));
                         string cssClass = null;
-                        string roles = null;
+                        var roles = "*";
                         var roleList = ((ArrayList)(props["Roles"].GetValue(data)));
                         if (roleList.Count > 0)
                             roles = string.Join(",", ((string[])(roleList.ToArray(typeof(string)))));
@@ -447,7 +447,7 @@ namespace MyCompany.Web
                         var roleList = ((ArrayList)(props["Roles"].GetValue(data)));
                         if (roleList.Count > 0)
                             roles = string.Join(",", ((string[])(roleList.ToArray(typeof(string)))));
-                        var resourceAuthorized = true;
+                        var resourceAuthorized = ((isPublic || (roles == "*")) || ApplicationServices.UserIsAuthorizedToAccessResource(url, roles));
                         if (resourceAuthorized)
                         {
                             if (first)

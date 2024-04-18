@@ -33,6 +33,14 @@ namespace MyCompany.Services
             RegisterREST();
             base.RegisterServices();
             ServicePointManager.SecurityProtocol = (ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls12);
+            OAuthHandlerFactory.Handlers.Add("appidentity", typeof(AppIdentityOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("facebook", typeof(FacebookOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("google", typeof(GoogleOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("msgraph", typeof(MSGraphOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("linkedin", typeof(LinkedInOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("windowslive", typeof(WindowsLiveOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("sharepoint", typeof(SharePointOAuthHandler));
+            OAuthHandlerFactoryBase.Handlers.Add("identityserver", typeof(IdentityServerOAuthHandler));
         }
 
         public virtual void RegisterREST()

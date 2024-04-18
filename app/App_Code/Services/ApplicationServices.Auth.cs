@@ -126,6 +126,9 @@ namespace MyCompany.Services
         public virtual UserTicket CreateTicket(MembershipUser user, string refreshToken, int accessTokenDuration, int refreshTokenDuration)
         {
             var userData = string.Empty;
+            var handler = OAuthHandlerFactory.GetActiveHandler();
+            if (handler != null)
+                userData = ("OAUTH:" + handler.GetHandlerName());
             var accessTicket = new FormsAuthenticationTicket(1, user.UserName, DateTime.Now, DateTime.Now.AddMinutes(accessTokenDuration), false, userData);
             if (string.IsNullOrEmpty(refreshToken))
             {
@@ -176,7 +179,93 @@ namespace MyCompany.Services
 
         public virtual MembershipUser AccessTokenToAppIdentityUser(string accessToken)
         {
-            return null;
+            if (string.IsNullOrEmpty(accessToken) || accessToken.Length != RESTfulResourceConfiguration.AccessTokenSize)
+                return null;
+            var identityHandler = new AppIdentityOAuthHandler();
+            var identityConfig = identityHandler.LookupConfigObject();
+            // If the appidentity is not defined then the access_token cannot be verified.
+            if (identityConfig["Client Uri"] == null)
+                return null;
+            // If the database is shared, then the access_token cannot be verfied.
+            if (Convert.ToBoolean(identityConfig["Shared Database"]))
+                return null;
+            var clientUri = Convert.ToString(identityConfig["Client Uri"]);
+            var localClientUri = Convert.ToString(identityConfig["Local Client Uri"]);
+            if (!string.IsNullOrEmpty(localClientUri) && HttpContext.Current.Request.IsLocal)
+                clientUri = localClientUri;
+            var userInfoUri = new Uri(new Uri(clientUri), "oauth2/v2/userinfo");
+            var userInfoParams = new JObject();
+            userInfoParams["auth"] = ("Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", identityConfig["Client Id"], identityConfig["Client Secret"]))));
+            var userInfoData = Encoding.UTF8.GetBytes(userInfoParams.ToString());
+            try
+            {
+                var userInfoRequest = WebRequest.Create(userInfoUri);
+                userInfoRequest.Method = "POST";
+                userInfoRequest.ContentType = "application/json";
+                userInfoRequest.ContentLength = userInfoData.Length;
+                userInfoRequest.Headers["Authorization"] = ("Bearer " + accessToken);
+                string userInfo = null;
+                using (var stream = userInfoRequest.GetRequestStream())
+                {
+                    stream.Write(userInfoData, 0, userInfoData.Length);
+                    var response = userInfoRequest.GetResponse();
+                    using (var sr = new StreamReader(response.GetResponseStream()))
+                        userInfo = sr.ReadToEnd();
+                }
+                identityHandler.Config = new SaasConfiguration(string.Empty);
+                var claims = TextUtility.ParseYamlOrJson(userInfo);
+                identityHandler.Claims = claims;
+                var user = identityHandler.SyncUser();
+                // setup the request context
+                HttpContext.Current.Items["OAuth2_scope"] = Convert.ToString(claims["scope"]);
+                RESTfulResource.IdToken = claims;
+                // create a shadow access_token
+                var ticket = CreateTicket(user, null);
+                var shadowAccessToken = new JObject();
+                shadowAccessToken["date"] = DateTime.UtcNow.ToString("o");
+                shadowAccessToken["issuer"] = userInfoUri.ToString();
+                shadowAccessToken["scope"] = claims["scope"];
+                shadowAccessToken["username"] = user.UserName;
+                shadowAccessToken["timezone"] = claims["zoneinfo"];
+                shadowAccessToken["locale"] = claims["locale"];
+                shadowAccessToken["token"] = ticket.AccessToken;
+                shadowAccessToken["token_type"] = "access";
+                shadowAccessToken["token_issued"] = shadowAccessToken["date"];
+                shadowAccessToken["token_remote_addr"] = RemoteAddress;
+                shadowAccessToken["id_token"] = claims;
+                foreach (var filename in AppDataSearch("sys/oauth2/tokens/%", "%.json", 5, DateTime.UtcNow.AddMinutes((-1 * GetAccessTokenDuration("server.rest.authorization.oauth2.accessTokenDuration")))))
+                    AppDataDelete(filename);
+                AppDataWriteAllText(string.Format("sys/oauth2/tokens/{0}/access/{1}.json", user.UserName, accessToken), shadowAccessToken.ToString());
+                return user;
+            }
+            catch (Exception ex)
+            {
+                if (ex is WebException)
+                {
+                    var errorResponse = ((WebException)(ex)).Response;
+                    if (errorResponse != null)
+                    {
+                        JObject err = null;
+                        using (var sr = new StreamReader(errorResponse.GetResponseStream()))
+                            err = TextUtility.ParseYamlOrJson(sr.ReadToEnd());
+                        var errors = err.SelectToken("error.errors");
+                        if (errors is JArray)
+                        {
+                            var authError = new JObject();
+                            ((JArray)(errors)).AddFirst(authError);
+                            authError["id"] = Guid.NewGuid().ToString();
+                            authError["reason"] = "unauthorized";
+                            authError["message"] = string.Format("Unable to confirm the user identity at {0}", userInfoUri);
+                        }
+                        // report the native error
+                        var response = HttpContext.Current.Response;
+                        response.ContentType = errorResponse.ContentType;
+                        response.Write(err.ToString());
+                        response.End();
+                    }
+                }
+                return null;
+            }
         }
 
         public virtual bool UserLogin(string username, string password, bool createPersistentCookie)
@@ -208,6 +297,12 @@ namespace MyCompany.Services
         public virtual void UserLogout()
         {
             FormsAuthentication.SignOut();
+            if (ApplicationServices.IsSiteContentEnabled)
+            {
+                var handler = OAuthHandlerFactory.GetActiveHandler();
+                if (handler != null)
+                    handler.SignOut();
+            }
         }
 
         public virtual string[] UserRoles()
@@ -233,6 +328,28 @@ namespace MyCompany.Services
                             if (!ApplicationServices.AllowUI(user.UserName))
                                 return false;
                             InvalidateTicket(ticket);
+                            var cookie = ApplicationServices.CreateCookie(".ID_PROVIDER", string.Empty);
+                            if (!string.IsNullOrEmpty(ticket.UserData) && ticket.UserData.StartsWith("OAUTH:"))
+                            {
+                                var handler = OAuthHandlerFactoryBase.Create(ticket.UserData.Substring(6));
+                                if (handler != null)
+                                {
+                                    cookie.Value = handler.GetHandlerName();
+                                    if (!handler.ValidateRefreshToken(user, key))
+                                        return false;
+                                }
+                            }
+                            else
+                            {
+                                if (ticket.Name != username)
+                                    return false;
+                            }
+                            if (createPersistentCookie.HasValue)
+                            {
+                                if (!string.IsNullOrEmpty(cookie.Value))
+                                    ApplicationServices.SetCookie(cookie);
+                                FormsAuthentication.SetAuthCookie(user.UserName, createPersistentCookie.Value);
+                            }
                             if (createPersistentCookie.HasValue)
                                 return CreateTicket(user, key);
                             else
@@ -1057,6 +1174,978 @@ namespace MyCompany.Services
 
         public virtual void EnumerateIdClaims(MembershipUser user, JObject claims, List<string> scopes, JObject context)
         {
+        }
+    }
+
+    public abstract class OAuthHandler
+    {
+
+        public string StartPage;
+
+        private bool _refreshedToken = false;
+
+        private string _clientUri;
+
+        private SaasConfiguration _config = null;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private JObject _tokens;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private bool _storeToken;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private string _appState;
+
+        public virtual string ClientUri
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_clientUri) && ApplicationServices.IsSiteContentEnabled)
+                {
+                    _clientUri = Config["Client Uri"];
+                    if (!_clientUri.StartsWith("http"))
+                        _clientUri = ("https://" + _clientUri);
+                }
+                return _clientUri;
+            }
+        }
+
+        public virtual SaasConfiguration Config
+        {
+            get
+            {
+                return _config;
+            }
+            set
+            {
+                _config = value;
+            }
+        }
+
+        protected virtual JObject Tokens
+        {
+            get
+            {
+                return _tokens;
+            }
+            set
+            {
+                _tokens = value;
+            }
+        }
+
+        protected virtual bool StoreToken
+        {
+            get
+            {
+                return _storeToken;
+            }
+            set
+            {
+                _storeToken = value;
+            }
+        }
+
+        protected virtual string Scope
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
+        public string AppState
+        {
+            get
+            {
+                return _appState;
+            }
+            set
+            {
+                _appState = value;
+            }
+        }
+
+        public virtual bool RequiresUserSync
+        {
+            get
+            {
+                return (Config["Sync User"] == "true");
+            }
+        }
+
+        public virtual bool RequiresRoleSync
+        {
+            get
+            {
+                return (Config["Sync Roles"] == "true");
+            }
+        }
+
+        public virtual void ProcessRequest(HttpContext context)
+        {
+            try
+            {
+                var services = ApplicationServices.Create();
+                StartPage = context.Request.QueryString["start"];
+                if (string.IsNullOrEmpty(StartPage))
+                    StartPage = services.UserHomePageUrl();
+                var state = context.Request.QueryString["state"];
+                if (!string.IsNullOrEmpty(state))
+                    SetState(state);
+                RestoreSession(context);
+                if (Config == null)
+                    throw new Exception("Provider not found.");
+                else
+                {
+                    var code = GetAuthCode(context.Request);
+                    if (string.IsNullOrEmpty(code))
+                    {
+                        var er = context.Request.QueryString["error"];
+                        if (!string.IsNullOrEmpty(er))
+                            HandleError(context);
+                        else
+                        {
+                            var redirectUrl = GetAuthorizationUrl();
+                            if (!string.IsNullOrEmpty(redirectUrl))
+                                context.Response.Redirect(redirectUrl);
+                        }
+                    }
+                    else
+                    {
+                        if (!GetAccessTokens(code, false))
+                            context.Response.StatusCode = 401;
+                        else
+                        {
+                            StoreTokens(Tokens, StoreToken);
+                            SetSession(context);
+                            RedirectToStartPage(context);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (!((ex is ThreadAbortException)) && context.Response.StatusCode != 302)
+                    HandleException(context, ex);
+            }
+        }
+
+        protected virtual string GetSiteContentBasePath()
+        {
+            return "sys/saas";
+        }
+
+        public virtual void SetSession(HttpContext context)
+        {
+            if (!StoreToken)
+            {
+                var user = SyncUser();
+                if (user == null)
+                    throw new Exception("No user found.");
+                var services = ApplicationServices.Current;
+                // logout current user
+                var auth = context.Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (auth != null)
+                {
+                    var oldTicket = FormsAuthentication.Decrypt(auth.Value);
+                    if (oldTicket.Name != user.UserName)
+                        services.UserLogout();
+                }
+                var ticket = new FormsAuthenticationTicket(0, user.UserName, DateTime.Now, DateTime.Now.AddHours(12), false, ("OAUTH:" + GetHandlerName()));
+                var encrypted = FormsAuthentication.Encrypt(ticket);
+                var accountManagerEnabled = ApplicationServicesBase.TryGetJsonProperty(services.DefaultSettings, "membership.accountManager.enabled");
+                if ((accountManagerEnabled == null) || accountManagerEnabled.Value<bool>())
+                {
+                    // client token login
+                    ApplicationServices.SetCookie(".ID_TOKEN", encrypted, DateTime.Now.AddMinutes(5));
+                }
+                else
+                {
+                    // server login
+                    services.AuthenticateUser(user.UserName, ("token:" + encrypted), false);
+                }
+                ApplicationServices.SetCookie(".ID_PROVIDER", GetHandlerName());
+            }
+        }
+
+        public virtual void RestoreSession(HttpContext context)
+        {
+            if (context.Request.QueryString["storeToken"] == "true")
+                StoreToken = true;
+        }
+
+        protected virtual bool GetAccessTokens(string code, bool refresh)
+        {
+            var request = GetAccessTokenRequest(code, refresh);
+            var response = request.GetResponse();
+            var json = string.Empty;
+            using (var sr = new StreamReader(response.GetResponseStream()))
+                json = sr.ReadToEnd();
+            if (!HttpContext.Current.IsCustomErrorEnabled && (string.IsNullOrEmpty(json) || json[0] != '{'))
+                throw new Exception(("Error fetching access tokens. Response: " + json));
+            var responseObj = JObject.Parse(json);
+            var er = ((string)(responseObj["error"]));
+            if (!string.IsNullOrEmpty(er))
+                throw new Exception(er);
+            Tokens = responseObj;
+            return (responseObj["access_token"] != null);
+        }
+
+        public virtual void StoreTokens(JObject tokens, bool storeSystem)
+        {
+        }
+
+        protected virtual string GetAuthCode(HttpRequest request)
+        {
+            return request.QueryString["code"];
+        }
+
+        public virtual JObject Query(string method, bool useSystemToken)
+        {
+            JObject result = null;
+            try
+            {
+                var token = ((string)(Tokens["access_token"]));
+                if (useSystemToken)
+                    token = Config.AccessToken;
+                if (string.IsNullOrEmpty(token))
+                    throw new Exception("No token for request.");
+                var request = GetQueryRequest(method, token);
+                var response = request.GetResponse();
+                using (var sr = new StreamReader(response.GetResponseStream()))
+                {
+                    result = JObject.Parse(sr.ReadToEnd());
+                    ApplicationServicesBase.Create().OAuthSetUserObject(result);
+                }
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = ((HttpWebResponse)(ex.Response));
+                    if ((response.StatusCode == HttpStatusCode.Unauthorized) && !_refreshedToken)
+                    {
+                        _refreshedToken = true;
+                        if (!RefreshTokens(useSystemToken))
+                            throw new Exception("Token expired.");
+                        else
+                            result = Query(method, useSystemToken);
+                    }
+                    else
+                    {
+                        if (response.StatusCode == HttpStatusCode.Forbidden)
+                            throw new Exception("Insufficient permissions.");
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected virtual bool RefreshTokens(bool useSystemToken)
+        {
+            var refresh = ((string)(Tokens["refresh_token"]));
+            if (useSystemToken)
+                refresh = Config.RefreshToken;
+            if (!string.IsNullOrEmpty(refresh))
+            {
+                if (GetAccessTokens(refresh, true))
+                {
+                    if (useSystemToken)
+                        StoreTokens(Tokens, true);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public virtual MembershipUser SyncUser()
+        {
+            var username = GetUserName();
+            var email = GetUserEmail();
+            var user = Membership.GetUser(username);
+            if (user == null)
+            {
+                var userNameOfEmailOwner = Membership.GetUserNameByEmail(username);
+                if (!string.IsNullOrEmpty(userNameOfEmailOwner))
+                    user = Membership.GetUser(userNameOfEmailOwner);
+            }
+            if ((user == null) && RequiresUserSync)
+            {
+                // create user
+                var comment = ("Source: " + GetHandlerName());
+                MembershipCreateStatus status;
+                if (string.IsNullOrEmpty(email))
+                    email = username;
+                user = Membership.CreateUser(username, Guid.NewGuid().ToString(), email, comment, Guid.NewGuid().ToString(), true, out status);
+                if (status != MembershipCreateStatus.Success)
+                    throw new Exception(status.ToString());
+                user.Comment = comment;
+                Membership.UpdateUser(user);
+                Roles.AddUserToRoles(user.UserName, GetDefaultUserRoles(user));
+            }
+            if (user != null)
+            {
+                if (!string.IsNullOrEmpty(email) && email != user.Email)
+                {
+                    user.Email = email;
+                    Membership.UpdateUser(user);
+                }
+                SetUserAvatar(user);
+                if (RequiresRoleSync)
+                {
+                    // verify roles
+                    var roleList = GetUserRoles(user);
+                    foreach (var role in roleList)
+                        if (!Roles.IsUserInRole(user.UserName, role))
+                        {
+                            if (!Roles.RoleExists(role))
+                                Roles.CreateRole(role);
+                            Roles.AddUserToRole(user.UserName, role);
+                        }
+                    var existingRoles = new List<string>(Roles.GetRolesForUser(user.UserName));
+                    foreach (var oldRole in existingRoles)
+                        if (!roleList.Contains(oldRole))
+                            Roles.RemoveUserFromRole(user.UserName, oldRole);
+                }
+            }
+            ApplicationServicesBase.Create().OAuthSyncUser(user);
+            return user;
+        }
+
+        public abstract string GetUserName();
+
+        public virtual string GetUserEmail()
+        {
+            return string.Empty;
+        }
+
+        public virtual void SetUserAvatar(MembershipUser user)
+        {
+        }
+
+        public virtual string GetUserImageUrl(MembershipUser user)
+        {
+            return null;
+        }
+
+        public virtual string[] GetDefaultUserRoles(MembershipUser user)
+        {
+            return new string[] {
+                    "Users"};
+        }
+
+        public virtual List<string> GetUserRoles(MembershipUser user)
+        {
+            var roleList = new List<string>();
+            roleList.Add("Users");
+            return roleList;
+        }
+
+        public virtual string GetUserProfile()
+        {
+            return string.Empty;
+        }
+
+        public virtual string GetState()
+        {
+            var state = ("start=" + StartPage);
+            if (StoreToken)
+                state = (state + "|storeToken=true");
+            if (!string.IsNullOrEmpty(AppState))
+                state = (state + ("|" + AppState));
+            return state;
+        }
+
+        public virtual void SetState(string state)
+        {
+            foreach (var part in state.Split('|'))
+                if (!string.IsNullOrEmpty(part))
+                {
+                    var ps = part.Split('=');
+                    if (ps[0] == "start")
+                        StartPage = ps[1];
+                    else
+                    {
+                        if (ps[0] == "storeToken")
+                            StoreToken = ((ps[1] == "true") && ApplicationServicesBase.IsSuperUser);
+                        else
+                            ApplicationServicesBase.Create().OAuthSetState(ps[0], ps[1]);
+                    }
+                }
+        }
+
+        public virtual void RedirectToLoginPage()
+        {
+            string redirectUrl = null;
+            if (Config == null)
+                redirectUrl = ApplicationServices.Create().UserHomePageUrl();
+            else
+            {
+                redirectUrl = GetAuthorizationUrl();
+                if (!string.IsNullOrEmpty(redirectUrl))
+                {
+                    var appState = new JObject();
+                    ApplicationServices.AppState = appState;
+                    appState["type"] = "login";
+                    appState["redirect_uri"] = redirectUrl;
+                }
+                if (ApplicationServices.IsTouchClient)
+                    return;
+            }
+            HttpContext.Current.Response.Redirect(redirectUrl);
+        }
+
+        public virtual void RedirectToStartPage(HttpContext context)
+        {
+            if (context.User.Identity.IsAuthenticated)
+                context.Response.Redirect(StartPage);
+            else
+                context.Response.Redirect(((ApplicationServices.Current.UserHomePageUrl() + "?ReturnUrl=") + HttpUtility.UrlEncode(ApplicationServices.ResolveClientUrl(StartPage))));
+        }
+
+        public virtual bool ValidateRefreshToken(MembershipUser user, string token)
+        {
+            return true;
+        }
+
+        public virtual void SignOut()
+        {
+        }
+
+        protected virtual void HandleError(HttpContext context)
+        {
+            var desc = context.Request.QueryString["error_description"];
+            if (string.IsNullOrEmpty(desc))
+                desc = context.Request.QueryString["error"];
+            throw new Exception(desc);
+        }
+
+        protected virtual void HandleException(HttpContext context, Exception ex)
+        {
+            while (ex.InnerException != null)
+                ex = ex.InnerException;
+            var er = new ServiceRequestError()
+            {
+                Message = ex.Message,
+                ExceptionType = ex.GetType().ToString()
+            };
+            if (!context.IsCustomErrorEnabled)
+                er.StackTrace = ex.StackTrace;
+            context.Server.ClearError();
+            context.Response.TrySkipIisCustomErrors = true;
+            context.Response.ContentType = "application/json";
+            context.Response.Clear();
+            context.Response.Write(JsonConvert.SerializeObject(er));
+        }
+
+        public abstract string GetHandlerName();
+
+        public abstract string GetAuthorizationUrl();
+
+        protected abstract WebRequest GetAccessTokenRequest(string code, bool refresh);
+
+        protected abstract WebRequest GetQueryRequest(string method, string token);
+
+        public virtual string BuildRedirectUri()
+        {
+            var identityConsumerUri = Config.RedirectUri;
+            if (string.IsNullOrEmpty(identityConsumerUri))
+            {
+                identityConsumerUri = ApplicationServicesBase.ResolveClientUrl("~/");
+                if (!identityConsumerUri.EndsWith("/"))
+                    identityConsumerUri = (identityConsumerUri + "/");
+                identityConsumerUri = new Uri(new Uri(identityConsumerUri), ("appservices/saas/" + GetHandlerName().ToLower())).ToString();
+            }
+            return identityConsumerUri;
+        }
+    }
+
+    public partial class OAuthHandlerFactory : OAuthHandlerFactoryBase
+    {
+    }
+
+    public class OAuthHandlerFactoryBase
+    {
+
+        public static SortedDictionary<string, Type> Handlers = new SortedDictionary<string, Type>();
+
+        public static OAuthHandler Create(string service)
+        {
+            return new OAuthHandlerFactory().GetHandler(service);
+        }
+
+        public static OAuthHandler GetActiveHandler()
+        {
+            var saas = HttpContext.Current.Request.Cookies[".ID_PROVIDER"];
+            if ((saas != null) && (saas.Value != null))
+                return OAuthHandlerFactory.Create(saas.Value);
+            return null;
+        }
+
+        public virtual OAuthHandler GetHandler(string service)
+        {
+            Type t = null;
+            if (Handlers.TryGetValue(service.ToLower(), out t))
+                return ((OAuthHandler)(Activator.CreateInstance(t)));
+            return null;
+        }
+
+        public static OAuthHandler CreateAutoLogin()
+        {
+            return new OAuthHandlerFactory().GetAutoLoginHandler();
+        }
+
+        public virtual OAuthHandler GetAutoLoginHandler()
+        {
+            return null;
+        }
+    }
+
+    public partial class AppIdentityOAuthHandler : AppIdentityOAuthHandlerBase
+    {
+    }
+
+    public partial class AppIdentityOAuthHandlerBase : OAuthHandler
+    {
+
+        private JObject _claims;
+
+        private JObject _authorizeServerTemplate;
+
+        public override string ClientUri
+        {
+            get
+            {
+                var providerUri = string.Empty;
+                var settings = TextUtility.ParseYamlOrJson(Config.ToString());
+                var localClientUri = Convert.ToString(settings["Local Client Uri"]);
+                if (!string.IsNullOrEmpty(localClientUri))
+                {
+                    var localRedirectUri = Convert.ToString(settings["Local Redirect Uri"]);
+                    if (!string.IsNullOrEmpty(localRedirectUri) && (HttpContext.Current.Request.Url.Authority == new Uri(localRedirectUri).Authority))
+                        providerUri = localClientUri;
+                }
+                if (string.IsNullOrEmpty(providerUri))
+                    providerUri = base.ClientUri;
+                if (!providerUri.EndsWith("/"))
+                    providerUri = (providerUri + "/");
+                return providerUri;
+            }
+        }
+
+        public JObject Claims
+        {
+            get
+            {
+                return _claims;
+            }
+            set
+            {
+                _claims = value;
+            }
+        }
+
+        public virtual bool DatabaseIsShared
+        {
+            get
+            {
+                return (Config["Shared Database"] == "true");
+            }
+        }
+
+        public virtual int PictureUpdateFrequency
+        {
+            get
+            {
+                return 60;
+            }
+        }
+
+        public virtual int ConfigObjectCacheTimeout
+        {
+            get
+            {
+                return 60;
+            }
+        }
+
+        protected override string Scope
+        {
+            get
+            {
+                var scopes = Config["Scope"];
+                if (string.IsNullOrEmpty(scopes))
+                    scopes = "profile email";
+                if (!scopes.Contains("openid"))
+                    scopes = (scopes + " openid");
+                if (!scopes.Contains(RESTfulResourceBase.AppIdentityUserScope))
+                    scopes = (scopes + (" " + RESTfulResourceBase.AppIdentityUserScope));
+                return scopes;
+            }
+        }
+
+        public override bool RequiresUserSync
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override bool RequiresRoleSync
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "AppIdentity";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            var authRequestParams = new JObject();
+            var redirectUri = BuildRedirectUri();
+            var providerDef = TextUtility.ParseYamlOrJson(Config.ToString());
+            if (DatabaseIsShared)
+                foreach (var f in ApplicationServices.Current.ReadSiteContent("sys/oauth2/apps", "%"))
+                {
+                    var clientApp = TextUtility.ParseYamlOrJson(f.Text);
+                    if ((Convert.ToString(clientApp["redirect_uri"]) == redirectUri) || (Convert.ToString(clientApp["local_redirect_uri"]) == redirectUri))
+                    {
+                        authRequestParams["client_id"] = clientApp["client_id"];
+                        authRequestParams["client_secret"] = clientApp["client_secret"];
+                        break;
+                    }
+                }
+            else
+            {
+                authRequestParams["client_id"] = Config.ClientId;
+                authRequestParams["client_secret"] = Config.ClientSecret;
+            }
+            authRequestParams["redirect_uri"] = redirectUri;
+            authRequestParams["scope"] = Scope;
+            var authRequestData = Encoding.UTF8.GetBytes(authRequestParams.ToString());
+            // get the identity request template from 'oauth2/v2/auth/server'
+            var providerUri = new Uri(new Uri(ClientUri), "oauth2/v2/auth/server");
+            try
+            {
+                var authRequest = WebRequest.Create(providerUri);
+                authRequest.Method = "POST";
+                authRequest.ContentType = "application/json";
+                authRequest.ContentLength = authRequestData.Length;
+                JObject identityRequest;
+                using (var stream = authRequest.GetRequestStream())
+                {
+                    stream.Write(authRequestData, 0, authRequestData.Length);
+                    var response = authRequest.GetResponse();
+                    using (var sr = new StreamReader(response.GetResponseStream()))
+                        identityRequest = TextUtility.ParseYamlOrJson(sr.ReadToEnd());
+                }
+                PersistIdentityRequest(identityRequest);
+                return Convert.ToString(identityRequest.SelectToken("_links.authorize.href"));
+            }
+            catch (Exception ex)
+            {
+                var err = new JObject();
+                if (ex is WebException)
+                {
+                    var errorResponse = ((WebException)(ex)).Response;
+                    if (errorResponse != null)
+                    {
+                        using (var sr = new StreamReader(errorResponse.GetResponseStream()))
+                        {
+                            var errorText = sr.ReadToEnd();
+                            if (errorResponse.ContentType.Contains("/json"))
+                                err = TextUtility.ParseYamlOrJson(errorText);
+                            else
+                                err["err"] = errorText;
+                        }
+                    }
+                    else
+                        err["error"] = ex.Message;
+                }
+                err["provider_uri"] = providerUri;
+                err["redirect_uri"] = redirectUri;
+                var response = HttpContext.Current.Response;
+                response.ContentType = "application/json";
+                response.Write(err.ToString(Formatting.Indented));
+                response.End();
+                return string.Empty;
+            }
+        }
+
+        public virtual void PersistIdentityRequest(JObject identityRequest)
+        {
+            var app = ApplicationServicesBase.Create();
+            identityRequest["app_name"] = app.DisplayName;
+            identityRequest["remote_address"] = app.RemoteAddress;
+            identityRequest["start_page"] = StartPage;
+            foreach (var filename in app.AppDataSearch("sys/oauth2/appidentity", "%.json", 5, DateTime.UtcNow.AddMinutes(-30)))
+                app.AppDataDelete(filename);
+            app.AppDataWriteAllText(string.Format("sys/oauth2/appidentity/{0}.json", identityRequest["state"]), identityRequest.ToString());
+        }
+
+        public override void SetState(string state)
+        {
+            // restore the pending "authorize-server" request
+            var requestPath = string.Format("sys/oauth2/appidentity/{0}.json", state);
+            _authorizeServerTemplate = TextUtility.ParseYamlOrJson(ApplicationServicesBase.Create().AppDataReadAllText(requestPath));
+            StartPage = ((string)(_authorizeServerTemplate["start_page"]));
+            ApplicationServicesBase.Create().AppDataDelete(requestPath);
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var tokenRequest = ((JObject)(_authorizeServerTemplate["token"]));
+            tokenRequest["code"] = code;
+            var payload = Encoding.UTF8.GetBytes(tokenRequest.ToString());
+            var request = WebRequest.Create(Convert.ToString(tokenRequest.SelectToken("_links.self.href")));
+            request.Method = Convert.ToString(tokenRequest.SelectToken("_links.self.method"));
+            request.ContentType = "application/json";
+            request.ContentLength = payload.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(payload, 0, payload.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create((ClientUri + ("/oauth/" + method)));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        public override JObject Query(string method, bool useSystemToken)
+        {
+            var idToken = Convert.ToString(Tokens["id_token"]).Split('.');
+            var claims = TextUtility.ParseYamlOrJson(Encoding.UTF8.GetString(TextUtility.FromBase64UrlEncoded(idToken[1])));
+            return claims;
+        }
+
+        public override string GetUserName()
+        {
+            if (_claims == null)
+                _claims = Query("user", false);
+            return Convert.ToString(_claims.SelectToken("appidentity.username"));
+        }
+
+        public override string GetUserEmail()
+        {
+            return Convert.ToString(_claims.SelectToken("appidentity.email"));
+        }
+
+        public override List<string> GetUserRoles(MembershipUser user)
+        {
+            var roles = _claims.SelectToken("appidentity.roles");
+            return roles.ToObject<List<string>>();
+        }
+
+        public override string GetUserImageUrl(MembershipUser user)
+        {
+            if (Tokens != null)
+            {
+                var pictureUpdated = Tokens["picture_updated"];
+                if ((pictureUpdated == null) || (TextUtility.ToUniversalTime(pictureUpdated).AddMinutes(PictureUpdateFrequency) < DateTime.UtcNow))
+                {
+                    Tokens["picture_updated"] = DateTime.UtcNow.ToString("O");
+                    return Convert.ToString(_claims.SelectToken("appidentity.picture"));
+                }
+            }
+            return null;
+        }
+
+        public override void SetUserAvatar(MembershipUser user)
+        {
+            if (!DatabaseIsShared)
+                base.SetUserAvatar(user);
+        }
+
+        public virtual JObject LookupConfigObject()
+        {
+            var appIdentity = ((JObject)(HttpContext.Current.Cache["AppIdentityOAuthHandler_Config"]));
+            if (appIdentity == null)
+            {
+                appIdentity = TextUtility.ParseYamlOrJson(ApplicationServicesBase.Create().AppDataReadAllText("sys/saas/appidentity"));
+                if (appIdentity == null)
+                    appIdentity = new JObject();
+                HttpContext.Current.Cache.Add("AppIdentityOAuthHandler_Config", appIdentity, null, DateTime.UtcNow.AddMinutes(ConfigObjectCacheTimeout), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+            }
+            return appIdentity;
+        }
+
+        public override void SignOut()
+        {
+            var userTokensFileName = string.Format("sys/users/{0}.json", HttpContext.Current.User.Identity.Name);
+            Tokens = SiteContentFile.ReadJson(userTokensFileName);
+            SiteContentFile.Delete(userTokensFileName);
+            var tokenRevokeParams = new JObject();
+            tokenRevokeParams["token"] = Tokens["access_token"];
+            var tokenRevokeData = Encoding.UTF8.GetBytes(tokenRevokeParams.ToString());
+            // revoke tokens at 'oauth2/v2/token'
+            var providerUri = new Uri(new Uri(ClientUri), "oauth2/v2/revoke");
+            try
+            {
+                var revokeRequest = WebRequest.Create(providerUri);
+                revokeRequest.Headers["Authorization"] = ("Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", Config.ClientId, Config.ClientSecret))));
+                revokeRequest.Method = "POST";
+                revokeRequest.ContentType = "application/json";
+                revokeRequest.ContentLength = tokenRevokeData.Length;
+                using (var stream = revokeRequest.GetRequestStream())
+                {
+                    stream.Write(tokenRevokeData, 0, tokenRevokeData.Length);
+                    revokeRequest.GetResponse();
+                }
+            }
+            catch (Exception)
+            {
+                // ignore all errors
+            }
+        }
+    }
+
+    public partial class DnnOAuthHandler : DnnOAuthHandlerBase
+    {
+    }
+
+    public partial class DnnOAuthHandlerBase : OAuthHandler
+    {
+
+        private string _showNavigation;
+
+        private JObject _userInfo;
+
+        protected override string Scope
+        {
+            get
+            {
+                var sc = Config["Scope"];
+                var tokens = Config["Tokens"];
+                if (!string.IsNullOrEmpty(tokens))
+                    sc = (sc + (" token:" + string.Join(" token:", tokens.Split(' '))));
+                return sc;
+            }
+        }
+
+        public override string GetHandlerName()
+        {
+            return "DNN";
+        }
+
+        public override string GetAuthorizationUrl()
+        {
+            var authUrl = string.Format("{0}?response_type=code&client_id={1}&redirect_uri={2}&state={3}", ClientUri, Config.ClientId, Uri.EscapeDataString(BuildRedirectUri()), Uri.EscapeDataString(GetState()));
+            if (!string.IsNullOrEmpty(Scope))
+                authUrl = (authUrl + ("&scope=" + Uri.EscapeDataString(Scope)));
+            var username = HttpContext.Current.Request.QueryString["username"];
+            if (!string.IsNullOrEmpty(username))
+                authUrl = (authUrl + ("&username=" + username));
+            return authUrl;
+        }
+
+        protected override WebRequest GetAccessTokenRequest(string code, bool refresh)
+        {
+            var request = WebRequest.Create(ClientUri);
+            request.Method = "POST";
+            var codeType = "code";
+            if (refresh)
+                codeType = "access_token";
+            var body = string.Format("{0}={1}&client_id={2}&client_secret={3}&redirect_uri={4}&grant_type=authorization_code", codeType, code, Config.ClientId, Config.ClientSecret, Uri.EscapeDataString(BuildRedirectUri()));
+            var bodyBytes = Encoding.UTF8.GetBytes(body);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = bodyBytes.Length;
+            using (var stream = request.GetRequestStream())
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
+            return request;
+        }
+
+        protected override WebRequest GetQueryRequest(string method, string token)
+        {
+            var request = WebRequest.Create((ClientUri + ("?method=" + method)));
+            request.Headers[HttpRequestHeader.Authorization] = ("Bearer " + token);
+            return request;
+        }
+
+        public override string GetState()
+        {
+            return (base.GetState() + ("|showNavigation=" + HttpContext.Current.Request.QueryString["showNavigation"]));
+        }
+
+        public override void SetState(string state)
+        {
+            base.SetState(state);
+            foreach (var part in state.Split('|'))
+            {
+                var ps = part.Split('=');
+                if (ps[0] == "showNavigation")
+                    _showNavigation = ps[1];
+            }
+        }
+
+        public override void RestoreSession(HttpContext context)
+        {
+            if (string.IsNullOrEmpty(_showNavigation))
+                _showNavigation = context.Request.QueryString["showNavigation"];
+            var session = context.Request.QueryString["session"];
+            if (!string.IsNullOrEmpty(session) && (session == "new"))
+                ApplicationServices.Current.UserLogout();
+            else
+            {
+                base.RestoreSession(context);
+                if (!StoreToken && context.User.Identity.IsAuthenticated)
+                    RedirectToStartPage(context);
+            }
+        }
+
+        public override void RedirectToStartPage(HttpContext context)
+        {
+            var connector = "?";
+            if (StartPage.Contains("?"))
+                connector = "&";
+            StartPage = (StartPage + (connector + ("_showNavigation=" + _showNavigation)));
+            base.RedirectToStartPage(context);
+        }
+
+        public override string GetUserName()
+        {
+            return ((string)(_userInfo["UserName"]));
+        }
+
+        public override string GetUserEmail()
+        {
+            return ((string)(_userInfo["UserEmail"]));
+        }
+
+        public override List<string> GetUserRoles(MembershipUser user)
+        {
+            var roles = base.GetUserRoles(user);
+            foreach (var r in _userInfo.Value<JArray>("Roles"))
+                roles.Add(r.ToString());
+            return roles;
+        }
+
+        public override MembershipUser SyncUser()
+        {
+            _userInfo = Query("me", false);
+            var user = base.SyncUser();
+            SiteContentFile.WriteJson(string.Format("sys/users/{0}.json", user.UserName), ((JObject)(_userInfo["Tokens"])));
+            return user;
+        }
+
+        public override string GetUserImageUrl(MembershipUser user)
+        {
+            return string.Format("{0}/DnnImageHandler.ashx?mode=profilepic&userId={1}&h=80&w=80", ClientUri, Convert.ToInt32(_userInfo["UserID"]));
+        }
+
+        public override void SignOut()
+        {
+            var url = ApplicationServices.ResolveClientUrl(ApplicationServices.Current.UserHomePageUrl());
+            ServiceRequestHandler.Redirect(string.Format("{0}?_logout=true&client_id={1}&redirect_uri={2}", ClientUri, Config.ClientId, url));
         }
     }
 }

@@ -7,7 +7,6 @@
   </foreignKeys>
   <columns>
     <column name="AttachmentID" fieldName="AttachmentID" label="Attachment ID" />
-    <column name="Attachment" fieldName="Attachment" label="Attachment" />
     <column name="FileName" fieldName="FileName" label="File Name" />
     <column name="Length" fieldName="Length" label="Length" />
     <column name="ContentType" fieldName="ContentType" label="Content Type" />

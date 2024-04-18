@@ -8,7 +8,7 @@
         public static void Initialize()
         {
             // register blob handlers
-            RegisterHandler("AttachmentsAttachment", "\"dbo\".\"Attachments\"", "\"Attachment\"", new string[] {
+            RegisterHandler("AttachmentBlobHandler", "\"dbo\".\"Attachments\"", "\"Attachment\"", new string[] {
                         "\"AttachmentID\""}, "Attachments Attachment", "Attachments", "Attachment");
         }
     }
